@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title> News & Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0B6623",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#132111",
+                        "accent": "#C8102E",
+                        "text-primary": "#333333",
+                        "text-secondary": "#698863",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="fixed top-0 z-50 w-full border-b border-gray-200/50 dark:border-gray-700/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="container mx-auto flex items-center justify-between whitespace-nowrap px-4 py-3 lg:px-8">
+<a href="index.html" class="flex items-center gap-3 text-primary min-w-0">
+<img src="assets/ycalogo.png" alt="Young Chakma Association Logo" class="size-12 object-contain flex-shrink-0">
+<h2 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em] truncate">Young Chakma Association</h2>
+</a>
+<nav class="hidden items-center gap-4 lg:flex flex-1 justify-center min-w-0">
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="index.html">Home</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="about.html">About Us</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="cyca.html">CYCA</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="zones.html">Zones</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="branches.html">Branches</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="gallery.html">Gallery</a>
+<a class="text-sm font-medium text-white bg-primary rounded-lg px-3 py-1" href="news-events.html">News & Events</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="election.html">Election</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="bylaw.html">By-Law</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="membership.html">Membership</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="contact.html">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button id="darkModeToggle" class="text-text-light dark:text-text-dark hover:text-accent">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<a href="login.html" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-red-600 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-red-700">
+<span class="truncate">Login</span>
+</a>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-accent">
+<span class="truncate">Donate</span>
+</button>
+<button class="lg:hidden text-text-light dark:text-text-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div></header>
+<main class="flex-grow container mx-auto px-4 py-8 md:py-16 pt-16">
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="flex-grow lg:w-2/3">
+<div class="flex flex-wrap justify-between gap-3 p-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-primary dark:text-green-400 text-4xl font-black leading-relaxed tracking-[-0.033em]">News & Events</p>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal leading-normal">Stay updated with the latest announcements, circulars, and notices from YCA.</p>
+</div>
+</div>
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-text-secondary dark:text-gray-400 flex border-none bg-gray-100 dark:bg-background-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-primary dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-gray-100 dark:bg-background-dark h-full placeholder:text-text-secondary dark:placeholder:text-gray-500 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search news by keyword" value=""/>
+</div>
+</label>
+</div>
+<div class="flex gap-2 p-3 flex-wrap pr-4">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 dark:bg-primary/30 pl-4 pr-4 cursor-pointer">
+<p class="text-primary dark:text-white text-sm font-medium leading-normal">Announcements</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-700/50 pl-4 pr-4 cursor-pointer">
+<p class="text-text-primary dark:text-gray-300 text-sm font-medium leading-normal">Circulars</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-700/50 pl-4 pr-4 cursor-pointer">
+<p class="text-text-primary dark:text-gray-300 text-sm font-medium leading-normal">Meetings</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-700/50 pl-4 pr-4 cursor-pointer">
+<p class="text-text-primary dark:text-gray-300 text-sm font-medium leading-normal">Notices</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-700/50 pl-4 pr-4 cursor-pointer">
+<p class="text-text-primary dark:text-gray-300 text-sm font-medium leading-normal">Press Releases</p>
+</div>
+</div>
+<div class="space-y-8 mt-6">
+<div class="p-4">
+<div class="flex flex-col-reverse sm:flex-row items-start justify-between gap-6 rounded-xl">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<p class="text-accent text-sm font-bold leading-normal">October 25, 2023</p>
+<p class="text-text-primary dark:text-white text-xl font-bold leading-tight">Annual General Meeting Announcement</p>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal leading-normal">Join us for our Annual General Meeting to discuss the past year's achievements and future plans for the community. All members are encouraged to attend.</p>
+<a class="flex mt-2 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-8 px-4 bg-gray-100 dark:bg-gray-700/50 text-text-primary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium leading-normal w-fit" href="#">
+<span class="truncate">Read More</span>
+</a>
+</div>
+<div class="w-full sm:w-1/3 bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="Abstract green and white pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAANZB85FzckUDrmcn8kaUBqNCZerweloMESctSKb_b9A2SX7Ln4pAA-VzDocn0n9HsP4Wn7ORPQdwoLRrK_7dTmC0taNkm_i1PGQbaNwk34hFMO5-WJ3E2nClbpERV_GDwtF0srbnvsmu5oy3H8cFL0ahVj1ACcA_qgaVvUQtPVgz6udLq1FgZTrAg3mhiLul4hT7hDpSoI29mQJ7SI-Xtk4WIR0_k4KbgXKdR86m9DGmIi-5RkBzWE5-zwSj3C7iFcgGoPKx3eZuc");'></div>
+</div>
+</div>
+<div class="w-full px-4">
+<div class="h-px bg-gray-200 dark:bg-gray-700 opacity-50 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%226%22%20height%3D%226%22%20viewBox%3D%220%200%206%206%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%230B6623%22%20fill-opacity%3D%220.1%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M5%200h1L0%206V5zM6%205v1H5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]" /></div>
+</div>
+<div class="p-4">
+<div class="flex flex-col-reverse sm:flex-row items-start justify-between gap-6 rounded-xl">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<p class="text-accent text-sm font-bold leading-normal">October 12, 2023</p>
+<p class="text-text-primary dark:text-white text-xl font-bold leading-tight">New Youth Leadership Program Launched</p>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal leading-normal">We are excited to launch a new leadership program aimed at empowering the next generation of Chakma leaders. Applications are now open.</p>
+<a class="flex mt-2 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-8 px-4 bg-gray-100 dark:bg-gray-700/50 text-text-primary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium leading-normal w-fit" href="#">
+<span class="truncate">Read More</span>
+</a>
+</div>
+<div class="w-full sm:w-1/3 bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="Chakma youth in a workshop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0eCL0w3UT3vcWxyBG5LoJVHEQCZvXnf1JUDnqJkQpOS4v92k2z3_obV2fZMochX1daW98IMmc2h154tyCBt0JyJLxw3R-SGA_uEA53TJ2nAIZz_HU7x3xAYKRa0UYvfqST7uy3GRvZKdoz9H-tBMJEh6ffe3GUkj0_Y6Y8Jmh9LnVzAkrdUV8t4vZS_L3NoSm41TBmKX2aXHu9iO6T5VO7yXvdgjUylnbGamtneHz47fP2jjJWWQdzZlNr4hbG4f45KsDJonPJ4R6");'></div>
+</div>
+</div>
+<div class="w-full px-4">
+<div class="h-px bg-gray-200 dark:bg-gray-700 opacity-50 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%226%22%20height%3D%226%22%20viewBox%3D%220%200%206%206%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%230B6623%22%20fill-opacity%3D%220.1%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M5%200h1L0%206V5zM6%205v1H5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]" /></div>
+</div>
+<div class="p-4">
+<div class="flex flex-col-reverse sm:flex-row items-start justify-between gap-6 rounded-xl">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<p class="text-accent text-sm font-bold leading-normal">September 30, 2023</p>
+<p class="text-text-primary dark:text-white text-xl font-bold leading-tight">YCA Circular on Community Health Initiatives</p>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal leading-normal">A new circular has been issued outlining our upcoming health and wellness programs for the community. Please review for details on participation.</p>
+<a class="flex mt-2 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-8 px-4 bg-gray-100 dark:bg-gray-700/50 text-text-primary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium leading-normal w-fit" href="#">
+<span class="truncate">Read More</span>
+</a>
+</div>
+<div class="w-full sm:w-1/3 bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="Community members at a health camp" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD59yJxqk09prZU9e16dFSi5zjtgapU0kFmwIWuNielw02v8L0zSIYRtQsmXjmV4Xu1SWJPYhKxkf9HEYCUla66WnJm9rRUDsM2gwytEVeiCMKaWIYzPo-n9_TyHAmfMM2ciRsx3AtO5hhVKK4oS3FAT5SzEn942AdCZAJ9711qpFtmaX524UmYCUO_3hUz5N1aI0M_sTLTMtjJRJ5VFnPxnu8XtRJ_QlvSCnzgGwu9NEjWedCYPZgzS1Gn_i52ruXAvPNzVHKiRvaI");'></div>
+</div>
+</div>
+<div class="pt-8 flex justify-center">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Load More</span>
+</button>
+</div>
+</div>
+</div>
+<aside class="lg:w-1/3 lg:pt-24">
+<div class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl">
+<h3 class="text-xl font-bold text-primary dark:text-green-400 mb-4">Upcoming Events</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<div class="flex flex-col items-center justify-center bg-accent text-white rounded-lg p-2 w-16 text-center">
+<span class="text-sm font-bold">OCT</span>
+<span class="text-2xl font-black">25</span>
+</div>
+<div class="pt-1">
+<p class="font-semibold text-text-primary dark:text-white">Community Blood Drive</p>
+<p class="text-sm text-text-secondary dark:text-gray-400">YCA Community Hall</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="flex flex-col items-center justify-center bg-accent text-white rounded-lg p-2 w-16 text-center">
+<span class="text-sm font-bold">NOV</span>
+<span class="text-2xl font-black">15</span>
+</div>
+<div class="pt-1">
+<p class="font-semibold text-text-primary dark:text-white">Cultural Heritage Workshop</p>
+<p class="text-sm text-text-secondary dark:text-gray-400">Online via Zoom</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="flex flex-col items-center justify-center bg-accent text-white rounded-lg p-2 w-16 text-center">
+<span class="text-sm font-bold">DEC</span>
+<span class="text-2xl font-black">05</span>
+</div>
+<div class="pt-1">
+<p class="font-semibold text-text-primary dark:text-white">Annual Sports Meet</p>
+<p class="text-sm text-text-secondary dark:text-gray-400">City Sports Complex</p>
+</div>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white pattern-bg">
+<div class="container mx-auto px-4 py-12">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+<!-- About YCA -->
+<div class="md:col-span-2">
+<div class="flex items-center gap-3">
+<img src="assets/ycalogo.png" alt="Young Chakma Association Logo" class="size-12 object-contain">
+<h3 class="text-xl font-bold">Young Chakma Association</h3>
+</div>
+<p class="mt-4 text-gray-300">Working towards the unity, empowerment, and progress of Chakma youth worldwide.</p>
+</div>
+<!-- Quick Links -->
+<div>
+<h4 class="font-bold tracking-wider">Quick Links</h4>
+<div class="mt-4 grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<a class="text-gray-300 hover:text-white text-sm block" href="index.html">Home</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="about.html">About Us</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="cyca.html">CYCA</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="zones.html">Zones</a>
+</div>
+<div class="space-y-2">
+<a class="text-gray-300 hover:text-white text-sm block" href="branches.html">Branches</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="gallery.html">Gallery</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="news-events.html">News & Events</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="bylaw.html">By-Law</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="contact.html">Contact</a>
+</div>
+</div>
+</div>
+<!-- Contact Info -->
+<div>
+<h4 class="font-bold tracking-wider">Contact Us</h4>
+<ul class="mt-4 space-y-2 text-gray-300">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-xl mt-0.5">location_on</span>123 Community Lane, Rangamati, Bangladesh</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">mail</span>info@yca.org</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">phone</span>+880 123 456 7890</li>
+</ul>
+</div>
+</div>
+<div class="mt-12 border-t border-white/20 pt-8">
+<div class="flex flex-col items-center space-y-4">
+<div class="flex space-x-4">
+<a aria-label="Facebook" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"></path></svg>
+</a>
+<a aria-label="Twitter" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.298 1.634 4.212 3.793 4.649-.65.177-1.354.23-2.06.088.607 1.954 2.37 3.378 4.464 3.417-1.73 1.358-3.91 2.169-6.28 2.169-.408 0-.81-.023-1.206-.07z"></path></svg>
+</a>
+<a aria-label="Instagram" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg>
+</a>
+</div>
+<p class="text-sm text-gray-300">© 2025 Young Chakma Association. All Rights Reserved.</p>
+<p class="text-sm text-gray-300">Made with <span class="text-red-500">❤️</span> By Angu Macmillan Chakma</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script>
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        const isDark = html.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+</script>
+</div>
+</body></html>

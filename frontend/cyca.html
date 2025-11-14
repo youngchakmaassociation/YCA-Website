@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Central YCA - Young Chakma Association</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "var(--color-primary)",
+                        "accent": "#da251c",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#00923f",
+                        "text-light": "#333333",
+                        "text-dark": "var(--color-text-dark)"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        :root {
+            --color-primary: #0b6623;
+            --color-text-dark: #E0E0E0;
+        }
+        .dark {
+            --color-primary: #da251c;
+            --color-text-dark: #ffffff;
+        }
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230b6623' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="fixed top-0 z-50 w-full border-b border-gray-200/50 dark:border-gray-700/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="container mx-auto flex items-center justify-between whitespace-nowrap px-4 py-3 lg:px-8">
+<div class="flex items-center gap-3 text-primary min-w-0">
+<img src="assets/ycalogo.png" alt="Young Chakma Association Logo" class="size-12 object-contain flex-shrink-0">
+<h2 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em] truncate">Young Chakma Association</h2>
+</div>
+<nav class="hidden items-center gap-4 lg:flex flex-1 justify-center min-w-0">
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="index.html">Home</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="about.html">About Us</a>
+<a class="text-sm font-medium text-white bg-primary rounded-lg px-3 py-1" href="cyca.html">CYCA</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="zones.html">Zones</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="branches.html">Branches</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="gallery.html">Gallery</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="news-events.html">News & Events</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="election.html">Election</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="bylaw.html">By-Law</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="membership.html">Membership</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="contact.html">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button id="darkModeToggle" class="text-text-light dark:text-text-dark hover:text-accent">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<a href="login.html" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-red-600 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-red-700">
+<span class="truncate">Login</span>
+</a>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-accent">
+<span class="truncate">Donate</span>
+</button>
+<button class="lg:hidden text-text-light dark:text-text-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div></header>
+<main class="flex-grow">
+<div class="bg-white dark:bg-background-dark">
+<div class="container mx-auto px-4 py-16 sm:py-24">
+<div class="text-center">
+<h1 class="text-4xl font-black text-primary md:text-5xl">Central YCA (CYCA)</h1>
+<p class="mt-4 max-w-3xl mx-auto text-lg text-text-light dark:text-text-dark leading-relaxed">The Central Young Chakma Association (CYCA) serves as the apex governing body, providing leadership, direction, and oversight to the entire organization.</p>
+</div>
+<section class="mt-16 sm:mt-24">
+<div class="mx-auto max-w-5xl">
+<h2 class="text-3xl font-bold text-primary text-center">Governance and Oversight</h2>
+<p class="mt-4 text-text-light dark:text-text-dark text-center leading-relaxed">The CYCA is responsible for supervising all Zonal Committees, which in turn oversee the Branch Committees within their respective regions. Additionally, a select number of Branch Committees are directly affiliated with and managed by the Central YCA to ensure streamlined communication and direct implementation of key initiatives.</p>
+<div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+<div class="flex flex-col items-center">
+<div class="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-4xl">public</span>
+</div>
+<h3 class="mt-4 text-xl font-semibold text-text-light dark:text-text-dark">Zonal Branches</h3>
+<p class="mt-1 max-w-xs text-text-light/80 dark:text-text-dark/80">Regional bodies under CYCA oversight.</p>
+</div>
+<div class="h-12 w-0.5 bg-gray-200 dark:bg-gray-700 hidden md:block"></div>
+<div class="w-1/2 h-0.5 bg-gray-200 dark:bg-gray-700 md:hidden"></div>
+<div class="flex flex-col items-center">
+<div class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 text-accent">
+<span class="material-symbols-outlined text-4xl">lan</span>
+</div>
+<h3 class="mt-4 text-xl font-semibold text-text-light dark:text-text-dark">Directly Linked Branches</h3>
+<p class="mt-1 max-w-xs text-text-light/80 dark:text-text-dark/80">Local branches directly managed by CYCA.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-16 sm:mt-24">
+<div class="text-center">
+<h2 class="text-3xl font-bold text-primary">Central Executive Committee</h2>
+<p class="mt-4 max-w-3xl mx-auto text-lg text-text-light dark:text-text-dark">Meet the dedicated leaders at the helm of the Young Chakma Association, steering our community towards a brighter future.</p>
+</div>
+<div class="mt-12">
+<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+<div class="flex flex-col items-center text-center p-6">
+<img alt="President Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCG-0zhTlsBim89w7wgunF5cbzUzkruaXWK-o0B6gwK4o6IqnJdu2QpFumGraV5yzxVTK0gNOwz2TF5w8dHyJN0sFaILq1gqmtE4uKlbElw10AmnMeII3jUfQKsKqeg5XkksB6Ov7dQkM6HxO4O16dwu1XzlddK10_Y_Htn5ZHHizivJ21vN-UuZttm6ytEm3p1MkKSYYfPE_6_xcN_eYp8ttT9M9IO5ZZMXwFMAUCO8ugfsYuYPOSuM9dJIKObXNGkYjMx5mgROxc"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">President</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Vice-President Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA693k8IbeJX_1gAgNMXDqSZm2NVsiuJIS7udWaL1mSk6CHOFYOc-AFXIUSkT_shd3h-npl6MwAR-ykuMn1pkgMnuarV42W5lb5zZypuDgUnKQCuxs3NnnSlI18nVs70obr04R9UDloXMIID62GBOa_6h53JJD9ZNOFk3vz7KN6KWJ8VeMEe3Z-idMxkEfoR4rc26O9BOJeKZbTEZOJyPStxvm-vI_ElDLvJNjFou4sF4123xWakYLta3yJVWsxIqY1nFyfVSMn2JXN"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Vice-President</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="General Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbzrEqK9WUdFhuj-UUuo4m7cZgp-F9UtD5TgO877f1kXMs8JtStQP353Qa3_Su0JOiJTlI_euJN7_vpp7W5A5jGegvM1SLhZLu_F0281WmjTGYLxLyr0a7Vjc13OalIi6cPBH3REs5bazlTTu50Ai2Oo3xBoQ3mXWAsn-QCTes8A9_pMLDwnDRisYn69KvOIxl2zghjdPW4ASwx9ZUTXp2SfbGpTDH7axHbyfqLLveh4VZimz-Zee1iwpQ54TyjV0PFEpWB8aZbzaN"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">General Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Office Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhVwgbrGTMgDT1gFiKXijKzC5AsgKd9w7p4kF1Bvej61_FcrRoZw4ESHkA5X6cfumf_XEim6DD_ekpX8tzSMNuq-Sqho9mjptpi3L3fERCxKQZYo3xPjVA_0h-lBS60bTpNbNUsyNVDkUMlmA-VcGGjSqOTKdFAVhhbnSp4I9dJiZh_Y1Gww1M5fJeii0Qi4uk4FDdHDki19vsKw1gbCQwVgDV71GktUKJir80LFDNCTOyWdJO5BJjyQ-utH4LAsUgHaCKy3_TbUAK"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Office Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Org. Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOaMq7RCqY-HsEvZ5vUQh5KFPqlZJ4JRY9tWZ_H4ilXUp_wmpJRzcED21Uk_eFYjqlEDXqVM8TawMH_STugVvbKMJ04l0WifmeVEizZK2EAjxvNWO-QzGcnY5rv7GKM3RedcQvlb0MvBHVlMrhdBq3PkQHpL5puDdnKqFeUvljGr_xuUgoVgN-9sJP04JMIkopAUuHb5x2tmY4J63piNy7d8D7q4sWoS-egYtxSoIyQH1riPDs1YYebvfUFD1DMVD_oVB95bEPpVbu"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Org. Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Cultural Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxjCSecHRDpT7zvbwiyiFiOLJ3Ye2iJYcOgE_lHOz6YD3HkIsiWVuwX86DweerR_CPposR1XQ9Dr23sOiJKqweeDTi1h9cTwXd6ExCvwuvE2mF3yBSQ1pHlYRu1hDeqUrccFncowX7f-8HPPutgztsAg5Rh15mNh6gkKMEZQ1EvJV_Xj7HI0ofm2RW2PHO1YHVWLSWhcmOoTfO_swDCHDvFV3kqLfpHEcPviKMTSsKytWSr9Wy-LviL8i3hSOrOKuOWJ__tFB_U1YU"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Cultural Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Religious Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO-qnquTQVINYgBUwxKw7oWp4NtZdZzmQ7Iz-Kwk9Lzfwyt_nYvI0b9VTUzc1WI5DubEZiLpTtbPx97meWb1O93AYXfkClPwvtYg7gC3Z_jMrMdoDg-NYGyXXdJsAFNani9tjoV1b3b62lDGSsBI2bSeOnN4HaKkuWBdTm_AMHTANjyIrc6MmfO6KTEtcnkUWKUaJVrKmt2PT5yhWouDiRaR5CtomFpAm2PUOikWM7fxxZ56EDDSqZfeb-07KXyxl5TWwQSDYXw3Lr"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Religious Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Game & Sport Secy. Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrqpxy-vRS5AmM7bc_QAiwQU5L2Km5P5ryvP12zYcDpD-REXPDiZvbgbifVfUWhbU0gIEoXQLQH2Tbn89vJsgy7bz5R64sLihy-Eq24JqEeiR8HbfCgjpLTd8Rtv10wvENI3Zq8F6r3LtTe-cuSvrUscpMX46HqrlxDoShCPFWnqAo3S8k-dSomcg5RIE2xu7TgcPPcYxbtppivD2m8TCMe8QbWKq10CM29Yw9xhn4FeemfTXQ0b_6gcIMph5NhWc5Yb2Z8lAsJBbc"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Game & Sport Secy.</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<div class="flex flex-col items-center text-center p-6 lg:col-start-1">
+<img alt="Literacy Secretary Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNb8RPE-8cpusKuLyZHHzX8P0o0D2D0DcXSmzS9RAynOTkOdHX3zcG3D6LzegKZtObX79hGgJX0m4A_crvHSxMbSnS7JyH5M49pderUJbmFVTieeUemzWSGbj2bz88314JhwK7iwjuKEkhZNeBr9W1dJtKt23GVLpdfW5zVBuIjIHAj2CgKNLE79Sb3gqUbzuVQ9Iu7U9KnwTQZM605DS9Lxz8Rbd12bD5ovkajrq_wX9ofEijeywWRO_6dNwB4ZZbMNKWrl3TY_Cx"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Literacy Secretary</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Soc. Welfare Secy. Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD9ZMw_2Xouy66Zd9QwhOtv82TUw_09P9-JHeny0FHc6al1vpufBMJbS_oYs3fpj-pWEJg4Q-JnZf_3zXn8zb6LzQts3M6J7GIYQTwKNNrxOuictf4-wBbuy0LzgCzK8X6VL1eMTrCSQjD1IFU5qdJN67WTMDUuJSg33qlB-RZ0-HblWSZafdnp9NufWAGrQTIsQ-cwPebWHENB9e-AUDUEZMu7lAPIVgbPY0LTzxYMMqeEXI6SeT6tzH7TguRDbn7X8zxtP3kC8iN"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Soc. Welfare Secy.</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Treasurer Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Hy9TtANyC_f3NFRC0tOL93-rpIxmoRqI6qMuzfXb_E-_QtHoEGqQCbB6iXMurl5d1fbvcKK0g00dy6QKmo9nv_biHLD_M9RI99RFq4GInCkwKGH7thyRhMtvjygcb4_yu8MP_CKpidyEhZrGtCqdRqQJWfgvYiZ4PGekVhZv4lMLmrdAFjolZlyi8ONP0onhtGYgZHHuUaxIAeiuFwrEDtHO_IBTKHY42E07Lv0TH2WhlDg69hK4VXFX4u1s-dfgoi8B0oqC4Q0R"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Treasurer</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+</div>
+</div>
+<div class="mt-16 sm:mt-24 text-center">
+<h2 class="text-3xl font-bold text-primary">Executive Members</h2>
+</div>
+<div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ3vK71UBTqqk5uuSRjXIPtjEYnmz2F5xhun1trZcjM-eNnnmK7xNQuyiLT_6nHFc-yy5SeSpcZnHLIt2Td6aDm1kuSHwV53SG1oKXzqK5Ldz9P6-YLt5eW0Sjl1pOHBJc1tPqxHEbdSaE0rnuiL9bF77qxij5JEMK3cVT10cCMdXDrjjaSdHCTuXS0MmBNAMT7tYQXnVDInIWDQfJlaf-R4aw0FKTWIBMw2dhRhIaT9QS2goaA7T8FIeRLoT6MdubKe4-4mKK3l45"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu2IXCbW04Yub84DqVpl1t4BGnPXN1fkXXfqYM3j0KQuBGWYaTgTH86wD0vKOMTHadyn-Q0eBy1-hglYhfFkaKWqMOI-M29mS5L-H1jwlDgFvZc3MYvTCR92zszhpFSD66YiIu3jVQKz1HaCuXNs26QBVguKIpZtuR3RVEnNPKhEJp20DcpuAjJX5L4bBo1dDdK097fyyvaJumnOK4ghWveB8AxQWvkLT_KGZLFaUxrY4DFXZfslFYVbi94cunymWamFY-KLtChVdM"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjNNwqo1fCoA7TaeXNs3PeRShj5OHC2_9-N1Iy_vvPojkV8XPQzORX6CUPPieH5K2ziHuBX_9JHjq6LeSIvRNuC3ulWWTws3vwCzxEQEMquFl337MgtWOfuCwqzHkftMPuxtlY50CC67Y_N5Nf2S77PdXwCD3A_lmHUQJYsZTsRDD-svOCZntjVKue2Scux_PrvRjXghi9vzdUSQA_vmXMnAnuDCfcKJuaCEzH3nkBBJY7VbfePmECu_VHyxiJOCo5L2t-ac87rUQi"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyP6EaNqpuQ9l2ghbE0GppksyzQATSBX01AeLRxLq-xk6vFBOIck-tdFetVGtGJfqumLub4iqiKO9CpBsFuQjzZZWYgjn55SW2Qrq-60atNhmQfvn8ryoUGbRkWqXoTmyNSLIe-h0h9CocLDvg6aKJXqOyrv9Hgx0fmh5PkQQJTOsRkVOiOnys53yKzRNSMXRW4L7pBrvX7MUVT3xSIlewP49hs22x45LRIfKh7R-th6lGJWeeUi5jqGZ5r1csUuQE4gKJJbTdheqL"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJoduvLTrNuAQ8UgenOqTbXXuy5h5gGkvC_4ooPGUB9ElHYKj2ToYESUGGgGvqyOWSVOB0ZLm5QzTLYAZKQCEKdyIy4IAI7M26FctbtLxm3ZXjRH2DPYGpLnwq1CEQ501j-Dcuqtrc5yTtjP9Zz3khynqEb6kxf1hgM13e3t9GsNiaX1oPZnSwB8Q21zmAtchCGF8_wiSl-ildDQ21ouSp47r7HUXwGlqOO_pJrL82DpQBiA8swhArnoB1J0CJPEI12ERe6INFl0T1"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+<div class="flex flex-col items-center text-center p-6">
+<img alt="Executive Member Photo" class="h-32 w-32 rounded-full object-cover ring-4 ring-accent/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC5Hh5FBlzzdycgQd73ltPgjXZ9L771G7N6EcFQiK7cf1PWbttEAMbDUsmUWYKGv1jX7HG1v50KbHzdG13eRh6rf5b6eig28ieCMzxKFEEY-UsymqEbx7ZtEa8BinL2GCp5WR08S7zgRsgCNPmScK653_W8RNaqEi1b81msY64CqbYvx4BrWUcjise06G8ZzojMXb-0-zuWIJHZUyXx35xkegdkgQKqQDLJrz3mr270A6rpxRq1I1AqYRfjBF_sQO3NwBnL3vAqq_U"/>
+<h3 class="mt-4 text-lg font-bold text-text-light dark:text-text-dark">Executive Member</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">[Name Here]</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white pattern-bg">
+<div class="container mx-auto px-4 py-12">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+<!-- About YCA -->
+<div class="md:col-span-2">
+<div class="flex items-center gap-3">
+<img src="assets/ycalogo.png" alt="Young Chakma Association Logo" class="size-12 object-contain">
+<h3 class="text-xl font-bold">Young Chakma Association</h3>
+</div>
+<p class="mt-4 text-gray-300">Working towards the unity, empowerment, and progress of Chakma youth worldwide.</p>
+</div>
+<!-- Quick Links -->
+<div>
+<h4 class="font-bold tracking-wider">Quick Links</h4>
+<div class="mt-4 grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<a class="text-gray-300 hover:text-white text-sm block" href="index.html">Home</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="about.html">About Us</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="cyca.html">CYCA</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="zones.html">Zones</a>
+</div>
+<div class="space-y-2">
+<a class="text-gray-300 hover:text-white text-sm block" href="branches.html">Branches</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="gallery.html">Gallery</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="news-events.html">News & Events</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="bylaw.html">By-Law</a>
+<a class="text-gray-300 hover:text-white text-sm block" href="contact.html">Contact</a>
+</div>
+</div>
+</div>
+<!-- Contact Info -->
+<div>
+<h4 class="font-bold tracking-wider">Contact Us</h4>
+<ul class="mt-4 space-y-2 text-gray-300">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-xl mt-0.5">location_on</span>123 Community Lane, Rangamati, Bangladesh</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">mail</span>info@yca.org</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">phone</span>+880 123 456 7890</li>
+</ul>
+</div>
+</div>
+<div class="mt-12 border-t border-white/20 pt-8">
+<div class="flex flex-col items-center space-y-4">
+<div class="flex space-x-4">
+<a aria-label="Facebook" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"></path></svg>
+</a>
+<a aria-label="Twitter" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.298 1.634 4.212 3.793 4.649-.65.177-1.354.23-2.06.088.607 1.954 2.37 3.378 4.464 3.417-1.73 1.358-3.91 2.169-6.28 2.169-.408 0-.81-.023-1.206-.07z"></path></svg>
+</a>
+<a aria-label="Instagram" class="text-gray-300 hover:text-white" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg>
+</a>
+</div>
+<p class="text-sm text-gray-300">© 2025 Young Chakma Association. All Rights Reserved.</p>
+<p class="text-sm text-gray-300">Made with <span class="text-red-500">❤️</span> By Angu Macmillan Chakma</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        const isDark = html.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+</script>
