@@ -57,18 +57,18 @@
 <img src="assets/ycalogo.png" alt="Young Chakma Association Logo" class="size-12 object-contain flex-shrink-0">
 <h2 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em] truncate">Young Chakma Association</h2>
 </div>
-<nav class="hidden items-center gap-4 lg:flex flex-1 justify-center min-w-0">
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="index.html">Home</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="about.html">About Us</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="cyca.html">CYCA</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="zones.html">Zones</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="branches.html">Branches</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="gallery.html">Gallery</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="news-events.html">News & Events</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="election.html">Election</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="bylaw.html">By-Law</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="membership.html">Membership</a>
-<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent" href="contact.html">Contact</a>
+<nav id="mobile-menu" class="absolute top-full left-0 w-full bg-background-light dark:bg-background-dark border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm hidden lg:flex lg:relative lg:static lg:border-0 lg:backdrop-blur-none lg:flex-1 lg:justify-center lg:min-w-0 lg:inline-flex items-center gap-4 flex-col lg:flex-row py-4 lg:py-0">
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="index.html">Home</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="about.html">About Us</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="cyca.html">CYCA</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="zones.html">Zones</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="branches.html">Branches</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="gallery.html">Gallery</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="news-events.html">News & Events</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="election.html">Election</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="bylaw.html">By-Law</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="membership.html">Membership</a>
+<a class="text-sm font-medium text-text-light dark:text-text-dark hover:text-accent py-2 lg:py-0" href="contact.html">Contact</a>
 </nav>
 <div class="flex items-center gap-4">
 <button id="darkModeToggle" class="text-text-light dark:text-text-dark hover:text-accent">
@@ -80,7 +80,7 @@
 <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-accent">
 <span class="truncate">Donate</span>
 </button>
-<button class="lg:hidden text-text-light dark:text-text-dark">
+<button onclick="toggleMobileMenu()" class="lg:hidden text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -416,5 +416,11 @@ darkModeToggle.addEventListener('click', () => {
     const isDark = html.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+}
 </script>
 </body></html>

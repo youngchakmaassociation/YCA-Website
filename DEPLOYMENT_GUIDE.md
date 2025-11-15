@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - GitHub account
-- Railway account (free tier available)
+
 - Netlify account (free tier available)
 - MongoDB Atlas account (free tier available)
 
