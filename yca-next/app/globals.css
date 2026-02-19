@@ -1,0 +1,373 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0c111d;
+  /* Premium Dark Slate Background */
+  --foreground: #FFFFFF;
+  /* Pure White Text for High Contrast */
+  --color-primary: #0A5D2E;
+  /* Heritage Green - Deeper and more professional */
+  --color-accent: #9B1C1C;
+  /* Deep Crimson - More institutional than bright red */
+  --color-text-dark: #F8FAFC;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-background-light: #FFFFFF;
+  --color-background-dark: #0F172A;
+  --color-text-light: #0F172A;
+  --color-text-dark: var(--color-text-dark);
+  --color-subtle-gray: #F1F5F9;
+
+  --font-display: var(--font-public-sans);
+
+  --radius-default: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 3rem;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --color-primary: #007A33;
+  --color-text-dark: #FFFFFF;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300923f' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* YCA Flag Animation - Professional Silk Flow */
+@keyframes silk-flow {
+  0% {
+    background-position: 0% 50%, 0 0;
+  }
+
+  50% {
+    background-position: 100% 50%, 0 0;
+  }
+
+  100% {
+    background-position: 0% 50%, 0 0;
+  }
+}
+
+.yca-flag-bg {
+  /* 
+     STRICT 3-COLOR SYSTEM 
+     Layer 1: Silk Highlight (Sheen)
+     Layer 2: Professional Top/Bottom Vignette (Depth)
+     Layer 3: Official Opaque Stripes
+  */
+  background-color: #0c111d;
+  background-image:
+    linear-gradient(115deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 33.33%, rgba(0, 165, 80, 0.18) 33.33%, rgba(0, 165, 80, 0.18) 66.66%, rgba(218, 37, 28, 0.18) 66.66%);
+
+  background-size: 200% 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: silk-flow 15s ease-in-out infinite;
+
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.yca-flag-bg::before {
+  /* Extremely fine grain for professional feel */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Ensure text remains readable on top */
+.yca-flag-bg * {
+  z-index: 10;
+  position: relative;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.05);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* --- ANIMATIONS START --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation Utilities */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+/* Interactive Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* --- ANIMATIONS END --- */
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 3D Pop Effect for Logo - Always Active */
+@keyframes logo-float {
+
+  0%,
+  100% {
+    transform: perspective(1000px) translate3d(0, -4px, 50px) rotateX(6deg) rotateY(-6deg);
+    filter: drop-shadow(12px 18px 25px rgba(0, 0, 0, 0.5));
+  }
+
+  50% {
+    transform: perspective(1000px) translate3d(0, -12px, 80px) rotateX(10deg) rotateY(-10deg);
+    filter: drop-shadow(20px 30px 45px rgba(0, 0, 0, 0.6));
+  }
+}
+
+.logo-3d-pop {
+  transform: perspective(1000px) translate3d(0, -4px, 50px) rotateX(6deg) rotateY(-6deg);
+  filter: drop-shadow(12px 18px 25px rgba(0, 0, 0, 0.5));
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  animation: logo-float 5s ease-in-out infinite;
+}
+
+.group:hover .logo-3d-pop {
+  transform: perspective(1000px) translate3d(0, -15px, 110px) rotateX(12deg) rotateY(-12deg);
+  filter: drop-shadow(25px 40px 60px rgba(0, 0, 0, 0.7));
+}
+
+.dark .logo-3d-pop {
+  filter: drop-shadow(12px 20px 30px rgba(0, 0, 0, 0.8));
+}
+
+/* Strong Text Shadow for readability on flag background */
+.text-shadow-heavy {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.4);
+}

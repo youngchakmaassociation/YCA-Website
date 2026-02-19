@@ -1,99 +1,65 @@
-# Young Chakma Association (YCA) Website
+# Young Chakma Association (YCA) Platform
 
-A beautiful, responsive website for the Young Chakma Association built with HTML, CSS (Tailwind CSS), and JavaScript.
+A modern, full-stack platform for the Young Chakma Association, featuring a high-performance Next.js frontend and a robust Node.js/Express backend.
 
-## Features
+## 🚀 Project Architecture
 
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **Dark Mode Support**: Toggle between light and dark themes
-- **Modern UI**: Clean, professional design with smooth animations
-- **Multi-page Navigation**: Complete website with all necessary pages
-- **Accessibility**: Proper semantic HTML and ARIA labels
+- **Frontend**: Next.js 16 (Turbopack) with Tailwind CSS for a premium, responsive UI.
+- **Backend & Database**: Supabase (PostgreSQL, Auth, Real-time) for a scalable BaaS architecture.
+- **Infrastructure**: Optimized for Vercel deployment with Supabase managed services.
 
-## Pages Included
-
-1. **Home** (`index.html`) - Landing page with hero section and overview
-2. **About Us** (`about.html`) - Organization information and mission
-3. **CYCA** (`cyca.html`) - Chakma Youth Cultural Association details
-4. **Zones** (`zones.html`) - Geographic zones information
-5. **Branches** (`branches.html`) - Local branch details
-6. **Gallery** (`gallery.html`) - Photo gallery with categories
-7. **News & Events** (`news-events.html`) - Latest news and upcoming events
-8. **Election** (`election.html`) - Election archive and results
-9. **By-Law** (`bylaw.html`) - Organization bylaws and regulations
-10. **Membership** (`membership.html`) - Membership information and application
-11. **Contact** (`contact.html`) - Contact form and information
-
-## How to Share
-
-### Option 1: Direct Browser Opening
-Simply open any of the HTML files in your web browser. All pages are self-contained and will work offline.
-
-### Option 2: Local Server
-1. Install Node.js if not already installed
-2. Run: `npx serve frontend -p 3000`
-3. Open `http://localhost:3000` in your browser
-
-### Option 3: Free Hosting
-Upload the `frontend` folder to any static hosting service:
-- **GitHub Pages**: Free hosting for public repositories
-- **Netlify**: Drag & drop deployment
-- **Vercel**: Simple deployment from Git
-- **Firebase Hosting**: Google's hosting service
-
-### Option 4: Share as ZIP
-Compress the `frontend` folder and share the ZIP file. Recipients can extract and open `index.html` directly.
-
-## File Structure
+## 📁 Project Structure
 
 ```
-frontend/
-├── index.html              # Home page
-├── about.html              # About page
-├── cyca.html               # CYCA page
-├── zones.html              # Zones page
-├── branches.html           # Branches page
-├── gallery.html            # Gallery page
-├── news-events.html        # News & Events page
-├── election.html           # Election page
-├── bylaw.html              # By-Law page
-├── membership.html         # Membership page
-├── contact.html            # Contact page
-├── assets/
-│   └── ycalogo.png         # Logo image
-├── css/                    # Additional CSS files (if any)
-├── images/                 # Gallery images (if any)
-└── js/                     # JavaScript files (if any)
+YCA/
+├── yca-next/           # Next.js Frontend Application
+│   ├── app/            # App Router (Bylaws, News, Zones, etc.)
+│   ├── public/         # Static Assets
+│   └── components/     # UI Components (Navbar, Footer, etc.)
+├── backend/            # Express API Server
+│   ├── models/         # Mongoose Schemas
+│   ├── routes/         # API Endpoints
+│   └── seedBylaws.js   # Constitutional Data Seeder
+├── .env                # Environment Variables (Shared)
+└── vercel.json         # Deployment Configuration
 ```
 
-## Technologies Used
+## 🛠️ Getting Started
 
-- **HTML5**: Semantic markup
-- **Tailwind CSS**: Utility-first CSS framework (CDN)
-- **JavaScript**: Interactive features and dark mode toggle
-- **Google Fonts**: Public Sans font family
-- **Material Symbols**: Icon library
+### 1. Prerequisites
+- Node.js 18+
+- MongoDB instance (Local or Atlas)
 
-## Browser Support
+### 2. Installation
+```bash
+# Install core dependencies
+npm install
 
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+# Install frontend dependencies
+cd yca-next
+npm install
+```
 
-## Customization
+### 3. Development
+Run the frontend:
 
-To customize the website:
+```bash
+cd yca-next
+npm run dev
+```
 
-1. **Colors**: Update the Tailwind config in each HTML file's `<script>` tag
-2. **Content**: Edit the text content in the HTML files
-3. **Images**: Replace images in the `assets/` folder
-4. **Styling**: Modify Tailwind classes or add custom CSS
+### ⚡ Supabase Setup (When Ready)
+1. Create a project at [supabase.com](https://supabase.com).
+2. Run the SQL in `supabase_schema.sql` (in root) in the Supabase SQL Editor.
+3. Update `.env` with your `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+4. The website will automatically switch from **Demo Mode** to **Live Mode** once keys are added.
 
-## License
-
-This project is created for the Young Chakma Association and can be freely shared and modified.
+## 📜 Key Features
+- **By-Laws Explorer**: Synchronized table of contents for the official 2018 Revised Constitution.
+- **Organization Directory**: Hierarchical view of Central, Zonal, and Branch committees.
+- **Newsroom**: Dynamic feed for announcements, circulars, and events.
+- **Membership**: Integrated registration and authentication system.
 
 ---
 
-**Made with ❤️ by Angu Macmillan Chakma**
+**Built with ❤️ for the Chakma Youth.**

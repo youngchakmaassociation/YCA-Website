@@ -1,0 +1,134 @@
+'use client';
+
+import Image from 'next/image';
+import { generateIDNumber } from '@/app/lib/api';
+
+export default function IDCardPreview({ member, onClose }) {
+    if (!member) return null;
+
+    const idNumber = generateIDNumber(member);
+    const level = member.level || 'branch';
+
+    // Design Tokens based on Level
+    const themes = {
+        central: {
+            bg: 'bg-slate-950',
+            accent: 'bg-amber-500',
+            text: 'text-amber-500',
+            border: 'border-amber-500/30',
+            label: 'CENTRAL EXECUTIVE COMMITTEE',
+            ring: 'ring-amber-500/50'
+        },
+        zonal: {
+            bg: 'bg-primary',
+            accent: 'bg-slate-300',
+            text: 'text-slate-300',
+            border: 'border-white/20',
+            label: 'ZONAL EXECUTIVE COMMITTEE',
+            ring: 'ring-white/50'
+        },
+        branch: {
+            bg: 'bg-primary-dark', // Custom deep blue
+            accent: 'bg-accent',
+            text: 'text-accent',
+            border: 'border-accent/30',
+            label: 'BRANCH EXECUTIVE COMMITTEE',
+            ring: 'ring-accent/50'
+        }
+    };
+
+    const theme = themes[level] || themes.branch;
+
+    return (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <div
+                className="absolute inset-0 bg-black/80 backdrop-blur-md animate-fade-in"
+                onClick={onClose}
+            ></div>
+
+            <div className="relative animate-zoom-in space-y-8 max-w-sm w-full">
+                {/* ID Card Front */}
+                <div className={`relative w-[350px] h-[550px] mx-auto rounded-[2.5rem] ${theme.bg} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col`}>
+                    {/* Header Design */}
+                    <div className="pt-10 px-8 text-center space-y-4">
+                        <div className="flex flex-col items-center">
+                            <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase mb-4">Official Identity Card</span>
+                            <div className="relative size-20 mb-2">
+                                <Image
+                                    src="/assets/ycalogo.png"
+                                    alt="YCA Logo"
+                                    fill
+                                    className="object-contain logo-3d-pop shadow-2xl"
+                                />
+                            </div>
+                            <h4 className="text-white font-black text-lg tracking-tighter uppercase leading-tight">Young Chakma Association</h4>
+                        </div>
+                    </div>
+
+                    {/* Member Info Section */}
+                    <div className="flex-grow flex flex-col items-center pt-8 px-8 text-center">
+                        {/* Member Photo */}
+                        <div className="relative size-40 mb-8">
+                            <div className={`absolute inset-0 rounded-3xl ${theme.accent} scale-105 blur-lg opacity-30`}></div>
+                            <Image
+                                src={member.photo_url}
+                                alt={member.name}
+                                fill
+                                className={`object-cover rounded-3xl border-4 border-white ${theme.ring} ring-8 ring-offset-0`}
+                            />
+                        </div>
+
+                        {/* Text Info */}
+                        <div className="space-y-1">
+                            <h2 className="text-2xl font-black text-white leading-tight">{member.name}</h2>
+                            <p className={`text-xs font-black uppercase tracking-widest ${theme.text}`}>{member.designation || member.role}</p>
+                        </div>
+
+                        <div className="w-full h-px bg-white/10 my-8"></div>
+
+                        <div className="grid grid-cols-2 gap-8 w-full text-left">
+                            <div>
+                                <span className="text-[8px] font-black text-white/40 uppercase tracking-widest block mb-1">ID Number</span>
+                                <span className="text-xs font-mono font-bold text-white tracking-widest">{idNumber}</span>
+                            </div>
+                            <div>
+                                <span className="text-[8px] font-black text-white/40 uppercase tracking-widest block mb-1">Validity</span>
+                                <span className="text-xs font-bold text-white tracking-widest">2024 - 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer Band */}
+                    <div className={`mt-auto h-20 ${theme.accent} flex items-center justify-center px-8 relative overflow-hidden`}>
+                        <div className="absolute inset-0 bg-black/10"></div>
+                        <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] relative z-10">
+                            {theme.label}
+                        </span>
+                    </div>
+
+                    {/* Watermark Logo */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-80 opacity-[0.03] pointer-events-none grayscale">
+                        <Image src="/assets/ycalogo.png" alt="" fill className="object-contain" />
+                    </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex flex-col gap-4 max-w-[350px] mx-auto">
+                    <button
+                        onClick={() => window.print()}
+                        className="w-full h-16 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl flex items-center justify-center gap-3"
+                    >
+                        <span className="material-symbols-outlined">print</span>
+                        Print Membership Card
+                    </button>
+                    <button
+                        onClick={onClose}
+                        className="w-full h-12 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-all backdrop-blur-md"
+                    >
+                        Close Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
