@@ -3,11 +3,11 @@ const { createClient } = require('@supabase/supabase-js');
 // These will be provided by GitHub Secrets for security
 async function keepAwake() {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
         console.error('❌ ERROR: Missing Supabase credentials!');
-        console.error('Please add NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to your GitHub Repository Secrets.');
+        console.error('Please add your Supabase URL and Key (Service Role or Anon) to your GitHub Repository Secrets.');
         process.exit(1);
     }
 
