@@ -16,6 +16,7 @@ export const metadata = {
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ElectionBanner from "./components/ElectionBanner";
 
 export default function RootLayout({ children }) {
   return (
