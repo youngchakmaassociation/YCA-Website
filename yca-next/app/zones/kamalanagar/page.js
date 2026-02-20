@@ -30,8 +30,8 @@ export default function KamalanagarZonePage() {
                 const bRes = await branchesAPI.getAll();
                 if (bRes.success && bRes.data?.length > 0) {
                     const filtered = bRes.data.filter(b =>
-                        b.zone?.name.toLowerCase().includes('kamalanagar') ||
-                        b.zone_id === 'z1' // Fallback to z1 ID
+                        !b.zones || // Central branches have no zone
+                        b.zones.name.toLowerCase().includes('kamalanagar')
                     );
                     setBranches(filtered.length > 0 ? filtered : FALLBACK_BRANCHES);
                 } else {
