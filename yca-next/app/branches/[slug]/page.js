@@ -18,14 +18,6 @@ export default function DynamicBranchPage() {
 
 
 
-    const FALLBACK_BRANCHES_DATA = {
-        'kamalanagar-1': { name: 'Kamalanagar-I Branch', landmark: 'CADC Government Office', description: 'Central administrative unit covering the main town area.', zone: { name: 'Kamalanagar Zone', slug: 'kamalanagar' } },
-        'kamalanagar-2': { name: 'Kamalanagar-II Branch', landmark: 'Main Market Building', description: 'Youth operations hub for northern Kamalanagar.', zone: { name: 'Kamalanagar Zone', slug: 'kamalanagar' } },
-        'kamalanagar-3': { name: 'Kamalanagar-III Branch', landmark: 'Playground Area', description: 'Focused on student welfare and education programs.', zone: { name: 'Kamalanagar Zone', slug: 'kamalanagar' } },
-        'sumsilui': { name: 'Sumsilui Branch', landmark: 'Government Primary School', description: 'The central hub of activities and coordination for the Bageisury region.', zone: { name: 'Bageisury Zone', slug: 'bageisury' }, coordinates: '22.591799, 92.641770' },
-        'longpuighat': { name: 'Longpuighat Branch', landmark: 'River Market Jetty', description: 'Primary hub for riverine environmental initiatives.', zone: { name: 'Longpuighat Zone', slug: 'longpuighat' } }
-    };
-
     useEffect(() => {
         const fetchBranch = async () => {
             setLoading(true);
@@ -51,18 +43,9 @@ export default function DynamicBranchPage() {
                             if (filtered.length > 0) setCommittee(filtered);
                         }
                     }
-                } else {
-                    // Try fallback
-                    const fallback = FALLBACK_BRANCHES_DATA[slug];
-                    if (fallback) {
-                        setBranch(fallback);
-                    } else {
-                        setBranch(null);
-                    }
                 }
             } catch (error) {
                 console.error('Error fetching branch:', error);
-                setBranch(FALLBACK_BRANCHES_DATA[slug] || null);
             } finally {
                 setLoading(false);
             }
@@ -181,12 +164,10 @@ export default function DynamicBranchPage() {
             )}
 
             <div className="flex flex-col gap-6 mb-20 animate-fade-in-up">
-                {branch.zone && (
-                    <Link href={`/zones/${branch.zone.slug || branch.zone._id}`} className="flex items-center gap-2 text-sm font-black text-accent uppercase tracking-widest hover:translate-x-1 transition-transform">
-                        <span className="material-symbols-outlined text-sm">arrow_back</span>
-                        {branch.zone.name}
-                    </Link>
-                )}
+                <Link href={branch.zone ? `/zones/${branch.zone.slug || branch.zone._id}` : '/zones/kamalanagar'} className="flex items-center gap-2 text-sm font-black text-accent uppercase tracking-widest hover:translate-x-1 transition-transform">
+                    <span className="material-symbols-outlined text-sm">arrow_back</span>
+                    {branch.zone ? branch.zone.name : 'Central Headquarters'}
+                </Link>
                 <h1 className="text-4xl md:text-7xl font-black text-primary leading-tight">
                     {branch.name.split(' ')[0]} <br /> <span className="text-accent underline decoration-primary decoration-4 underline-offset-8">Branch</span>
                 </h1>

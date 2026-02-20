@@ -15,31 +15,6 @@ export default function Home() {
         const response = await newsAPI.getAll('?isPublished=true&limit=3');
         if (response.success && response.data.length > 0) {
           setLatestNews(response.data);
-        } else {
-          // Fallback to high-quality mock data for aesthetic consistency
-          setLatestNews([
-            {
-              _id: '1',
-              title: 'Annual YCA Conference 2024: Shaping the Future',
-              category: 'Meetings',
-              createdAt: '2024-06-15',
-              content: 'The 40th General Conference concluded with landmark resolutions for youth empowerment and community development across Mizoram.'
-            },
-            {
-              _id: '2',
-              title: 'Cultural Heritage Workshop Series Announced',
-              category: 'Education',
-              createdAt: '2024-05-28',
-              content: 'Preserving our traditions through modern technology. Join our masterclass on Chakma linguistic history.'
-            },
-            {
-              _id: '3',
-              title: 'Global Youth Leadership Cohort Applications Open',
-              category: 'Announcements',
-              createdAt: '2024-05-10',
-              content: 'Identify your potential. Our flagship leadership program is looking for 50 young leaders to represent YCA globally.'
-            }
-          ]);
         }
       } catch (err) {
         console.error(err);
@@ -51,8 +26,8 @@ export default function Home() {
   }, []);
 
   const stats = [
-    { label: 'Active Members', value: '1,250+', icon: 'group' },
-    { label: 'Local Branches', value: '4', icon: 'account_tree' },
+    { label: 'Active Members', value: '4,500+', icon: 'group' },
+    { label: 'Local Branches', value: '7', icon: 'account_tree' },
     { label: 'Zonal HQs', value: '3', icon: 'hub' },
     { label: 'Years of Service', value: '45+', icon: 'history_edu' }
   ];

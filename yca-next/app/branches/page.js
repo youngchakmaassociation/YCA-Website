@@ -7,18 +7,10 @@ import { branchesAPI, zonesAPI } from '@/app/lib/api';
 
 export default function BranchesPage() {
     const [search, setSearch] = useState('');
-    const [selectedZone, setSelectedZone] = useState('All Zones');
+    const [selectedZone, setSelectedZone] = useState('All');
     const [branches, setBranches] = useState([]);
-    const [zones, setZones] = useState(['All Zones']);
+    const [zones, setZones] = useState(['All']);
     const [loading, setLoading] = useState(true);
-
-    const FALLBACK_ZONES_LIST = ['All Zones', 'Kamalanagar Zone', 'Borapansury Zone', 'Chawngte Zone', 'Bageisury Zone'];
-    const FALLBACK_BRANCHES = [
-        { _id: 'b1', name: 'Kamalanagar-I Branch', landmark: 'CADC Government Office', zone: { name: 'Kamalanagar Zone' }, slug: 'kamalanagar-1' },
-        { _id: 'b2', name: 'Kamalanagar-II Branch', landmark: 'Main Market Building', zone: { name: 'Kamalanagar Zone' }, slug: 'kamalanagar-2' },
-        { _id: 'b3', name: 'Kamalanagar-III Branch', landmark: 'Playground Area', zone: { name: 'Kamalanagar Zone' }, slug: 'kamalanagar-3' },
-        { _id: 'b4', name: 'Sumsilui Branch', landmark: 'Government Primary School', zone: { name: 'Bageisury Zone' }, slug: 'sumsilui' },
-    ];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,21 +21,15 @@ export default function BranchesPage() {
                     branchesAPI.getAll()
                 ]);
 
-                if (zonesRes.success && zonesRes.data?.length > 0) {
-                    setZones(['All Zones', ...zonesRes.data.map(z => z.name)]);
-                } else {
-                    setZones(FALLBACK_ZONES_LIST);
+                if (zonesRes.success && zonesRes.data) {
+                    setZones(['All', 'Central YCA', ...zonesRes.data.map(z => z.name)]);
                 }
 
-                if (branchesRes.success && branchesRes.data?.length > 0) {
+                if (branchesRes.success && branchesRes.data) {
                     setBranches(branchesRes.data);
-                } else {
-                    setBranches(FALLBACK_BRANCHES);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
-                setZones(FALLBACK_ZONES_LIST);
-                setBranches(FALLBACK_BRANCHES);
             } finally {
                 setLoading(false);
             }
@@ -51,10 +37,12 @@ export default function BranchesPage() {
         fetchData();
     }, []);
 
-    const filteredBranches = branches.filter(b =>
-        (selectedZone === 'All Zones' || (b.zone && b.zone.name === selectedZone)) &&
-        b.name.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredBranches = branches.filter(b => {
+        const matchesSearch = b.name.toLowerCase().includes(search.toLowerCase());
+        if (selectedZone === 'All') return matchesSearch;
+        if (selectedZone === 'Central YCA') return matchesSearch && !b.zone;
+        return matchesSearch && b.zone?.name === selectedZone;
+    });
 
     return (
         <div className="container mx-auto px-4 py-8 md:py-16">
@@ -115,7 +103,7 @@ export default function BranchesPage() {
                                         </div>
                                         <div>
                                             <h3 className="text-xl font-black text-black dark:text-white">{branch.name}</h3>
-                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zone?.name}</p>
+                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zone?.name || 'Central YCA'}</p>
                                         </div>
                                     </div>
 

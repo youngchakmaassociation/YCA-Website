@@ -16,52 +16,22 @@ export default function DynamicZonePage() {
     const [selectedMember, setSelectedMember] = useState(null);
     const [showIDCard, setShowIDCard] = useState(false);
 
-
-    const FALLBACK_ZONES_DATA = {
-        'kamalanagar': { name: 'Kamalanagar Zone', landmark: 'Main Market', description: 'The administrative heart of the YCA network, coordinating regional initiatives.', branches: [{ name: 'Kamalanagar-I', slug: 'kamalanagar-1' }, { name: 'Kamalanagar-II', slug: 'kamalanagar-2' }, { name: 'Kamalanagar-III', slug: 'kamalanagar-3' }] },
-        'longpuighat': { name: 'Longpuighat Zone', landmark: 'Riverside Bazaar', description: 'Focuses on riverine development and youth vocational training in border regions.', branches: [{ name: 'Longpuighat Branch', slug: 'longpuighat' }] },
-        'bageisury': { name: 'Bageisury Zone', landmark: 'Village Market Area', description: 'Cultural heart of the eastern region, officially Sakeilui, driving local heritage programs.', branches: [{ name: 'Sumsilui Branch', slug: 'sumsilui' }] }
-    };
-
     useEffect(() => {
         const fetchZone = async () => {
             setLoading(true);
             try {
                 const response = await zonesAPI.getOne(slug);
                 if (response.success && response.data) {
-                    const zoneData = response.data;
-                    // Check if branches are empty and we have fallback data for this zone
-                    if (!zoneData.branches || zoneData.branches.length === 0) {
-                        // Match by slug or by normalized name
-                        const normalizedName = zoneData.name?.toLowerCase().replace(/\s+zone$/i, '').trim();
-                        const fallback = FALLBACK_ZONES_DATA[slug] || FALLBACK_ZONES_DATA[normalizedName];
-
-                        if (fallback) {
-                            setZone({ ...zoneData, ...fallback });
-                        } else {
-                            setZone(zoneData);
-                        }
-                    } else {
-                        setZone(zoneData);
-                    }
+                    setZone(response.data);
 
                     // Fetch zonal committee members
-                    const commRes = await committeeAPI.getAll('zonal', zoneData.id);
+                    const commRes = await committeeAPI.getAll('zonal', response.data.id);
                     if (commRes.success && commRes.data?.length > 0) {
                         setCommittee(commRes.data);
-                    }
-                } else {
-                    // Try fallback data if API returns empty
-                    const fallback = FALLBACK_ZONES_DATA[slug];
-                    if (fallback) {
-                        setZone(fallback);
-                    } else {
-                        setZone(null);
                     }
                 }
             } catch (error) {
                 console.error('Error fetching zone:', error);
-                setZone(FALLBACK_ZONES_DATA[slug] || null);
             } finally {
                 setLoading(false);
             }

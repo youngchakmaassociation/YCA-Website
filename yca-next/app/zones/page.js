@@ -9,25 +9,16 @@ export default function ZonesPage() {
     const [zones, setZones] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const FALLBACK_ZONES = [
-        { _id: 'z1', name: 'Kamalanagar Zone', landmark: 'Main Market', description: 'The central hub of YCA operations, coordinating regional initiatives and administrative standards.', slug: 'kamalanagar', branches: [1, 2, 3] },
-        { _id: 'z2', name: 'Longpuighat Zone', landmark: 'Riverside Bazaar', description: 'Riverine district HQ specializing in maritime skills and environmental conservation.', slug: 'longpuighat', branches: [1] },
-        { _id: 'z3', name: 'Bageisury Zone', landmark: 'Village Market Area', description: 'The community-named heart of the eastern region, reflecting local identity (Officially Sakeilui). Focuses on cultural preservation and youth empowerment.', slug: 'bageisury', branches: [1] },
-    ];
-
     useEffect(() => {
         const fetchZones = async () => {
             setLoading(true);
             try {
                 const response = await zonesAPI.getAll();
-                if (response.success && response.data.length > 0) {
+                if (response.success && response.data) {
                     setZones(response.data);
-                } else {
-                    setZones(FALLBACK_ZONES);
                 }
             } catch (error) {
                 console.error('Error fetching zones:', error);
-                setZones(FALLBACK_ZONES);
             } finally {
                 setLoading(false);
             }
@@ -35,9 +26,23 @@ export default function ZonesPage() {
         fetchZones();
     }, []);
 
-    const filteredZones = zones.filter(z =>
-        z.name.toLowerCase().includes(search.toLowerCase()) ||
-        z.description.toLowerCase().includes(search.toLowerCase())
+    const centralHQ = {
+        _id: 'central-hq',
+        name: 'Central Headquarters',
+        description: 'Primary administrative hub in Kamalanagar. Oversees direct branches including Kamalanagar-I, II, III, and IV.',
+        slug: 'kamalanagar',
+        branches: [1, 2, 3, 4] // dummy for count
+    };
+
+    const filteredZones = [...zones];
+    if (centralHQ.name.toLowerCase().includes(search.toLowerCase()) ||
+        centralHQ.description.toLowerCase().includes(search.toLowerCase())) {
+        filteredZones.unshift(centralHQ);
+    }
+
+    const displayedZones = filteredZones.filter(z =>
+    (z._id === 'central-hq' || z.name.toLowerCase().includes(search.toLowerCase()) ||
+        z.description.toLowerCase().includes(search.toLowerCase()))
     );
 
     return (
@@ -68,13 +73,13 @@ export default function ZonesPage() {
                         [1, 2, 3, 4, 5, 6].map(i => (
                             <div key={i} className="h-80 rounded-[3rem] bg-gray-100 dark:bg-white/5 animate-pulse"></div>
                         ))
-                    ) : filteredZones.length === 0 ? (
+                    ) : displayedZones.length === 0 ? (
                         <div className="col-span-full text-center py-20">
                             <span className="material-symbols-outlined text-6xl text-gray-300">location_off</span>
                             <p className="text-xl font-black text-gray-400 mt-4">No zones match your search</p>
                         </div>
                     ) : (
-                        filteredZones.map((zone, i) => (
+                        displayedZones.map((zone, i) => (
                             <div
                                 key={zone._id}
                                 onClick={() => window.location.href = `/zones/${zone.slug || zone._id}`}
