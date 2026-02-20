@@ -40,8 +40,8 @@ export default function BranchesPage() {
     const filteredBranches = branches.filter(b => {
         const matchesSearch = b.name.toLowerCase().includes(search.toLowerCase());
         if (selectedZone === 'All') return matchesSearch;
-        if (selectedZone === 'Central YCA') return matchesSearch && !b.zone;
-        return matchesSearch && b.zone?.name === selectedZone;
+        if (selectedZone === 'Central YCA') return matchesSearch && !b.zones;
+        return matchesSearch && b.zones?.name === selectedZone;
     });
 
     return (
@@ -103,7 +103,7 @@ export default function BranchesPage() {
                                         </div>
                                         <div>
                                             <h3 className="text-xl font-black text-black dark:text-white">{branch.name}</h3>
-                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zone?.name || 'Central YCA'}</p>
+                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zones?.name || 'Central YCA'}</p>
                                         </div>
                                     </div>
 
