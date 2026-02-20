@@ -1,5 +1,8 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,7 +25,7 @@ export default function BranchesPage() {
                 ]);
 
                 if (zonesRes.success && zonesRes.data) {
-                    setZones(['All', 'Central YCA', ...zonesRes.data.map(z => z.name)]);
+                    setZones(['All', 'Central Headquarters', ...zonesRes.data.map(z => z.name)]);
                 }
 
                 if (branchesRes.success && branchesRes.data) {
@@ -40,7 +43,7 @@ export default function BranchesPage() {
     const filteredBranches = branches.filter(b => {
         const matchesSearch = b.name.toLowerCase().includes(search.toLowerCase());
         if (selectedZone === 'All') return matchesSearch;
-        if (selectedZone === 'Central YCA') return matchesSearch && !b.zones;
+        if (selectedZone === 'Central Headquarters') return matchesSearch && !b.zones;
         return matchesSearch && b.zones?.name === selectedZone;
     });
 
@@ -103,7 +106,7 @@ export default function BranchesPage() {
                                         </div>
                                         <div>
                                             <h3 className="text-xl font-black text-black dark:text-white">{branch.name}</h3>
-                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zones?.name || 'Central YCA'}</p>
+                                            <p className="text-xs font-black uppercase text-slate-600 dark:text-slate-400 tracking-widest">{branch.zones?.name || 'Central Headquarters'}</p>
                                         </div>
                                     </div>
 
