@@ -26,23 +26,9 @@ export default function ZonesPage() {
         fetchZones();
     }, []);
 
-    const centralHQ = {
-        _id: 'central-hq',
-        name: 'Central Headquarters',
-        description: 'Primary administrative hub in Kamalanagar. Oversees direct branches including Kamalanagar-I, II, III, and IV.',
-        slug: 'kamalanagar',
-        branches: [1, 2, 3, 4] // dummy for count
-    };
-
-    const filteredZones = [...zones];
-    if (centralHQ.name.toLowerCase().includes(search.toLowerCase()) ||
-        centralHQ.description.toLowerCase().includes(search.toLowerCase())) {
-        filteredZones.unshift(centralHQ);
-    }
-
-    const displayedZones = filteredZones.filter(z =>
-    (z._id === 'central-hq' || z.name.toLowerCase().includes(search.toLowerCase()) ||
-        z.description.toLowerCase().includes(search.toLowerCase()))
+    const displayedZones = zones.filter(z =>
+        z.name.toLowerCase().includes(search.toLowerCase()) ||
+        z.description.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
@@ -142,14 +128,14 @@ export default function ZonesPage() {
                                 style={{ border: 0 }}
                                 loading="lazy"
                                 allowFullScreen
-                                src={`https://maps.google.com/maps?q=${encodeURIComponent((filteredZones[0]?.name || '') + ' ' + (filteredZones[0]?.landmark || '') + ' Mizoram India')}&output=embed`}
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent((displayedZones[0]?.name || '') + ' ' + (displayedZones[0]?.landmark || '') + ' Mizoram India')}&output=embed`}
                                 className="grayscale hover:grayscale-0 transition-all duration-1000 contrast-125"
                             ></iframe>
                             <div className="absolute inset-x-6 bottom-6 p-6 bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20">
                                 <div className="flex items-center justify-between">
                                     <div className="space-y-1">
                                         <p className="text-[10px] font-black uppercase tracking-widest text-primary/40">Headquarters Focus</p>
-                                        <h4 className="text-lg font-black text-primary">{filteredZones[0]?.name || 'District Command'}</h4>
+                                        <h4 className="text-lg font-black text-primary">{displayedZones[0]?.name || 'District Command'}</h4>
                                     </div>
                                     <span className="material-symbols-outlined text-primary text-3xl animate-bounce">location_on</span>
                                 </div>

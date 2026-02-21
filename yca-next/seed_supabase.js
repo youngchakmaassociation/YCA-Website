@@ -31,9 +31,56 @@ async function seedData() {
 
     // 4. Create Zones
     const zonesToCreate = [
-        { name: 'Bageisury Zone', slug: 'bageisury', description: 'Bageisury region, officially known as Sakeilui.' },
-        { name: 'Longpuighat Zone', slug: 'longpuighat', description: 'Strategic frontier and riverine gateway.' },
-        { name: 'Borapansury Zone', slug: 'borapansury', description: 'Northern regional coordination hub.' }
+        {
+            name: 'Kamalanagar Zone',
+            slug: 'kamalanagar',
+            description: 'The central administrative hub and General Headquarters of the Young Chakma Association. Oversees direct branches in the capital region of the Chakma Autonomous District Council (CADC).'
+        },
+        {
+            name: 'Bageisury Zone',
+            slug: 'bageisury',
+            description: 'Strategic coordination hub for the Bageisury region, officially known as Sakeilui.'
+        },
+        {
+            name: 'Longpuighat Zone',
+            slug: 'longpuighat',
+            description: 'Strategic frontier and riverine gateway coordinating branches along the western borders.'
+        },
+        {
+            name: 'Borapansury Zone',
+            slug: 'borapansury',
+            description: 'Consists of two constituencies (I & II) within the Chakma Autonomous District Council (CADC) in South-Western Mizoram.'
+        },
+        {
+            name: 'Damdep Zone',
+            slug: 'damdep',
+            description: 'A village located in the southern part of the Chakma Autonomous District Council (CADC).'
+        },
+        {
+            name: 'Tiperagath Zone',
+            slug: 'tiperagath',
+            description: 'Historically significant to the CADC, recognized as the site where Chakma leaders held the first meeting to demand autonomy in 1972.'
+        },
+        {
+            name: 'Nunsury Zone',
+            slug: 'nunsury',
+            description: 'A village in the Lungsen block of Lunglei district, Mizoram, serving as a key regional link.'
+        },
+        {
+            name: 'Tuichawng Zone',
+            slug: 'tuichawng',
+            description: 'Often referenced near Tlabung, this is a village and locality in the Lungsen Block of Lunglei district, Mizoram.'
+        },
+        {
+            name: 'Marpara Zone',
+            slug: 'marpara',
+            description: 'A village in the Lunglei district of Mizoram, with Marpara South located in the Laisawral area of the district.'
+        },
+        {
+            name: 'Rajiv Nagar Zone',
+            slug: 'rajiv-nagar',
+            description: 'Also known as Tuipuibari II, located in the Mamit District of Mizoram.'
+        }
     ];
 
     await supabase.from('zones').insert(zonesToCreate);
