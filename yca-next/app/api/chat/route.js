@@ -108,10 +108,11 @@ export async function POST(req) {
                 contextDataText += `\n`;
             }
 
-            // 2. COMMITTEE MEMBERS
+            // 2. COMMITTEE MEMBERS & EMERGENCY CONTACTS
             if (membersRes.status === 'fulfilled' && membersRes.value.success) {
                 const members = membersRes.value.data || [];
                 const grouped = { cyca: [], zonal: [], branch: [] };
+
                 members.forEach(m => {
                     const group = grouped[m.level] || grouped.branch;
                     let locationInfo = "";
@@ -119,8 +120,31 @@ export async function POST(req) {
                     else if (m.level === 'zonal') locationInfo = `Zone: ${m.zones?.name || 'Unknown'}`;
                     else if (m.level === 'branch') locationInfo = `Branch: ${m.branches?.name || 'Unknown'}`;
 
-                    group.push(`- ${m.name} (${m.designation}) | ${locationInfo} | Term: ${m.term_start_year || ''}-${m.term_end_year || 'Present'}`);
+                    let contactInfo = "";
+                    if (m.phone || m.email) {
+                        contactInfo = ` [Contact: ${m.phone || ''} ${m.email || ''}]`.trim();
+                    }
+
+                    group.push(`- ${m.name} (${m.designation}) | ${locationInfo} | Term: ${m.term_start_year || ''}-${m.term_end_year || 'Present'}${contactInfo}`);
                 });
+
+                // Emergency Contacts block
+                contextDataText += `--- EMERGENCY & OFFICIAL CONTACTS ---\n`;
+                contextDataText += `HQ Location: Kamalanagar (General Headquarters)\n`;
+                contextDataText += `Official Email: contact@youngchakmaassociation.org (Fallback)\n`;
+                contextDataText += `Key CYCA Leaders (Contact them for severe emergencies):\n`;
+                const topLeaders = members.filter(m => m.level === 'cyca' || m.level === 'central');
+                if (topLeaders.length > 0) {
+                    topLeaders.forEach(m => {
+                        let contact = (m.phone || m.email) ? `(Contact: ${m.phone || ''} ${m.email || ''})` : "(Contact HQ)";
+                        contextDataText += `- ${m.name}, ${m.designation} ${contact}\n`;
+                    });
+                } else {
+                    contextDataText += `- Dr. Jyoti Bikash Chakma, President (Contact HQ)\n`;
+                    contextDataText += `- Sujoy Chakma, Vice-President (Contact HQ)\n`;
+                    contextDataText += `- General Secretary (Contact HQ)\n`;
+                }
+                contextDataText += `\n`;
 
                 contextDataText += `--- YCA COMMITTEE MEMBERS ---\nCYCA Members:\n${grouped.cyca.join('\n')}\nZonal Leaders:\n${grouped.zonal.join('\n')}\nBranch Leaders:\n${grouped.branch.join('\n')}\n\n`;
             }
