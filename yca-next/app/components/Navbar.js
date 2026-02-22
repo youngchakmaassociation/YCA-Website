@@ -117,8 +117,8 @@ export default function Navbar() {
                     <div className="hidden xl:block w-32"></div>
 
                     {/* Centered Links */}
-                    <div className="flex-1 flex items-center justify-center overflow-x-auto overflow-y-hidden no-scrollbar scroll-smooth">
-                        <div className="flex items-center min-w-max">
+                    <div className="flex-1 flex items-center justify-start md:justify-center overflow-x-auto overflow-y-hidden no-scrollbar scroll-smooth w-full">
+                        <div className="flex items-center min-w-max px-2 md:px-0">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href;
                                 return (
