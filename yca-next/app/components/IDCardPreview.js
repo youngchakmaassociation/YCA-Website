@@ -39,28 +39,40 @@ export default function IDCardPreview({ member, onClose }) {
     // Design Tokens based on Level
     const themes = {
         central: {
-            bg: 'bg-slate-950',
-            accent: 'bg-amber-500',
-            text: 'text-amber-500',
-            border: 'border-amber-500/30',
+            bg: 'bg-white',
+            accent: 'bg-slate-950',
+            text: 'text-slate-950',
+            memberText: 'text-slate-900',
+            subText: 'text-slate-500',
+            border: 'border-slate-200',
             label: 'CENTRAL EXECUTIVE COMMITTEE',
-            ring: 'ring-amber-500/50'
+            labelBg: 'bg-slate-900',
+            ring: 'ring-slate-200',
+            watermark: 'opacity-[0.05]'
         },
         zonal: {
-            bg: 'bg-primary',
-            accent: 'bg-slate-300',
-            text: 'text-slate-300',
+            bg: 'bg-[#007A33]', // YCA Heritage Green
+            accent: 'bg-white/20',
+            text: 'text-white',
+            memberText: 'text-white',
+            subText: 'text-white/60',
             border: 'border-white/20',
             label: 'ZONAL EXECUTIVE COMMITTEE',
-            ring: 'ring-white/50'
+            labelBg: 'bg-black/20',
+            ring: 'ring-white/30',
+            watermark: 'opacity-[0.03]'
         },
         branch: {
-            bg: 'bg-primary-dark', // Custom deep blue
-            accent: 'bg-accent',
-            text: 'text-accent',
-            border: 'border-accent/30',
+            bg: 'bg-[#C8102E]', // Deep Crimson
+            accent: 'bg-white/20',
+            text: 'text-white',
+            memberText: 'text-white',
+            subText: 'text-white/60',
+            border: 'border-white/20',
             label: 'BRANCH EXECUTIVE COMMITTEE',
-            ring: 'ring-accent/50'
+            labelBg: 'bg-black/20',
+            ring: 'ring-white/30',
+            watermark: 'opacity-[0.03]'
         }
     };
 
@@ -115,7 +127,7 @@ export default function IDCardPreview({ member, onClose }) {
                     {/* Header Design */}
                     <div className="pt-10 px-8 text-center space-y-4">
                         <div className="flex flex-col items-center">
-                            <span className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase mb-4">Official Identity Card</span>
+                            <span className={`text-[10px] font-black tracking-[0.4em] ${level === 'central' ? 'text-slate-400' : 'text-white/40'} uppercase mb-4`}>Official Identity Card</span>
                             <div className="relative size-20 mb-2">
                                 <Image
                                     src="/assets/ycalogo.png"
@@ -124,30 +136,30 @@ export default function IDCardPreview({ member, onClose }) {
                                     className="object-contain logo-3d-pop shadow-2xl"
                                 />
                             </div>
-                            <h4 className="text-white font-black text-lg tracking-tighter uppercase leading-tight">Young Chakma Association</h4>
+                            <h4 className={`${level === 'central' ? 'text-slate-900' : 'text-white'} font-black text-lg tracking-tighter uppercase leading-tight`}>Young Chakma Association</h4>
                         </div>
                     </div>
 
                     {/* Member Info Section */}
-                    <div className="flex-grow flex flex-col items-center pt-8 px-8 text-center">
+                    <div className="flex-grow flex flex-col items-center pt-6 px-8 text-center gap-6">
                         {/* Member Photo */}
-                        <div className="relative size-40 mb-8">
+                        <div className="relative size-36 shrink-0">
                             <div className={`absolute inset-0 rounded-3xl ${theme.accent} scale-105 blur-lg opacity-30`}></div>
                             <Image
-                                src={member.photo_url}
+                                src={member.photo_url || 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=200&h=200&auto=format&fit=crop'}
                                 alt={member.name}
                                 fill
-                                className={`object-cover rounded-3xl border-4 border-white ${theme.ring} ring-8 ring-offset-0`}
+                                className={`object-cover rounded-3xl border-4 ${level === 'central' ? 'border-slate-100' : 'border-white'} ${theme.ring} ring-8 ring-offset-0`}
                             />
                         </div>
 
                         {/* Text Info */}
-                        <div className="space-y-1">
-                            <h2 className="text-2xl font-black text-white leading-tight">{member.name}</h2>
-                            <div className="flex flex-wrap justify-center gap-1 mt-2">
+                        <div className="space-y-3">
+                            <h2 className={`text-2xl font-black ${theme.memberText} leading-tight`}>{member.name}</h2>
+                            <div className="flex flex-wrap justify-center gap-1.5 max-h-20 overflow-y-auto no-scrollbar py-1">
                                 {sortedRoles.map((role, idx) => (
-                                    <span key={idx} className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-md ${theme.accent} text-white`}>
-                                        {role.designation} ({role.level === 'central' ? 'CYCA' : role.level === 'zonal' ? 'Zone' : 'Branch'})
+                                    <span key={idx} className={`text-[9px] font-black uppercase px-2 py-1 rounded-md ${theme.accent} ${theme.text} border ${theme.border}`}>
+                                        {role.designation}
                                     </span>
                                 ))}
                                 {sortedRoles.length === 0 && (
@@ -156,30 +168,30 @@ export default function IDCardPreview({ member, onClose }) {
                             </div>
                         </div>
 
-                        <div className="w-full h-px bg-white/10 my-8"></div>
+                        <div className={`w-full h-px ${level === 'central' ? 'bg-slate-100' : 'bg-white/10'}`}></div>
 
                         <div className="grid grid-cols-2 gap-8 w-full text-left">
                             <div>
-                                <span className="text-[8px] font-black text-white/40 uppercase tracking-widest block mb-1">ID Number</span>
-                                <span className="text-xs font-mono font-bold text-white tracking-widest">{idNumber}</span>
+                                <span className={`text-[8px] font-black ${theme.subText} uppercase tracking-widest block mb-1`}>ID Number</span>
+                                <span className={`text-xs font-mono font-bold ${theme.memberText} tracking-widest`}>{idNumber}</span>
                             </div>
                             <div>
-                                <span className="text-[8px] font-black text-white/40 uppercase tracking-widest block mb-1">Validity</span>
-                                <span className="text-xs font-bold text-white tracking-widest">2024 - 2026</span>
+                                <span className={`text-[8px] font-black ${theme.subText} uppercase tracking-widest block mb-1`}>Validity</span>
+                                <span className={`text-xs font-bold ${theme.memberText} tracking-widest`}>2024 - 2026</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Footer Band */}
-                    <div className={`mt-auto h-20 ${theme.accent} flex items-center justify-center px-8 relative overflow-hidden`}>
-                        <div className="absolute inset-0 bg-black/10"></div>
-                        <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] relative z-10">
+                    <div className={`mt-auto h-20 ${theme.labelBg} flex items-center justify-center px-8 relative overflow-hidden`}>
+                        {level !== 'central' && <div className="absolute inset-0 bg-black/10"></div>}
+                        <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] relative z-10 text-center">
                             {theme.label}
                         </span>
                     </div>
 
                     {/* Watermark Logo */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-80 opacity-[0.03] pointer-events-none grayscale">
+                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-80 ${theme.watermark} pointer-events-none grayscale`}>
                         <Image src="/assets/ycalogo.png" alt="" fill className="object-contain" />
                     </div>
                 </div>
