@@ -7,9 +7,10 @@ import { useState, useEffect } from 'react';
 export default function IDCardPreview({ member, onClose }) {
     if (!member) return null;
 
+    const [cardSize, setCardSize] = useState('CR80'); // CR80 or CR100
     const [allRoles, setAllRoles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [cardSize, setCardSize] = useState('CR80'); // CR80 or CR100
+    console.log('IDCardPreview Build V2.1 Load - Size:', cardSize);
 
     useEffect(() => {
         const fetchAllRoles = async () => {
@@ -65,7 +66,21 @@ export default function IDCardPreview({ member, onClose }) {
 
     const theme = themes[level] || themes.branch;
 
-    if (loading) return null;
+    const finalPrintCSS = `
+        @media print {
+            .no-print { display: none !important; }
+            .register-ignore { display: none !important; }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            .fixed { position: relative !important; inset: 0 !important; padding: 0 !important; }
+            #id-card-printable {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                ${cardSize === 'CR80' ? 'width: 53.98mm !important; height: 85.6mm !important;' : 'width: 67mm !important; height: 98.4mm !important;'}
+                margin: 0 auto !important;
+                border-radius: 2rem !important;
+            }
+        }
+    `;
 
     return (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
@@ -77,16 +92,16 @@ export default function IDCardPreview({ member, onClose }) {
             <div className="relative animate-zoom-in space-y-8 max-w-sm w-full print:m-0 print:p-0">
                 {/* Size Selector */}
                 <div className="flex justify-center gap-4 no-print register-ignore">
-                    {['CR80', 'CR100'].map(size => (
+                    {['CR80', 'CR100'].map(sz => (
                         <button
-                            key={size}
-                            onClick={() => setCardSize(size)}
-                            className={`px-6 py-2 rounded-full font-black text-xs transition-all ${cardSize === size
+                            key={sz}
+                            onClick={() => setCardSize(sz)}
+                            className={`px-6 py-2 rounded-full font-black text-xs transition-all ${cardSize === sz
                                 ? 'bg-white text-primary shadow-xl scale-110'
                                 : 'bg-white/10 text-white hover:bg-white/20'
                                 }`}
                         >
-                            {size} {size === 'CR80' ? '(Standard)' : '(Extended)'}
+                            {sz} {sz === 'CR80' ? '(Standard)' : '(Extended)'}
                         </button>
                     ))}
                 </div>
@@ -186,23 +201,8 @@ export default function IDCardPreview({ member, onClose }) {
                     </button>
                 </div>
             </div>
-            {/* Official Print Styles for CR80/CR100 Sizing */}
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @media print {
-                    .no-print { display: none !important; }
-                    .register-ignore { display: none !important; }
-                    body { background: white !important; padding: 0 !important; margin: 0 !important; }
-                    .fixed { position: relative !important; inset: 0 !important; padding: 0 !important; }
-                    #id-card-printable {
-                        box-shadow: none !important;
-                        border: 1px solid #ddd !important;
-                        ${cardSize === 'CR80' ? 'width: 53.98mm !important; height: 85.6mm !important;' : 'width: 67mm !important; height: 98.4mm !important;'}
-                        margin: 0 auto !important;
-                        border-radius: 2rem !important;
-                    }
-                }
-            ` }} />
+            {/* Version 2.1: CSS Sanitized for Turbopack */}
+            <style dangerouslySetInnerHTML={{ __html: finalPrintCSS }} />
         </div>
     );
 }
