@@ -141,17 +141,18 @@ function VerifyContent() {
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                                            <span className="text-[9px] font-black uppercase text-slate-400 block mb-1">Designation</span>
-                                            <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{result.designation}</span>
-                                        </div>
-                                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                                            <span className="text-[9px] font-black uppercase text-slate-400 block mb-1">Committee</span>
-                                            <span className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase">
-                                                {result.level === 'central' ? 'Central (CYCA)' :
-                                                    result.level === 'zonal' ? result.zones?.name :
-                                                        result.branches?.name}
-                                            </span>
+                                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 md:col-span-2">
+                                            <span className="text-[9px] font-black uppercase text-slate-400 block mb-2">Designations & Units</span>
+                                            <div className="flex flex-wrap gap-2">
+                                                {(result.roles && result.roles.length > 0 ? result.roles : [{ designation: result.designation, level: result.level, zones: result.zones, branches: result.branches }]).map((role, idx) => (
+                                                    <span key={idx} className="px-3 py-1.5 rounded-lg bg-primary/5 dark:bg-primary/20 text-[11px] font-black text-primary dark:text-blue-400 uppercase border border-primary/10">
+                                                        {role.designation}
+                                                        {role.level === 'zonal' ? ` (${role.zones?.name || 'Zonal'})` :
+                                                            role.level === 'branch' ? ` (${role.branches?.name || 'Branch'})` :
+                                                                ' (CYCA)'}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
 

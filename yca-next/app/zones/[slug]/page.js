@@ -141,128 +141,118 @@ export default function DynamicZonePage() {
                 </p>
             </div>
 
-            {/* Leadership Grid */}
-            <section className="mb-32">
-                <div className="flex items-center gap-6 mb-16">
-                    <h2 className="text-3xl font-black text-primary whitespace-nowrap">Zone Leadership</h2>
-                    <div className="h-px bg-gray-100 dark:bg-white/10 flex-grow"></div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {leaders.map((leader, i) => (
-                        <div
-                            key={i}
-                            className="group text-center animate-fade-in-up cursor-pointer"
-                            style={{ animationDelay: `${i * 100}ms` }}
-                            onClick={() => setSelectedMember(leader)}
-                        >
-                            <div className="relative size-48 mx-auto mb-8">
-                                <div className="absolute inset-0 bg-primary/20 rounded-full scale-110 blur-xl group-hover:bg-accent/20 transition-all duration-700"></div>
-                                <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/40 rounded-full backdrop-blur-sm border-2 border-white/50">
-                                    <span className="material-symbols-outlined text-white text-4xl">contact_page</span>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-32">
+                {/* Main Content Area */}
+                <div className="lg:col-span-2 space-y-32">
+                    {/* Leadership Grid */}
+                    <section>
+                        <div className="flex items-center gap-6 mb-16">
+                            <h2 className="text-3xl font-black text-primary whitespace-nowrap">Zone Leadership</h2>
+                            <div className="h-px bg-gray-100 dark:bg-white/10 flex-grow"></div>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                            {leaders.map((leader, i) => (
+                                <div
+                                    key={i}
+                                    className="group text-center animate-fade-in-up cursor-pointer"
+                                    style={{ animationDelay: `${i * 100}ms` }}
+                                    onClick={() => setSelectedMember(leader)}
+                                >
+                                    <div className="relative size-48 mx-auto mb-8">
+                                        <div className="absolute inset-0 bg-primary/20 rounded-full scale-110 blur-xl group-hover:bg-accent/20 transition-all duration-700"></div>
+                                        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/40 rounded-full backdrop-blur-sm border-2 border-white/50">
+                                            <span className="material-symbols-outlined text-white text-4xl">contact_page</span>
+                                        </div>
+                                        <Image
+                                            src={leader.photo_url || leader.img || 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=200&h=200&auto=format&fit=crop'}
+                                            alt={leader.name}
+                                            fill
+                                            className="object-cover rounded-full border-4 border-white dark:border-white/10 relative z-10 transition-transform duration-700 group-hover:scale-110 shadow-2xl"
+                                        />
+                                    </div>
+                                    <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">{leader.name}</h3>
+                                    <p className="text-sm font-black uppercase tracking-widest text-accent">{leader.designation || leader.role}</p>
                                 </div>
-                                <Image
-                                    src={leader.photo_url || leader.img || 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=200&h=200&auto=format&fit=crop'}
-                                    alt={leader.name}
-                                    fill
-                                    className="object-cover rounded-full border-4 border-white dark:border-white/10 relative z-10 transition-transform duration-700 group-hover:scale-110 shadow-2xl"
-                                />
-                            </div>
-                            <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">{leader.name}</h3>
-                            <p className="text-sm font-black uppercase tracking-widest text-accent">{leader.designation || leader.role}</p>
+                            ))}
                         </div>
-                    ))}
+                    </section>
+
+                    {/* Branch List */}
+                    <section>
+                        <div className="p-10 rounded-[3rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-xl">
+                            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                                <h2 className="text-2xl font-black text-primary">Regional Branches</h2>
+                                <span className={`px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest`}>
+                                    {zone.branches?.length || 0} Registered Units
+                                </span>
+                            </div>
+
+                            <div className="space-y-4">
+                                {zone.branches?.map((branch, i) => (
+                                    <div
+                                        key={i}
+                                        onClick={() => window.location.href = `/branches/${branch.slug || branch._id}`}
+                                        className="group p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-transparent hover:border-accent hover:bg-white dark:hover:bg-white/10 transition-all cursor-pointer flex items-center justify-between"
+                                    >
+                                        <div className="space-y-1">
+                                            <h3 className="text-lg font-black text-primary group-hover:text-accent transition-colors">{branch.name}</h3>
+                                            <p className="text-xs font-medium opacity-60 line-clamp-1">{branch.description || 'Administrative unit under Zonal HQ.'}</p>
+                                        </div>
+                                        <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </section>
 
-            {/* Branch List */}
-            <section className="mb-32">
-                <div className="p-12 md:p-20 rounded-[4rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-2xl">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
-                        <h2 className="text-3xl font-black text-primary">Regional Branches</h2>
-                        <button className="px-10 py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/30 hover:bg-accent transition-all">Connect All</button>
-                    </div>
+                {/* Sticky Sidebar Area */}
+                <aside className="space-y-12">
+                    <div className="sticky top-24 space-y-12">
+                        {/* Map Box */}
+                        <div className="p-4 rounded-[3.5rem] bg-white dark:bg-white/5 border border-primary/10 shadow-2xl space-y-6">
+                            <div className="relative rounded-[3rem] overflow-hidden border-2 border-slate-100 dark:border-white/5 h-[350px]">
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    loading="lazy"
+                                    allowFullScreen
+                                    src={`https://maps.google.com/maps?q=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}&output=embed`}
+                                    className="grayscale hover:grayscale-0 transition-all duration-1000"
+                                ></iframe>
+                            </div>
+                            <div className="px-6 pb-6 space-y-4 text-center">
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Zonal Command Center</span>
+                                <h3 className="text-xl font-black text-primary leading-tight">Headquarters Location</h3>
+                                <a
+                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full py-4 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-accent transition-all flex items-center justify-center gap-3 shadow-xl"
+                                >
+                                    <span className="material-symbols-outlined">directions</span>
+                                    Office Navigation
+                                </a>
+                            </div>
+                        </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {zone.branches?.map((branch, i) => (
-                            <div
-                                key={i}
-                                onClick={() => window.location.href = `/branches/${branch.slug || branch._id}`}
-                                className="group p-8 rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-transparent hover:border-accent hover:bg-white dark:hover:bg-white/10 transition-all cursor-pointer"
-                            >
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-xl font-black text-primary group-hover:text-accent transition-colors">{branch.name}</h3>
-                                    <span className="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">arrow_outward</span>
+                        {/* Quick Stats Grid */}
+                        <div className="grid grid-cols-2 gap-4">
+                            {[
+                                { val: zone.branches?.length || 0, label: 'Branches' },
+                                { val: 'Official', label: 'Status' },
+                                { val: new Date(zone.establishedDate).getFullYear() || '2010', label: 'Established' },
+                                { val: '24/7', label: 'Support' }
+                            ].map((stat, i) => (
+                                <div key={i} className="p-6 rounded-[2rem] bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 text-center space-y-1">
+                                    <div className="text-2xl font-black text-primary">{stat.val}</div>
+                                    <div className="text-[9px] font-black uppercase tracking-widest opacity-40">{stat.label}</div>
                                 </div>
-                                <p className="font-medium opacity-60 leading-relaxed">{branch.description || 'Administrative unit under Zonal HQ.'}</p>
-                            </div>
-                        ))}
-                        {(!zone.branches || zone.branches.length === 0) && (
-                            <p className="text-center col-span-full py-10 opacity-60 font-medium italic">No branches registered in this zone yet.</p>
-                        )}
-                    </div>
-                </div>
-            </section>
-
-            {/* New Map Section */}
-            <section className="mb-32">
-                <div className="flex items-center justify-between mb-16">
-                    <h2 className="text-3xl font-black text-primary border-l-8 border-accent pl-6">Zonal Command Center</h2>
-                    <div className="flex items-center gap-6">
-                        <a
-                            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-accent transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
-                        >
-                            <span className="material-symbols-outlined text-sm">directions</span>
-                            Direct Navigate
-                        </a>
-                        <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-xs font-black uppercase text-primary hover:text-accent transition-colors hidden sm:flex"
-                        >
-                            Detailed Command Map
-                            <span className="material-symbols-outlined text-sm">map</span>
-                        </a>
-                    </div>
-                </div>
-                <div className="relative rounded-[4rem] overflow-hidden shadow-3xl border-8 border-white dark:border-white/5 h-[500px]">
-                    <iframe
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        loading="lazy"
-                        allowFullScreen
-                        src={`https://maps.google.com/maps?q=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}&output=embed`}
-                        className="grayscale hover:grayscale-0 transition-all duration-1000 contrast-110"
-                    ></iframe>
-                    <div className="absolute inset-x-10 bottom-10 p-8 bg-white/80 dark:bg-black/80 backdrop-blur-xl rounded-[3rem] shadow-2xl border border-white/20 hidden md:flex items-center justify-between max-w-xl">
-                        <div className="space-y-2">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-[#007A33]">Active Jurisdiction</span>
-                            <h4 className="text-xl font-black text-primary leading-tight">Headquarters of {zone.name}</h4>
-                        </div>
-                        <div className="size-14 rounded-2xl bg-primary flex items-center justify-center text-white">
-                            <span className="material-symbols-outlined text-3xl">location_on</span>
+                            ))}
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32">
-                {[
-                    { val: zone.branches?.length || 0, label: 'Active Branches' },
-                    { val: '24/7', label: 'Support Available' },
-                    { val: 'Official', label: 'HQ Status' },
-                    { val: new Date(zone.establishedDate).getFullYear() || 'N/A', label: 'Established' }
-                ].map((stat, i) => (
-                    <div key={i} className="text-center space-y-2 py-12 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border border-slate-200/50 dark:border-transparent group hover:bg-accent hover:text-white transition-all">
-                        <div className="text-5xl font-black text-accent group-hover:text-white transition-colors">{stat.val}</div>
-                        <div className="text-xs font-black uppercase tracking-widest opacity-40">{stat.label}</div>
-                    </div>
-                ))}
+                </aside>
             </div>
         </div>
     );

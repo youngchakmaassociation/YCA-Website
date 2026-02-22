@@ -258,43 +258,7 @@ export default function DynamicBranchPage() {
                         </div>
                     </section>
 
-                    {/* New Map Section */}
-                    <section className="space-y-12">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-3xl font-black text-primary border-l-8 border-accent pl-6">Geographical Context</h2>
-                            <div className="flex items-center gap-6">
-                                <a
-                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-6 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-accent transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
-                                >
-                                    <span className="material-symbols-outlined text-sm">directions</span>
-                                    Navigate Now
-                                </a>
-                                <a
-                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.name + ' ' + (branch.landmark || '') + ' Mizoram India')}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-xs font-black uppercase text-primary hover:text-accent transition-colors hidden sm:flex"
-                                >
-                                    Open in Google Maps
-                                    <span className="material-symbols-outlined text-sm">open_in_new</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white dark:border-white/5 h-[450px]">
-                            <iframe
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                loading="lazy"
-                                allowFullScreen
-                                src={`https://maps.google.com/maps?q=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}&output=embed`}
-                                className="grayscale hover:grayscale-0 transition-all duration-700"
-                            ></iframe>
-                        </div>
-                    </section>
+
 
                     <section className="space-y-12">
                         <h2 className="text-3xl font-black text-primary border-l-8 border-accent pl-6">Latest Updates</h2>
@@ -307,49 +271,81 @@ export default function DynamicBranchPage() {
 
                 {/* Sidebar - Quick Info */}
                 <aside className="space-y-12">
-                    <div className="p-10 rounded-[3.5rem] bg-primary text-white shadow-2xl space-y-10 sticky top-24">
-                        <div className="space-y-4">
-                            <h2 className="text-2xl font-black underline decoration-accent underline-offset-8">Branch Contact</h2>
-                            <p className="text-sm font-medium opacity-80 leading-relaxed pt-2">
-                                For official correspondence or local unit support, please reach out to the executive committee.
-                            </p>
-                        </div>
-                        <button className="w-full h-16 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl">Contact Secretary</button>
-                    </div>
-
-                    {branch.zones && (
-                        <div className="p-10 rounded-[3.5rem] bg-white dark:bg-white/5 border border-primary/10 shadow-2xl space-y-8">
-                            <div className="flex items-center gap-4 text-primary">
-                                <span className="material-symbols-outlined text-3xl">hub</span>
-                                <h3 className="text-xl font-black">Regional HQ</h3>
-                            </div>
-                            <div className="space-y-6">
-                                <div className="p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-gray-100 dark:border-white/5">
-                                    <p className="text-[10px] font-black uppercase text-accent tracking-widest mb-1">Parent Entity</p>
-                                    <h4 className="font-black text-primary">{branch.zones.name}</h4>
-                                </div>
-                                <p className="text-sm font-medium opacity-60 leading-relaxed">
-                                    This branch is supervised by the {branch.zones.name} Executive Committee.
+                    <div className="sticky top-24 space-y-12">
+                        <div className="p-10 rounded-[3.5rem] bg-primary text-white shadow-2xl space-y-10">
+                            <div className="space-y-4">
+                                <h2 className="text-2xl font-black underline decoration-accent underline-offset-8">Branch Contact</h2>
+                                <p className="text-sm font-medium opacity-80 leading-relaxed pt-2">
+                                    For official correspondence or local unit support, please reach out to the executive committee.
                                 </p>
-                                <Link
-                                    href={`/zones/${branch.zones.slug || branch.zones._id}`}
-                                    className="flex items-center justify-center gap-2 w-full py-4 rounded-xl border-2 border-primary/10 text-primary font-black text-sm hover:bg-primary hover:text-white transition-all group"
-                                >
-                                    View Zonal Details
-                                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </Link>
+                            </div>
+                            <button className="w-full h-16 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl">Contact Secretary</button>
+                        </div>
+
+                        {/* Moved Map Here */}
+                        <div className="p-4 rounded-[3rem] bg-white dark:bg-white/5 border border-primary/10 shadow-2xl space-y-4">
+                            <div className="relative rounded-[2.5rem] overflow-hidden border border-gray-100 dark:border-white/10 h-[300px]">
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    loading="lazy"
+                                    allowFullScreen
+                                    src={`https://maps.google.com/maps?q=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}&output=embed`}
+                                    className="grayscale hover:grayscale-0 transition-all duration-700"
+                                ></iframe>
+                            </div>
+                            <div className="px-4 pb-4 space-y-3 text-center">
+                                <h3 className="text-lg font-black text-primary">Geographical Context</h3>
+                                <div className="flex flex-col gap-2">
+                                    <a
+                                        href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-accent transition-all flex items-center justify-center gap-2"
+                                    >
+                                        <span className="material-symbols-outlined text-sm">directions</span>
+                                        Navigate Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    )}
 
-                    <div className="p-10 rounded-[3.5rem] bg-accent text-white shadow-2xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 size-32 bg-white/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
-                        <h3 className="text-2xl font-black mb-4">Join This Branch</h3>
-                        <p className="font-medium opacity-80 mb-8 leading-relaxed">Living in this area? Join our local unit to start making an impact.</p>
-                        <Link href="/membership" className="block text-center w-full py-4 bg-white text-accent font-black rounded-xl hover:bg-primary hover:text-white transition-all">Submit Application</Link>
+                        {branch.zones && (
+                            <div className="p-10 rounded-[3.5rem] bg-white dark:bg-white/5 border border-primary/10 shadow-2xl space-y-8">
+                                <div className="flex items-center gap-4 text-primary">
+                                    <span className="material-symbols-outlined text-3xl">hub</span>
+                                    <h3 className="text-xl font-black">Regional HQ</h3>
+                                </div>
+                                <div className="space-y-6">
+                                    <div className="p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-gray-100 dark:border-white/5">
+                                        <p className="text-[10px] font-black uppercase text-accent tracking-widest mb-1">Parent Entity</p>
+                                        <h4 className="font-black text-primary">{branch.zones.name}</h4>
+                                    </div>
+                                    <p className="text-sm font-medium opacity-60 leading-relaxed">
+                                        This branch is supervised by the {branch.zones.name} Executive Committee.
+                                    </p>
+                                    <Link
+                                        href={`/zones/${branch.zones.slug || branch.zones._id}`}
+                                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl border-2 border-primary/10 text-primary font-black text-sm hover:bg-primary hover:text-white transition-all group"
+                                    >
+                                        View Zonal Details
+                                        <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </aside>
-            </div>
+
+                <div className="p-10 rounded-[3.5rem] bg-accent text-white shadow-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 size-32 bg-white/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
+                    <h3 className="text-2xl font-black mb-4">Join This Branch</h3>
+                    <p className="font-medium opacity-80 mb-8 leading-relaxed">Living in this area? Join our local unit to start making an impact.</p>
+                    <Link href="/membership" className="block text-center w-full py-4 bg-white text-accent font-black rounded-xl hover:bg-primary hover:text-white transition-all">Submit Application</Link>
+                </div>
+            </aside>
         </div>
+        </div >
     );
 }
