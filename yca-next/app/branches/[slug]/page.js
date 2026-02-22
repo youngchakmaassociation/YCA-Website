@@ -26,8 +26,6 @@ export default function DynamicBranchPage() {
                 const response = await branchesAPI.getOne(slug);
                 if (response.success && response.data) {
                     setBranch(response.data);
-
-                    // Fetch committee members for this branch
                     const branchId = response.data.id || response.data._id;
                     const commResponse = await committeeAPI.getAll('branch', null, branchId);
 
@@ -45,11 +43,15 @@ export default function DynamicBranchPage() {
                         }
                     }
 
-                    // Fetch general members and filter out committee members
-                    const profRes = await profilesAPI.getAll(branchId);
+                    // Fetch general members and filter out ANY person who is in the Executive Committee (at any level)
+                    const [profRes, allExecutivesRes] = await Promise.all([
+                        profilesAPI.getAll(branchId),
+                        committeeAPI.getAll() // Fetch ALL executives (central, zonal, branch)
+                    ]);
+
                     if (profRes.success && profRes.data) {
-                        const committeeNames = (commResponse.data || []).map(c => c.name.toLowerCase());
-                        const filtered = profRes.data.filter(p => !committeeNames.includes(p.name.toLowerCase()));
+                        const executiveNames = (allExecutivesRes.data || []).map(c => c.name.toLowerCase());
+                        const filtered = profRes.data.filter(p => !executiveNames.includes(p.name.toLowerCase()));
                         setGeneralMembers(filtered);
                     }
                 }
@@ -59,7 +61,7 @@ export default function DynamicBranchPage() {
                 setLoading(false);
             }
         };
-        fetchBranch();
+        fetchData();
     }, [slug]);
 
     if (loading) return (

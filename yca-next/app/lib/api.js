@@ -153,6 +153,13 @@ export const committeeAPI = {
 
         const { data, error } = await query;
         return handleSupabaseResponse(data, error);
+    },
+    getByName: async (name) => {
+        const { data, error } = await supabase
+            .from('committee_members')
+            .select('*, zones(name, slug), branches(name, slug, zones(name))')
+            .ilike('name', name);
+        return handleSupabaseResponse(data, error);
     }
 };
 

@@ -1,13 +1,38 @@
 'use client';
 
 import Image from 'next/image';
-import { generateIDNumber } from '@/app/lib/api';
+import { generateIDNumber, committeeAPI } from '@/app/lib/api';
+import { useState, useEffect } from 'react';
 
 export default function IDCardPreview({ member, onClose }) {
     if (!member) return null;
 
+    const [allRoles, setAllRoles] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchAllRoles = async () => {
+            if (member.name) {
+                const res = await committeeAPI.getByName(member.name);
+                if (res.success && res.data) {
+                    setAllRoles(res.data);
+                }
+            }
+            setLoading(false);
+        };
+        fetchAllRoles();
+    }, [member.name]);
+
     const idNumber = generateIDNumber(member);
-    const level = member.level || 'branch';
+
+    // Sort roles by priority (central > zonal > branch)
+    const sortedRoles = [...allRoles].sort((a, b) => {
+        const levels = { central: 1, zonal: 2, branch: 3 };
+        return levels[a.level] - levels[b.level];
+    });
+
+    const primaryRole = sortedRoles[0] || member;
+    const level = primaryRole.level || 'branch';
 
     // Design Tokens based on Level
     const themes = {
@@ -38,6 +63,8 @@ export default function IDCardPreview({ member, onClose }) {
     };
 
     const theme = themes[level] || themes.branch;
+
+    if (loading) return null;
 
     return (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
@@ -81,7 +108,16 @@ export default function IDCardPreview({ member, onClose }) {
                         {/* Text Info */}
                         <div className="space-y-1">
                             <h2 className="text-2xl font-black text-white leading-tight">{member.name}</h2>
-                            <p className={`text-xs font-black uppercase tracking-widest ${theme.text}`}>{member.designation || member.role}</p>
+                            <div className="flex flex-wrap justify-center gap-1 mt-2">
+                                {sortedRoles.map((role, idx) => (
+                                    <span key={idx} className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-md ${theme.accent} text-white`}>
+                                        {role.designation} ({role.level === 'central' ? 'CYCA' : role.level === 'zonal' ? 'Zone' : 'Branch'})
+                                    </span>
+                                ))}
+                                {sortedRoles.length === 0 && (
+                                    <p className={`text-xs font-black uppercase tracking-widest ${theme.text}`}>{member.designation || member.role}</p>
+                                )}
+                            </div>
                         </div>
 
                         <div className="w-full h-px bg-white/10 my-8"></div>
