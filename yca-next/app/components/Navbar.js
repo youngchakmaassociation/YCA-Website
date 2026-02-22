@@ -35,6 +35,7 @@ export default function Navbar() {
         { name: 'Election', href: '/election' },
         { name: 'By-Law', href: '/bylaw' },
         { name: 'Membership', href: '/membership' },
+        { name: 'Admin', href: '/admin' },
         { name: 'Contact', href: '/contact' },
     ];
 
