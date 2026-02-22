@@ -254,14 +254,14 @@ export default function IDCardPreview({ member, onClose }) {
 
                             <div className={`w-full h-px ${isWhiteTop && !isMultiColor ? 'bg-slate-100' : 'bg-white/10'}`}></div>
 
-                            <div className="grid grid-cols-2 gap-8 w-full text-center">
+                            <div className="grid grid-cols-2 gap-4 w-full text-center">
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[8px] font-black ${isMultiColor ? 'text-white/60' : theme.subText} uppercase tracking-widest block mb-1`}>ID Number</span>
-                                    <span className={`text-xs font-mono font-bold ${isMultiColor ? 'text-white' : theme.memberText} tracking-widest`}>{idNumber}</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/80' : theme.subText} uppercase tracking-widest block mb-1`}>ID Number</span>
+                                    <span className={`text-sm font-mono font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-widest`}>{idNumber}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[8px] font-black ${isMultiColor ? 'text-white/60' : theme.subText} uppercase tracking-widest block mb-1`}>Validity</span>
-                                    <span className={`text-xs font-bold ${isMultiColor ? 'text-white' : theme.memberText} tracking-widest`}>2024 - 2026</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/80' : theme.subText} uppercase tracking-widest block mb-1`}>Validity</span>
+                                    <span className={`text-sm font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-widest`}>2024 - 2026</span>
                                 </div>
                             </div>
                         </div>
