@@ -53,13 +53,6 @@ async function seedCommittee() {
 
         // 3. BRANCH COMMITTEE (Sumsilui Branch)
         {
-            name: 'Priti Chakma',
-            designation: 'Branch President',
-            level: 'branch',
-            branch_id: BRANCHES['Sumsilui Branch'],
-            display_order: 1
-        },
-        {
             name: 'Macmillan Chakma',
             designation: 'General Secretary',
             level: 'branch',
@@ -67,13 +60,6 @@ async function seedCommittee() {
             display_order: 2,
             photo_url: 'https://scontent.fajl1-1.fna.fbcdn.net/v/t39.30808-6/514175747_24164777296449256_6932244748562086651_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=53a332&_nc_ohc=MeBbvj8cx8UQ7kNvwEH8FKZ&_nc_ohc=MeBbvj8cx8UQ7kNvwEH8FKZ&_nc_oc=AdkvZi7ht8HqTf8W0FUeuDeWByIqU9egqLdLfzkKySwLgbyBT_X2qypKMp9kriWy-hU&_nc_zt=23&_nc_ht=scontent.fajl1-1.fna&_nc_gid=FL_IPG6N_ooK8nw0UG5HsQ&oh=00_AfsVG2NVe3wjaNIAsSujhZIZrpL-CewZb1Y0M6l2XzT8ew&oe=69A0EB87',
             phone: '+917003069633'
-        },
-        {
-            name: 'Uttam Chakma',
-            designation: 'Branch Assistant Secretary',
-            level: 'branch',
-            branch_id: BRANCHES['Sumsilui Branch'],
-            display_order: 3
         },
         // MULTI-ROLE MEMBER
         {
