@@ -20,7 +20,7 @@ export default function DynamicBranchPage() {
 
 
     useEffect(() => {
-        const fetchBranch = async () => {
+        const fetchData = async () => {
             setLoading(true);
             try {
                 const response = await branchesAPI.getOne(slug);
