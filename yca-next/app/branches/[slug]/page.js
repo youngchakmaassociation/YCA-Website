@@ -166,7 +166,7 @@ export default function DynamicBranchPage() {
             <div className="flex flex-col gap-6 mb-20 animate-fade-in-up">
                 <Link href={branch.zones ? `/zones/${branch.zones.slug || branch.zones._id}` : '/zones/kamalanagar'} className="flex items-center gap-2 text-sm font-black text-accent uppercase tracking-widest hover:translate-x-1 transition-transform">
                     <span className="material-symbols-outlined text-sm">arrow_back</span>
-                    {branch.zones ? branch.zones.name : 'Central Headquarters'}
+                    {branch.zones ? branch.zones.name : 'Central Administration'}
                 </Link>
                 <h1 className="text-4xl md:text-7xl font-black text-primary leading-tight">
                     {branch.name.split(' ')[0]} <br /> <span className="text-accent underline decoration-primary decoration-4 underline-offset-8">Branch</span>
@@ -231,7 +231,7 @@ export default function DynamicBranchPage() {
                             <h2 className="text-3xl font-black text-primary border-l-8 border-accent pl-6">Geographical Context</h2>
                             <div className="flex items-center gap-6">
                                 <a
-                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.coordinates || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}`}
+                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-6 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-accent transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
@@ -257,7 +257,7 @@ export default function DynamicBranchPage() {
                                 style={{ border: 0 }}
                                 loading="lazy"
                                 allowFullScreen
-                                src={`https://maps.google.com/maps?q=${encodeURIComponent(branch.coordinates || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}&output=embed`}
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent(branch.address || (branch.name + ' ' + (branch.landmark || '') + ' Mizoram India'))}&output=embed`}
                                 className="grayscale hover:grayscale-0 transition-all duration-700"
                             ></iframe>
                         </div>
