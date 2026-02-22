@@ -29,13 +29,6 @@ async function seedCommittee() {
             display_order: 1
         },
         {
-            name: 'Macmillan Chakma',
-            designation: 'General Secretary',
-            level: 'central',
-            display_order: 3,
-            phone: '+917003069633'
-        },
-        {
             name: 'Sujoy Chakma',
             designation: 'Vice-President',
             level: 'central',
@@ -67,11 +60,19 @@ async function seedCommittee() {
             display_order: 1
         },
         {
-            name: 'Uttam Chakma',
-            designation: 'Branch Secretary',
+            name: 'Macmillan Chakma',
+            designation: 'General Secretary',
             level: 'branch',
             branch_id: BRANCHES['Sumsilui Branch'],
-            display_order: 2
+            display_order: 2,
+            phone: '+917003069633'
+        },
+        {
+            name: 'Uttam Chakma',
+            designation: 'Branch Assistant Secretary',
+            level: 'branch',
+            branch_id: BRANCHES['Sumsilui Branch'],
+            display_order: 3
         }
     ];
 
