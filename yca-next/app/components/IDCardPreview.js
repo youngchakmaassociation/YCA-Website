@@ -236,10 +236,18 @@ export default function IDCardPreview({ member, onClose }) {
                                     {sortedRoles.map((role, idx) => (
                                         <span key={idx} className={`text-[9px] font-black uppercase px-2 py-1 rounded-md ${theme.accent} ${isMultiColor ? 'text-white' : theme.text} border ${theme.border}`}>
                                             {role.designation}
+                                            {role.level === 'zonal' ? ` (${role.zones?.name || 'Zonal'})` :
+                                                role.level === 'branch' ? ` (${role.branches?.name || 'Branch'})` :
+                                                    ' (CYCA)'}
                                         </span>
                                     ))}
                                     {sortedRoles.length === 0 && (
-                                        <p className={`text-xs font-black uppercase tracking-widest ${isMultiColor ? 'text-white' : theme.text}`}>{member.designation || member.role}</p>
+                                        <p className={`text-xs font-black uppercase tracking-widest ${isMultiColor ? 'text-white' : theme.text}`}>
+                                            {member.designation || member.role}
+                                            {member.level === 'zonal' ? ` (${member.zones?.name || 'Zonal'})` :
+                                                member.level === 'branch' ? ` (${member.branches?.name || 'Branch'})` :
+                                                    member.level === 'central' ? ' (CYCA)' : ''}
+                                        </p>
                                     )}
                                 </div>
                             </div>
