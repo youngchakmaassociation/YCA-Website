@@ -123,7 +123,7 @@ export default function AiAssistant() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Type your message..."
-                            className="flex-grow bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a4d2e] transition-all"
+                            className="flex-grow bg-gray-100 text-gray-900 placeholder-gray-500 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a4d2e] transition-all"
                         />
                         <button
                             type="submit"
