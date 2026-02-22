@@ -82,8 +82,8 @@ export default function IDCardPreview({ member, onClose }) {
                             key={size}
                             onClick={() => setCardSize(size)}
                             className={`px-6 py-2 rounded-full font-black text-xs transition-all ${cardSize === size
-                                    ? 'bg-white text-primary shadow-xl scale-110'
-                                    : 'bg-white/10 text-white hover:bg-white/20'
+                                ? 'bg-white text-primary shadow-xl scale-110'
+                                : 'bg-white/10 text-white hover:bg-white/20'
                                 }`}
                         >
                             {size} {size === 'CR80' ? '(Standard)' : '(Extended)'}
@@ -186,6 +186,7 @@ export default function IDCardPreview({ member, onClose }) {
                     </button>
                 </div>
             </div>
+            {/* Official Print Styles for CR80/CR100 Sizing */}
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @media print {
