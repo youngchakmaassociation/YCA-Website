@@ -56,7 +56,7 @@ export default function IDCardPreview({ member, onClose }) {
             label: 'CENTRAL EXECUTIVE COMMITTEE',
             labelBg: 'bg-slate-900',
             ring: 'ring-slate-200',
-            watermark: 'opacity-[0.05]'
+            watermark: 'opacity-[0.08]'
         },
         zonal: {
             bg: 'bg-[#007A33]', // YCA Heritage Green
@@ -68,7 +68,7 @@ export default function IDCardPreview({ member, onClose }) {
             label: 'ZONAL EXECUTIVE COMMITTEE',
             labelBg: 'bg-black/20',
             ring: 'ring-white/30',
-            watermark: 'opacity-[0.03]'
+            watermark: 'opacity-[0.06]'
         },
         branch: {
             bg: 'bg-[#C8102E]', // Deep Crimson
@@ -80,7 +80,7 @@ export default function IDCardPreview({ member, onClose }) {
             label: 'BRANCH EXECUTIVE COMMITTEE',
             labelBg: 'bg-black/20',
             ring: 'ring-white/30',
-            watermark: 'opacity-[0.03]'
+            watermark: 'opacity-[0.06]'
         }
     };
 
@@ -91,7 +91,7 @@ export default function IDCardPreview({ member, onClose }) {
 
     // Gradient logic for multi-level members
     const backgroundClass = isMultiLevel
-        ? 'bg-gradient-to-br from-[#slate-950] via-[#007A33] to-[#C8102E]' // Default fallback
+        ? 'bg-gradient-to-br from-slate-950 via-[#007A33] to-[#C8102E]'
         : theme.bg;
 
     // Custom gradient mapping
@@ -106,6 +106,10 @@ export default function IDCardPreview({ member, onClose }) {
         const priorityOrder = { central: 1, zonal: 2, branch: 3 };
         const sortedActiveLevels = [...distinctLevels].sort((a, b) => priorityOrder[a] - priorityOrder[b]);
         const activeColors = sortedActiveLevels.map(l => colors[l]);
+        // Use solid sections for print if more than 2 colors to keep it clean
+        if (activeColors.length > 2) {
+            return `linear-gradient(to bottom, ${activeColors[0]} 0%, ${activeColors[0]} 33%, ${activeColors[1]} 33%, ${activeColors[1]} 66%, ${activeColors[2]} 66%, ${activeColors[2]} 100%)`;
+        }
         return `linear-gradient(to bottom, ${activeColors.join(', ')})`;
     };
 
@@ -125,43 +129,51 @@ export default function IDCardPreview({ member, onClose }) {
         @media print {
             .no-print { display: none !important; }
             .register-ignore { display: none !important; }
-            body { background: white !important; padding: 0 !important; margin: 0 !important; }
-            .fixed { position: relative !important; inset: 0 !important; padding: 0 !important; overflow: visible !important; }
+            body { 
+                background: white !important; 
+                padding: 0 !important; 
+                margin: 0 !important; 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important;
+                text-rendering: optimizeLegibility;
+            }
+            .fixed { 
+                position: absolute !important; 
+                inset: 0 !important; 
+                padding: 0 !important; 
+                margin: 0 !important;
+                overflow: visible !important; 
+                background: white !important; 
+            }
             #id-card-wrap {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 5mm !important;
+                gap: 15mm !important;
                 align-items: center !important;
-                justify-content: center !important;
-                width: 210mm !important; /* A4 Width */
-                min-height: 297mm !important; /* A4 Height */
+                justify-content: flex-start !important;
+                width: 210mm !important; 
                 margin: 0 auto !important;
+                padding-top: 10mm !important;
             }
             .id-card-face {
                 box-shadow: none !important;
-                border: 0.1mm solid rgba(0,0,0,0.1) !important;
+                filter: none !important;
+                border: 0.15mm solid #000 !important;
                 ${cardSize === 'CR80' ? 'width: 53.98mm !important; height: 85.6mm !important;' : 'width: 67mm !important; height: 98.4mm !important;'}
                 margin: 0 !important;
-                border-radius: 3mm !important;
+                border-radius: 3.18mm !important;
                 page-break-inside: avoid !important;
-                background: ${isMultiLevel ? getGradient() : (level === 'central' ? 'white' : level === 'zonal' ? '#007A33' : '#C8102E')} !important;
-                background-color: ${level === 'central' ? 'white' : level === 'zonal' ? '#007A33' : '#C8102E'} !important;
+                background: ${isMultiLevel ? getGradient() : (level === 'central' ? '#FFFFFF' : level === 'zonal' ? '#007A33' : '#C8102E')} !important;
+                background-color: ${level === 'central' ? '#FFFFFF' : level === 'zonal' ? '#007A33' : '#C8102E'} !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 display: flex !important;
                 flex-direction: column !important;
-                transform: rotate(0deg) !important;
                 position: relative !important;
+                overflow: hidden !important;
             }
-            /* Add cut marks at corners */
-            .id-card-face::before {
-                content: '';
-                position: absolute;
-                top: -2mm; left: -2mm; right: -2mm; bottom: -2mm;
-                border: 0.1mm dashed #ddd;
-                pointer-events: none;
-                z-index: 0;
-            }
+            .logo-3d-pop { filter: none !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
     `;
 

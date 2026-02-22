@@ -335,17 +335,16 @@ export default function DynamicBranchPage() {
                                 </div>
                             </div>
                         )}
+
+                        <div className="p-10 rounded-[3.5rem] bg-accent text-white shadow-2xl relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 size-32 bg-white/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
+                            <h3 className="text-2xl font-black mb-4">Join This Branch</h3>
+                            <p className="font-medium opacity-80 mb-8 leading-relaxed">Living in this area? Join our local unit to start making an impact.</p>
+                            <Link href="/membership" className="block text-center w-full py-4 bg-white text-accent font-black rounded-xl hover:bg-primary hover:text-white transition-all">Submit Application</Link>
+                        </div>
                     </div>
                 </aside>
-
-                <div className="p-10 rounded-[3.5rem] bg-accent text-white shadow-2xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 size-32 bg-white/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
-                    <h3 className="text-2xl font-black mb-4">Join This Branch</h3>
-                    <p className="font-medium opacity-80 mb-8 leading-relaxed">Living in this area? Join our local unit to start making an impact.</p>
-                    <Link href="/membership" className="block text-center w-full py-4 bg-white text-accent font-black rounded-xl hover:bg-primary hover:text-white transition-all">Submit Application</Link>
-                </div>
-            </aside>
+            </div>
         </div>
-        </div >
     );
 }
