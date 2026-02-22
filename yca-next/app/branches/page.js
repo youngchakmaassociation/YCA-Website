@@ -11,6 +11,7 @@ export default function BranchesPage() {
     const [branches, setBranches] = useState([]);
     const [zones, setZones] = useState(['All']);
     const [loading, setLoading] = useState(true);
+    const [hoveredBranch, setHoveredBranch] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,6 +96,7 @@ export default function BranchesPage() {
                                 <div
                                     key={branch._id}
                                     onClick={() => window.location.href = `/branches/${branch.slug || branch._id}`}
+                                    onMouseEnter={() => setHoveredBranch(branch)}
                                     className="group p-8 rounded-[2.5rem] bg-slate-50/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/10 shadow-xl hover:shadow-2xl hover:border-primary/30 hover:-translate-y-2 transition-all animate-fade-in-up cursor-pointer"
                                 >
                                     <div className="flex items-center gap-6 mb-8">
@@ -164,13 +166,13 @@ export default function BranchesPage() {
                                 style={{ border: 0 }}
                                 loading="lazy"
                                 allowFullScreen
-                                src={`https://maps.google.com/maps?q=${encodeURIComponent((filteredBranches[0]?.name || '') + ' ' + (filteredBranches[0]?.landmark || '') + ' Mizoram India')}&output=embed`}
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent(((hoveredBranch || filteredBranches[0])?.address || (hoveredBranch || filteredBranches[0])?.name || '') + ' Mizoram India')}&output=embed`}
                                 className="grayscale hover:grayscale-0 transition-all duration-700"
                             ></iframe>
                             <div className="absolute inset-0 pointer-events-none border-[12px] border-white/10 rounded-[2rem]"></div>
                             <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/90 dark:bg-black/90 backdrop-blur-md rounded-2xl flex items-center justify-between shadow-xl">
                                 <span className="font-black text-[10px] uppercase tracking-widest opacity-60">
-                                    {filteredBranches[0]?.name || 'Regional Overview'}
+                                    {(hoveredBranch || filteredBranches[0])?.name || 'Regional Overview'}
                                 </span>
                                 <div className="flex items-center gap-2">
                                     <span className="size-2 bg-green-500 rounded-full animate-pulse"></span>
