@@ -81,11 +81,10 @@ export default function IDCardPreview({ member, onClose }) {
                         <button
                             key={size}
                             onClick={() => setCardSize(size)}
-                            className={`px-6 py-2 rounded-full font-black text-xs transition-all ${
-                                cardSize === size 
-                                ? 'bg-white text-primary shadow-xl scale-110' 
-                                : 'bg-white/10 text-white hover:bg-white/20'
-                            }`}
+                            className={`px-6 py-2 rounded-full font-black text-xs transition-all ${cardSize === size
+                                    ? 'bg-white text-primary shadow-xl scale-110'
+                                    : 'bg-white/10 text-white hover:bg-white/20'
+                                }`}
                         >
                             {size} {size === 'CR80' ? '(Standard)' : '(Extended)'}
                         </button>
@@ -93,11 +92,10 @@ export default function IDCardPreview({ member, onClose }) {
                 </div>
 
                 {/* ID Card Front */}
-                <div 
+                <div
                     id="id-card-printable"
-                    className={`relative mx-auto rounded-[2.5rem] ${theme.bg} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${
-                        cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
-                    }`}
+                    className={`relative mx-auto rounded-[2.5rem] ${theme.bg} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
+                        }`}
                 >
                     {/* Header Design */}
                     <div className="pt-10 px-8 text-center space-y-4">
@@ -188,11 +186,11 @@ export default function IDCardPreview({ member, onClose }) {
                     </button>
                 </div>
             </div>
-            </div>
-
-            <style jsx global>{`
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @media print {
                     .no-print { display: none !important; }
+                    .register-ignore { display: none !important; }
                     body { background: white !important; padding: 0 !important; margin: 0 !important; }
                     .fixed { position: relative !important; inset: 0 !important; padding: 0 !important; }
                     #id-card-printable {
@@ -200,9 +198,10 @@ export default function IDCardPreview({ member, onClose }) {
                         border: 1px solid #ddd !important;
                         ${cardSize === 'CR80' ? 'width: 53.98mm !important; height: 85.6mm !important;' : 'width: 67mm !important; height: 98.4mm !important;'}
                         margin: 0 auto !important;
+                        border-radius: 2rem !important;
                     }
                 }
-            `}</style>
-        </div >
+            ` }} />
+        </div>
     );
 }
