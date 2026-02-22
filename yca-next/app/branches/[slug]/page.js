@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { branchesAPI, committeeAPI } from '@/app/lib/api';
+import { branchesAPI, committeeAPI, profilesAPI } from '@/app/lib/api';
 import IDCardPreview from '@/app/components/IDCardPreview';
 
 
@@ -15,6 +15,7 @@ export default function DynamicBranchPage() {
     const [loading, setLoading] = useState(true);
     const [selectedMember, setSelectedMember] = useState(null);
     const [showIDCard, setShowIDCard] = useState(false);
+    const [generalMembers, setGeneralMembers] = useState([]);
 
 
 
@@ -42,6 +43,14 @@ export default function DynamicBranchPage() {
                             );
                             if (filtered.length > 0) setCommittee(filtered);
                         }
+                    }
+
+                    // Fetch general members and filter out committee members
+                    const profRes = await profilesAPI.getAll(branchId);
+                    if (profRes.success && profRes.data) {
+                        const committeeNames = (commResponse.data || []).map(c => c.name.toLowerCase());
+                        const filtered = profRes.data.filter(p => !committeeNames.includes(p.name.toLowerCase()));
+                        setGeneralMembers(filtered);
                     }
                 }
             } catch (error) {
@@ -209,6 +218,28 @@ export default function DynamicBranchPage() {
                 </div>
             </section>
 
+            {generalMembers.length > 0 && (
+                <section className="mb-32">
+                    <div className="flex items-center gap-6 mb-12">
+                        <h2 className="text-2xl font-black text-primary whitespace-nowrap opacity-60">Verified Members</h2>
+                        <div className="h-px bg-gray-100 dark:bg-white/10 flex-grow"></div>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                        {generalMembers.map((member, i) => (
+                            <div key={i} className="flex flex-col items-center gap-4 p-4 rounded-3xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                <div className="size-16 rounded-2xl bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-400">
+                                    <span className="material-symbols-outlined">person</span>
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-xs font-black text-slate-800 dark:text-slate-200 line-clamp-1">{member.name}</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-tighter opacity-40">{member.membership_type || 'General'}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-32">
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-20">
@@ -283,6 +314,31 @@ export default function DynamicBranchPage() {
                         </div>
                         <button className="w-full h-16 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl">Contact Secretary</button>
                     </div>
+
+                    {branch.zones && (
+                        <div className="p-10 rounded-[3.5rem] bg-white dark:bg-white/5 border border-primary/10 shadow-2xl space-y-8">
+                            <div className="flex items-center gap-4 text-primary">
+                                <span className="material-symbols-outlined text-3xl">hub</span>
+                                <h3 className="text-xl font-black">Regional HQ</h3>
+                            </div>
+                            <div className="space-y-6">
+                                <div className="p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-gray-100 dark:border-white/5">
+                                    <p className="text-[10px] font-black uppercase text-accent tracking-widest mb-1">Parent Entity</p>
+                                    <h4 className="font-black text-primary">{branch.zones.name}</h4>
+                                </div>
+                                <p className="text-sm font-medium opacity-60 leading-relaxed">
+                                    This branch is supervised by the {branch.zones.name} Executive Committee.
+                                </p>
+                                <Link
+                                    href={`/zones/${branch.zones.slug || branch.zones._id}`}
+                                    className="flex items-center justify-center gap-2 w-full py-4 rounded-xl border-2 border-primary/10 text-primary font-black text-sm hover:bg-primary hover:text-white transition-all group"
+                                >
+                                    View Zonal Details
+                                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </Link>
+                            </div>
+                        </div>
+                    )}
 
                     <div className="p-10 rounded-[3.5rem] bg-accent text-white shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 size-32 bg-white/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>

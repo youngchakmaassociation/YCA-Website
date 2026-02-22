@@ -256,6 +256,16 @@ export const votesAPI = {
     },
 };
 
+export const profilesAPI = {
+    getAll: async (branchId = null, zoneId = null) => {
+        let query = supabase.from('profiles').select('*');
+        if (branchId) query = query.eq('branch_id', branchId);
+        if (zoneId) query = query.eq('zone_id', zoneId);
+        const { data, error } = await query;
+        return handleSupabaseResponse(data, error);
+    }
+};
+
 export const membershipAPI = {
     apply: async (data) => {
         const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
