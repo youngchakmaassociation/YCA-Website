@@ -9,16 +9,15 @@ const supabase = createClient(
 async function seedCommittee() {
     console.log('--- Seeding Committee Members ---');
 
-    // IDs from database
-    const ZONES = {
-        'Bageisury Zone': '04663017-aa04-497f-848e-cffce3237324',
-        'Longpuighat Zone': '0fd33c9e-2ad3-4a22-b224-0f10479c5a55'
-    };
+    // Fetch IDs dynamically from database
+    const { data: zonesData } = await supabase.from('zones').select('id, name');
+    const { data: branchesData } = await supabase.from('branches').select('id, name');
 
-    const BRANCHES = {
-        'Sumsilui Branch': '8a03bc4f-485f-4a60-bece-3948f31de762',
-        'Longpuighat Branch': '7b2e8fda-efd8-4da0-90e0-f53b4138f497'
-    };
+    const ZONES = {};
+    if (zonesData) zonesData.forEach(z => ZONES[z.name] = z.id);
+
+    const BRANCHES = {};
+    if (branchesData) branchesData.forEach(b => BRANCHES[b.name] = b.id);
 
     const members = [
         // 1. CENTRAL COMMITTEE (CYCA)
