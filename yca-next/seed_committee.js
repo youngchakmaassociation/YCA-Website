@@ -1,5 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: 'yca-next/.env' });
+require('dotenv').config({ path: '.env' });
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -74,6 +74,23 @@ async function seedCommittee() {
             level: 'branch',
             branch_id: BRANCHES['Sumsilui Branch'],
             display_order: 3
+        },
+        // MULTI-ROLE MEMBER
+        {
+            name: 'Shyamal Kanti Chakma',
+            designation: 'General Secretary',
+            level: 'zonal',
+            zone_id: ZONES['Bageisury Zone'],
+            display_order: 3,
+            photo_url: 'https://scontent.fajl1-1.fna.fbcdn.net/v/t39.30808-6/624509331_3356146174543082_3361437895158922117_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=7b2446&_nc_ohc=Nb7A_2RgJUUQ7kNvwGUGbCa&_nc_oc=AdmvtsXMzZlbgAtyACC8p7aqoHFOg4lqdwu7HeladTcmu9n2wa4YIeUZK94tviZtE7E&_nc_zt=23&_nc_ht=scontent.fajl1-1.fna&_nc_gid=-aU1uABFNL4rrCX5uTxddw&oh=00_AfvvWBWL4cVs38egnN2zcL2PblXPlKAdg8BT1BM0y_FqJA&oe=69A0FC3A'
+        },
+        {
+            name: 'Shyamal Kanti Chakma',
+            designation: 'President',
+            level: 'branch',
+            branch_id: BRANCHES['Sumsilui Branch'],
+            display_order: 1,
+            photo_url: 'https://scontent.fajl1-1.fna.fbcdn.net/v/t39.30808-6/624509331_3356146174543082_3361437895158922117_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=7b2446&_nc_ohc=Nb7A_2RgJUUQ7kNvwGUGbCa&_nc_oc=AdmvtsXMzZlbgAtyACC8p7aqoHFOg4lqdwu7HeladTcmu9n2wa4YIeUZK94tviZtE7E&_nc_zt=23&_nc_ht=scontent.fajl1-1.fna&_nc_gid=-aU1uABFNL4rrCX5uTxddw&oh=00_AfvvWBWL4cVs38egnN2zcL2PblXPlKAdg8BT1BM0y_FqJA&oe=69A0FC3A'
         }
     ];
 

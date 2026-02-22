@@ -10,6 +10,14 @@ export default function IDCardPreview({ member, onClose }) {
     const [cardSize, setCardSize] = useState('CR80'); // CR80 or CR100
     const [allRoles, setAllRoles] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [origin, setOrigin] = useState('yca-website.vercel.app');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setOrigin(window.location.host);
+        }
+    }, []);
+
     console.log('IDCardPreview Build V2.1 Load - Size:', cardSize);
 
     useEffect(() => {
@@ -76,7 +84,29 @@ export default function IDCardPreview({ member, onClose }) {
         }
     };
 
+    const distinctLevels = [...new Set(sortedRoles.map(r => r.level))];
+    const isMultiLevel = distinctLevels.length > 1;
+
     const theme = themes[level] || themes.branch;
+
+    // Gradient logic for multi-level members
+    const backgroundClass = isMultiLevel
+        ? 'bg-gradient-to-br from-[#slate-950] via-[#007A33] to-[#C8102E]' // Default fallback
+        : theme.bg;
+
+    // Custom gradient mapping
+    const getGradient = () => {
+        if (!isMultiLevel) return theme.bg;
+        const colors = {
+            central: '#0f172a', // slate-950
+            zonal: '#007A33',
+            branch: '#C8102E'
+        };
+        const activeColors = distinctLevels.map(l => colors[l]);
+        return `linear-gradient(135deg, ${activeColors.join(', ')})`;
+    };
+
+    const cardStyle = isMultiLevel ? { background: getGradient() } : {};
 
     const finalPrintCSS = `
         @media print {
@@ -101,6 +131,7 @@ export default function IDCardPreview({ member, onClose }) {
                 margin: 0 !important;
                 border-radius: 3mm !important;
                 page-break-inside: avoid !important;
+                background: ${isMultiLevel ? getGradient() : (level === 'central' ? 'white' : level === 'zonal' ? '#007A33' : '#C8102E')} !important;
                 background-color: ${level === 'central' ? 'white' : level === 'zonal' ? '#007A33' : '#C8102E'} !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -152,8 +183,9 @@ export default function IDCardPreview({ member, onClose }) {
                     {/* ID Card Front */}
                     <div
                         id="id-card-printable"
-                        className={`id-card-face relative rounded-[2.5rem] ${theme.bg} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
+                        className={`id-card-face relative rounded-[2.5rem] ${!isMultiLevel ? theme.bg : ''} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
                             }`}
+                        style={cardStyle}
                     >
                         {/* Header Design */}
                         <div className="pt-10 px-8 text-center space-y-4">
@@ -229,8 +261,9 @@ export default function IDCardPreview({ member, onClose }) {
 
                     {/* ID Card Back */}
                     <div
-                        className={`id-card-face relative rounded-[2.5rem] ${theme.bg} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
+                        className={`id-card-face relative rounded-[2.5rem] ${!isMultiLevel ? theme.bg : ''} overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border ${theme.border} flex flex-col transition-all duration-500 ${cardSize === 'CR80' ? 'w-[350px] h-[550px]' : 'w-[400px] h-[584px]'
                             }`}
+                        style={cardStyle}
                     >
                         <div className="p-10 flex flex-col items-center justify-between h-full relative z-10">
                             {/* Terms/Instructions */}
@@ -240,7 +273,7 @@ export default function IDCardPreview({ member, onClose }) {
                                     <li>1. This card is non-transferable and must be produced upon request.</li>
                                     <li>2. In case of loss, please report to your nearest YCA unit immediately.</li>
                                     <li>3. Found cards should be returned to the YCA Zonal Headquarters.</li>
-                                    <li>4. Verify authenticity at yca-website.vercel.app/verify</li>
+                                    <li>4. Verify authenticity at {origin}/verify</li>
                                 </ul>
                             </div>
 
@@ -256,9 +289,9 @@ export default function IDCardPreview({ member, onClose }) {
                                 </div>
                             </div>
 
-                            {/* Logo/QR Watermark Area */}
+                            {/* Logo Area */}
                             <div className="flex flex-col items-center gap-4 pt-10 border-t border-white/10 w-full">
-                                <div className={`relative ${cardSize === 'CR80' ? 'size-24' : 'size-32'} opacity-60 grayscale brightness-200`}>
+                                <div className={`relative ${cardSize === 'CR80' ? 'size-24' : 'size-32'} drop-shadow-xl`}>
                                     <Image src="/assets/ycalogo.png" alt="" fill className="object-contain" />
                                 </div>
                                 <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${theme.subText}`}>Unity • Culture • Progress</span>
