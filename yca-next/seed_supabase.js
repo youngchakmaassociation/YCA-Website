@@ -32,11 +32,6 @@ async function seedData() {
     // 4. Create Zones
     const zonesToCreate = [
         {
-            name: 'Kamalanagar Zone',
-            slug: 'kamalanagar',
-            description: 'The central administrative hub and General Headquarters of the Young Chakma Association. Oversees direct branches in the capital region of the Chakma Autonomous District Council (CADC).'
-        },
-        {
             name: 'Bageisury Zone',
             slug: 'bageisury',
             description: 'Strategic coordination hub for the Bageisury region, officially known as Sakeilui.'

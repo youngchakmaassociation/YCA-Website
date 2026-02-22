@@ -44,7 +44,8 @@ export default function AiAssistant() {
             }
         } catch (error) {
             console.error('Chat Error:', error);
-            setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again later.' }]);
+            const errorMessage = error.message || 'Sorry, I encountered an error. Please try again later.';
+            setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${errorMessage}` }]);
         } finally {
             setIsLoading(false);
         }
