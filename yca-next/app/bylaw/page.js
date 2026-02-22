@@ -967,10 +967,20 @@ export default function BylawPage() {
         }
     ];
 
+    const categories = [
+        { id: 'foundational', title: 'Foundational', icon: 'auto_stories', articles: ['preamble', 'memorandum', '1', '2', '40', '41'] },
+        { id: 'membership', title: 'Membership', icon: 'person_add', articles: ['3', '4', '5', '6'] },
+        { id: 'organization', title: 'Organization', icon: 'account_tree', articles: ['7', '9', '11', '14', '15'] },
+        { id: 'powers', title: 'Powers & Duties', icon: 'gavel', articles: ['16', '17', '17(a)', '18', '19', '21'] },
+        { id: 'meetings', title: 'Meetings', icon: 'groups', articles: ['8', '10', '22'] },
+        { id: 'admin', title: 'Administration', icon: 'admin_panel_settings', articles: ['12', '13'] },
+        { id: 'finance', title: 'Finance & Audit', icon: 'payments', articles: ['23', '24', '25', '26', '27'] },
+        { id: 'elections', title: 'Elections', icon: 'how_to_reg', articles: ['28', '29', '30', '31'] }
+    ];
+
     useEffect(() => {
         const fetchBylaws = async () => {
             try {
-                // Prepare for Supabase switch - if backend fails, use stable fallback
                 const response = await bylawsAPI.getAll();
                 if (response.success && response.data.length > 0) {
                     setArticles(response.data);
@@ -989,20 +999,18 @@ export default function BylawPage() {
 
     useEffect(() => {
         let sectionOffsets = [];
-
         const updateOffsets = () => {
             const sections = document.querySelectorAll('section[id^="art-"]');
             sectionOffsets = Array.from(sections).map(s => ({
                 id: s.getAttribute('id'),
-                top: s.offsetTop
+                top: s.offsetTop - 150
             }));
         };
 
         const handleScroll = () => {
             if (sectionOffsets.length === 0) updateOffsets();
-
             let current = '';
-            const scrollPos = window.scrollY + (window.innerHeight * 0.4);
+            const scrollPos = window.scrollY + 160;
 
             for (const section of sectionOffsets) {
                 if (scrollPos >= section.top) {
@@ -1012,225 +1020,308 @@ export default function BylawPage() {
                 }
             }
 
-            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 250) {
+            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
                 if (articles.length > 0) {
                     current = `art-${articles[articles.length - 1].articleNumber}`;
                 }
             }
-
             setActiveArticle(prev => prev !== current ? current : prev);
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', updateOffsets);
         updateOffsets();
-        handleScroll();
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', updateOffsets);
         };
     }, [articles, loading]);
 
-    // Effect to scroll the active item into view within the sidebar
     useEffect(() => {
-        if (activeArticle) {
+        if (activeArticle && articles.length > 0) {
             const activeLink = document.getElementById(`link-${activeArticle}`);
-            if (activeLink) {
-                // Using 'auto' and 'nearest' to prevent thread-blocking animations that cause hesitation
-                // 'auto' prevents the scroll momentum fighting that causes 'hesitation'
-                activeLink.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+            const sidebarContainer = document.getElementById('sidebar-index-container');
+            if (activeLink && sidebarContainer) {
+                const containerRect = sidebarContainer.getBoundingClientRect();
+                const linkRect = activeLink.getBoundingClientRect();
+
+                // Use 'auto' instead of 'smooth' for the sidebar internal scroll to prevent window-level scroll fighting
+                if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                    activeLink.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+                }
             }
         }
-    }, [activeArticle]);
+    }, [activeArticle, articles.length]);
 
     const filteredArticles = useMemo(() => articles.filter(art => {
         const searchLower = search.toLowerCase();
         const numberMatch = art.articleNumber.toString() === searchLower.replace('article', '').trim();
-
         return art.title.toLowerCase().includes(searchLower) ||
             art.sections.some(s => s.content.toLowerCase().includes(searchLower)) ||
             numberMatch;
     }), [articles, search]);
 
-
     return (
-        <div className="container mx-auto px-4 py-8 md:py-16">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 mb-12 text-sm font-bold uppercase tracking-widest text-gray-500">
-                <Link href="/" className="hover:text-primary">Home</Link>
-                <span className="material-symbols-outlined text-xs">chevron_right</span>
-                <span className="text-primary">By-Laws</span>
-            </nav>
-
-            {/* Hero Header */}
-            <div className="flex flex-col gap-6 mb-16 animate-fade-in-up">
-                <h1 className="text-4xl md:text-7xl font-black text-primary leading-tight uppercase">
-                    Young Chakma <br />
-                    <span className="text-accent underline decoration-primary decoration-4 underline-offset-8">Association</span>
-                </h1>
-                <div className="flex items-center gap-4">
-                    <div className="h-1.5 w-24 bg-accent rounded-full"></div>
-                    <p className="text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest text-sm">Memorandum & Constitution (2018 Revision)</p>
-                </div>
+        <div className="bg-[#fcfdfc] dark:bg-slate-950 min-h-screen">
+            {/* Reading Progress */}
+            <div className="fixed top-0 left-0 right-0 h-1.5 bg-gray-100 dark:bg-white/5 z-[100]">
+                <div
+                    className="h-full bg-primary transition-all duration-300"
+                    style={{ width: `${loading ? 0 : 30}%` }}
+                ></div>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-16">
-                {/* Table of Contents sidebar */}
-                <aside className="w-full lg:w-1/4 relative hidden lg:block">
-                    <div className="sticky top-24 h-[calc(100vh-6rem)] flex flex-col justify-center py-12">
-                        <div className="w-full max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar rounded-3xl">
-                            <div className="p-8 rounded-[2rem] bg-primary border border-primary text-white shadow-xl">
-                                <h3 className="text-xl font-black uppercase tracking-tighter text-white mb-6">Outline</h3>
-                                <nav className="flex flex-col gap-1">
-                                    {filteredArticles.map((art) => (
-                                        <a
-                                            key={art._id}
-                                            id={`link-art-${art.articleNumber}`}
-                                            href={`#art-${art.articleNumber}`}
-                                            className={`p-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-between group border ${activeArticle === `art-${art.articleNumber}` ? 'bg-white text-primary border-white shadow-lg scale-105' : 'text-white border-transparent hover:bg-white/10 hover:border-white/20'}`}
-                                        >
-                                            <span>{art.articleNumber === 0 ? 'Preamble' : art.articleNumber === 'M' ? 'Memorandum' : `Article ${art.articleNumber}`}</span>
-                                            <span className="material-symbols-outlined text-[14px] transition-all">north_east</span>
-                                        </a>
-                                    ))}
-                                </nav>
-                            </div>
-                        </div>
+            <div className="container mx-auto px-4 py-8 md:py-20 lg:py-32">
+                {/* Modern Hero */}
+                <header className="max-w-4xl mb-24 space-y-8">
+                    <div className="flex items-center gap-4 text-accent font-black uppercase tracking-[0.4em] text-xs">
+                        <span className="material-symbols-outlined text-lg">policy</span>
+                        The Legal Foundation
                     </div>
-                </aside>
+                    <h1 className="text-5xl md:text-8xl font-black text-primary leading-tight">
+                        Memorandum & <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary animate-gradient">Constitution</span>
+                    </h1>
+                    <p className="text-xl font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
+                        The supreme governing document of the Young Chakma Association, revised 2018. Explore the laws, rights, and principles that define our unity.
+                    </p>
 
-                {/* Content Area */}
-                <div className="w-full lg:w-3/4 space-y-12">
-                    {/* Search */}
-                    <div className="relative group max-w-2xl">
-                        <span className="absolute left-6 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400 group-focus-within:text-primary transition-colors">search</span>
+                    {/* Search Bar Refined */}
+                    <div className="relative group max-w-2xl pt-8">
+                        <span className="absolute left-6 top-[calc(50%+16px)] -translate-y-1/2 material-symbols-outlined text-gray-400 group-focus-within:text-accent transition-colors z-10">search_check</span>
                         <input
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full h-14 pl-14 pr-6 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-sm text-black placeholder:text-gray-500"
-                            placeholder="Quick find in constitution..."
+                            className="w-full h-20 pl-16 pr-8 rounded-[2rem] bg-white dark:bg-white/5 border-2 border-primary/10 shadow-2xl outline-none focus:ring-8 focus:ring-accent/10 focus:border-accent transition-all font-bold text-lg text-primary"
+                            placeholder="Find specific articles or sections..."
                         />
                     </div>
+                </header>
 
-                    <div className="space-y-24 min-h-[400px]">
-                        {loading ? (
-                            <div className="flex flex-col gap-10 animate-pulse">
-                                {[1, 2, 3].map(i => <div key={i} className="h-64 bg-gray-100 dark:bg-white/5 rounded-3xl"></div>)}
-                            </div>
-                        ) : (
-                            filteredArticles.map((art) => (
-                                <section key={art._id} id={`art-${art.articleNumber}`} className="scroll-mt-32 animate-fade-in-up">
-                                    <div className="mb-10">
-                                        <h2 className="text-4xl font-black text-primary flex items-baseline gap-4 mb-2">
-                                            <span className="text-accent text-5xl">
-                                                {art.articleNumber === 'M' ? '' : `0${art.articleNumber}`}
-                                            </span>
-                                            {art.title}
-                                        </h2>
-                                        <div className="h-1 w-20 bg-primary/10 rounded-full"></div>
-                                    </div>
+                <div className="flex flex-col lg:flex-row gap-20">
+                    {/* Categorical Sidebar */}
+                    <aside className="w-full lg:w-1/4 hidden lg:block">
+                        <div className="sticky top-32 space-y-8">
+                            <div className="p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border border-primary/10 shadow-2xl overflow-hidden relative">
+                                <div className="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-primary mb-8 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-sm">list_alt</span>
+                                    Constitution Index
+                                </h3>
 
-                                    <div className="grid gap-8">
-                                        {art.sections.map((sec, i) => (
-                                            <div key={i} className="p-10 rounded-[2.5rem] transition-all border bg-white border-gray-100 hover:shadow-2xl hover:-translate-y-1">
-                                                <div className="flex items-center gap-3 mb-6">
-                                                    <span className="px-3 py-1 rounded-lg bg-accent text-white font-black text-[10px] uppercase tracking-tighter">
-                                                        Section {sec.sectionNumber}
-                                                    </span>
-                                                    <h4 className="font-black text-primary uppercase tracking-widest text-xs">{sec.label}</h4>
-                                                </div>
-                                                <p className="text-lg font-medium leading-[1.8] whitespace-pre-wrap mb-6 text-black">{sec.content}</p>
-
-                                                {sec.hasFlagVideo && <FlagAnimation />}
-
-                                                {sec.hasSymbol && (
-                                                    <div className="flex justify-center my-8">
-                                                        <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-primary/20 bg-white p-2">
-                                                            <img
-                                                                src="/assets/ycalogo.png"
-                                                                alt="YCA Symbol"
-                                                                className="w-full h-full object-contain"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {sec.annexure && (
-                                                    <div className="text-center my-8">
-                                                        <p className="font-bold text-xl text-primary tracking-widest">{sec.annexure}</p>
-                                                        {sec.subAnnexure && <p className="font-medium text-sm text-gray-500 mt-1 tracking-wider">{sec.subAnnexure}</p>}
-                                                    </div>
-                                                )}
-
-                                                {sec.description && (
-                                                    <p className="text-center font-medium text-black/80 whitespace-pre-wrap leading-relaxed max-w-2xl mx-auto">
-                                                        {sec.description}
-                                                    </p>
-                                                )}
-
-                                                {sec.members && (
-                                                    <div className="overflow-x-auto rounded-2xl border border-primary/10 bg-white/50 dark:bg-black/20">
-                                                        <table className="w-full text-left border-collapse">
-                                                            <thead>
-                                                                <tr className="bg-primary/5 text-[10px] uppercase tracking-widest font-black text-primary border-b border-primary/10">
-                                                                    <th className="px-6 py-4">#</th>
-                                                                    <th className="px-6 py-4">{sec.sectionNumber === 'M5' ? 'Name (Full in Capital)' : 'Name'}</th>
-                                                                    <th className="px-6 py-4">Address</th>
-                                                                    <th className="px-6 py-4">Occupation</th>
-                                                                    <th className="px-6 py-4">{sec.sectionNumber === 'M5' ? 'Signature' : 'Designation'}</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody className="text-sm font-bold text-black">
-                                                                {sec.members.map((member, idx) => (
-                                                                    <tr key={idx} className="border-b border-primary/5 hover:bg-primary/5 transition-colors">
-                                                                        <td className="px-6 py-4 opacity-40">{idx + 1}</td>
-                                                                        <td className="px-6 py-4 text-primary font-black uppercase text-xs">{member.name}</td>
-                                                                        <td className="px-6 py-4">{member.address || '-'}</td>
-                                                                        <td className="px-6 py-4 text-[11px]">{member.occupation || '-'}</td>
-                                                                        <td className="px-6 py-4">
-                                                                            <span className="px-3 py-1 rounded-md bg-accent/10 text-accent text-[10px] uppercase tracking-tighter">
-                                                                                {member.designation}
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))}
-                                                            </tbody>
-                                                        </table>
-                                                        {sec.footer && (
-                                                            <div className="p-8 flex justify-between font-black uppercase text-sm tracking-widest text-primary/40 mt-8">
-                                                                <div>President</div>
-                                                                <div>Secretary</div>
+                                <div id="sidebar-index-container" className="space-y-10 max-h-[60vh] overflow-y-auto no-scrollbar pr-2">
+                                    {categories.map((cat) => (
+                                        <div key={cat.id} className="space-y-4">
+                                            <div className="flex items-center gap-2 px-2 text-[10px] font-black uppercase text-accent tracking-widest">
+                                                <span className="material-symbols-outlined text-xs">{cat.icon}</span>
+                                                {cat.title}
+                                            </div>
+                                            <div className="grid gap-1">
+                                                {cat.articles.map(artNum => {
+                                                    const art = articles.find(a => a.articleNumber.toString() === artNum.toString() || (artNum === 'preamble' && a.articleNumber === 0));
+                                                    if (!art) return null;
+                                                    const isActive = activeArticle === `art-${art.articleNumber}`;
+                                                    return (
+                                                        <a
+                                                            key={art._id}
+                                                            id={`link-art-${art.articleNumber}`}
+                                                            href={`#art-${art.articleNumber}`}
+                                                            className={`group flex items-center justify-between p-3 rounded-2xl transition-all border ${isActive ? 'bg-primary border-primary text-white shadow-lg' : 'hover:bg-primary/5 border-transparent text-slate-600 dark:text-slate-400 hover:text-primary'}`}
+                                                        >
+                                                            <div className="flex items-center gap-3">
+                                                                <span className={`text-[10px] font-black w-6 h-6 flex items-center justify-center rounded-lg ${isActive ? 'bg-white/20' : 'bg-primary/10'}`}>
+                                                                    {art.articleNumber === 0 ? 'P' : art.articleNumber === 'M' ? 'M' : art.articleNumber}
+                                                                </span>
+                                                                <span className="text-[11px] font-black uppercase tracking-tight truncate max-w-[120px]">
+                                                                    {art.title.length > 20 ? art.title.substring(0, 20) + '...' : art.title}
+                                                                </span>
                                                             </div>
+                                                            <span className="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                                                        </a>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Mobile Shortcut FAB could go here, but this is desktop aside */}
+                        </div>
+                    </aside>
+
+                    {/* Main Content */}
+                    <div className="w-full lg:w-3/4">
+                        <div className="space-y-40">
+                            {loading ? (
+                                <div className="space-y-20 animate-pulse">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className="space-y-6">
+                                            <div className="h-12 bg-gray-100 dark:bg-white/5 rounded-2xl w-1/3"></div>
+                                            <div className="h-64 bg-gray-100 dark:bg-white/5 rounded-[3rem]"></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                filteredArticles.map((art, artIdx) => (
+                                    <section
+                                        key={art._id}
+                                        id={`art-${art.articleNumber}`}
+                                        className="scroll-mt-40 group/article"
+                                    >
+                                        {/* Article Modern Header */}
+                                        <div className="mb-16 relative">
+                                            <div className="absolute -left-20 top-0 text-[12rem] font-black text-primary/5 select-none pointer-events-none group-hover/article:text-accent/10 transition-colors duration-1000">
+                                                {art.articleNumber === 'M' ? 'M' : art.articleNumber === 0 ? 'P' : art.articleNumber}
+                                            </div>
+                                            <div className="relative z-10 flex flex-col gap-4">
+                                                <span className="text-accent font-black uppercase tracking-[0.3em] text-xs">
+                                                    {art.articleNumber === 0 ? 'Preamble' : art.articleNumber === 'M' ? 'Memorandum' : `Article ${art.articleNumber}`}
+                                                </span>
+                                                <h2 className="text-4xl md:text-5xl font-black text-primary uppercase leading-tight">
+                                                    {art.title}
+                                                </h2>
+                                                <div className="h-2 w-32 bg-primary group-hover/article:w-48 transition-all duration-700 rounded-full"></div>
+                                            </div>
+                                        </div>
+
+                                        {/* Sections Grid/Stack */}
+                                        <div className="grid gap-12">
+                                            {art.sections.map((sec, i) => (
+                                                <div
+                                                    key={i}
+                                                    className={`p-10 md:p-16 rounded-[4rem] bg-white dark:bg-white/5 border border-primary/5 shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-primary/20 ${sec.content === 'Deleted' ? 'opacity-30 scale-95 grayscale' : ''}`}
+                                                >
+                                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="size-14 rounded-2xl bg-primary text-white flex items-center justify-center font-black text-xs shadow-lg shadow-primary/20">
+                                                                {sec.sectionNumber}
+                                                            </div>
+                                                            <h4 className="text-lg font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest">{sec.label || 'Clause'}</h4>
+                                                        </div>
+                                                        {sec.content !== 'Deleted' && (
+                                                            <button
+                                                                onClick={() => {
+                                                                    navigator.clipboard.writeText(`${art.title} - Section ${sec.sectionNumber}: ${sec.content}`);
+                                                                    alert('Copied specific section to clipboard');
+                                                                }}
+                                                                className="size-10 rounded-full border border-primary/10 flex items-center justify-center text-primary/40 hover:bg-primary hover:text-white transition-all"
+                                                                title="Share this section"
+                                                            >
+                                                                <span className="material-symbols-outlined text-sm">share</span>
+                                                            </button>
                                                         )}
                                                     </div>
-                                                )}
-                                            </div>
-                                        ))}
+
+                                                    <div className="prose prose-xl prose-slate max-w-none">
+                                                        <p className="text-xl md:text-2xl font-medium leading-[1.8] text-slate-800 dark:text-slate-100 whitespace-pre-wrap">
+                                                            {sec.content}
+                                                        </p>
+                                                    </div>
+
+                                                    {sec.hasFlagVideo && <FlagAnimation />}
+                                                    {sec.hasSymbol && (
+                                                        <div className="flex justify-center my-16">
+                                                            <div className="relative size-64 md:size-80 rounded-full overflow-hidden shadow-2xl border-8 border-primary/10 bg-white p-4 animate-float">
+                                                                <img src="/assets/ycalogo.png" alt="YCA Logo" className="w-full h-full object-contain" />
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {sec.members && (
+                                                        <div className="mt-16 overflow-hidden rounded-[3rem] border border-primary/10 shadow-inner bg-gray-50/50 dark:bg-black/20">
+                                                            <div className="overflow-x-auto">
+                                                                <table className="w-full text-left border-collapse">
+                                                                    <thead>
+                                                                        <tr className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em]">
+                                                                            <th className="px-10 py-6">ID</th>
+                                                                            <th className="px-10 py-6">Name</th>
+                                                                            <th className="px-10 py-6">Occupation</th>
+                                                                            <th className="px-10 py-6 text-right">Role</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {sec.members.map((m, idx) => (
+                                                                            <tr key={idx} className="border-b border-primary/5 hover:bg-white dark:hover:bg-white/5 transition-colors">
+                                                                                <td className="px-10 py-6 font-mono text-xs text-slate-400 dark:text-slate-500">{idx + 1}</td>
+                                                                                <td className="px-10 py-6 font-black text-slate-800 dark:text-slate-100 uppercase text-sm">{m.name}</td>
+                                                                                <td className="px-10 py-6 text-xs font-medium text-slate-500 dark:text-slate-400 italic">{m.occupation || 'Cultural Ambassador'}</td>
+                                                                                <td className="px-10 py-6 text-right">
+                                                                                    <span className="px-4 py-1.5 rounded-full bg-accent/10 text-accent font-black text-[10px] uppercase shadow-sm">
+                                                                                        {m.designation}
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ))
+                            )}
+
+                            {!loading && filteredArticles.length === 0 && (
+                                <div className="text-center py-40 animate-fade-in">
+                                    <span className="material-symbols-outlined text-8xl text-primary/10 mb-8">search_off</span>
+                                    <h3 className="text-3xl font-black text-primary/40 italic">No articles match "{search}"</h3>
+                                    <button onClick={() => setSearch('')} className="mt-8 text-accent font-black uppercase tracking-widest border-b-2 border-accent">Clear Results</button>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Legal CTA */}
+                        <div className="mt-60 p-16 md:p-24 rounded-[5rem] bg-primary text-white relative overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,122,51,0.3)]">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                            <div className="relative z-10 grid lg:grid-cols-5 gap-16 items-center">
+                                <div className="lg:col-span-3 space-y-10 text-center lg:text-left">
+                                    <div className="inline-flex size-20 items-center justify-center rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20">
+                                        <span className="material-symbols-outlined text-4xl">balance</span>
                                     </div>
-                                </section>
-                            ))
-                        )}
-
-                        {!loading && filteredArticles.length === 0 && (
-                            <div className="text-center py-20 opacity-40 italic font-bold">No results found for "{search}"</div>
-                        )}
-                    </div>
-
-                    <div className="mt-20 p-16 rounded-[4rem] bg-gradient-to-br from-primary to-primary/90 text-white text-center space-y-8 shadow-2xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 size-96 bg-white/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-110"></div>
-                        <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-                            <h3 className="text-4xl font-black">Governance & Legal</h3>
-                            <p className="text-xl font-medium opacity-80">
-                                Have questions about specific constitutional articles or their interpretation?
-                                Our legal committee is here to help.
-                            </p>
-                            <Link href="/contact" className="inline-flex items-center gap-3 px-10 py-5 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl hover:scale-105 active:scale-95">
-                                Contact Legal Committee
-                                <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                            </Link>
+                                    <div className="space-y-4">
+                                        <h3 className="text-4xl md:text-6xl font-black">Need Clarification?</h3>
+                                        <p className="text-xl opacity-70 leading-relaxed font-medium">
+                                            The constitution is a living document. For interpretations, legal appeals or formal amendments, engage with our central executive committee.
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row gap-6 pt-4 justify-center lg:justify-start">
+                                        <Link href="/contact" className="px-12 py-6 bg-white text-primary font-black rounded-3xl hover:bg-accent hover:text-white transition-all shadow-2xl flex items-center justify-center gap-3 active:scale-95 leading-none">
+                                            Contact Legal Dept
+                                            <span className="material-symbols-outlined text-sm">mail</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-2 hidden lg:block">
+                                    <div className="relative aspect-square rounded-[3rem] bg-white/5 border border-white/10 p-10 rotate-3 group-hover:rotate-0 transition-transform duration-700">
+                                        <img src="/assets/ycalogo.png" alt="YCA symbol" className="w-full h-full object-contain opacity-20 grayscale brightness-200" />
+                                        <div className="absolute inset-x-0 bottom-10 text-center">
+                                            <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Unity • Culture • Progress</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile TOC Scroller (Horizontal Bottom Bar) */}
+            <div className="lg:hidden fixed bottom-8 left-4 right-4 z-[90]">
+                <div className="bg-primary/95 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl p-4 flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory">
+                    {categories.map(cat => (
+                        <a
+                            key={cat.id}
+                            href={`#art-${articles.find(a => cat.articles.includes(a.articleNumber.toString()) || (cat.articles.includes('preamble') && a.articleNumber === 0))?.articleNumber || ''}`}
+                            className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/10 text-white whitespace-nowrap snap-center border border-white/10"
+                        >
+                            <span className="material-symbols-outlined text-sm">{cat.icon}</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest">{cat.title}</span>
+                        </a>
+                    ))}
                 </div>
             </div>
         </div>

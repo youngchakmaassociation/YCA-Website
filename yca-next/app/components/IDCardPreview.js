@@ -242,15 +242,17 @@ export default function IDCardPreview({ member, onClose }) {
                             </div>
 
                             {/* Text Info */}
-                            <div className="space-y-2">
-                                <h2 className={`text-2xl font-black ${isMultiColor ? 'text-white' : theme.memberText} leading-tight`}>{member.name}</h2>
-                                <div className="flex flex-wrap justify-center gap-1 max-h-24 overflow-y-auto no-scrollbar py-1">
+                            <div className="space-y-3">
+                                <h2 className={`text-3xl font-black ${isMultiColor ? 'text-white' : theme.memberText} leading-tight tracking-tight drop-shadow-sm`}>
+                                    {member.name}
+                                </h2>
+                                <div className="flex flex-wrap justify-center gap-2 max-h-24 overflow-y-auto no-scrollbar py-1">
                                     {sortedRoles.map((role, idx) => (
-                                        <span key={idx} className={`text-[8.5px] font-black uppercase px-2 py-0.5 rounded-md ${theme.accent} ${isMultiColor ? 'text-white' : theme.text} border ${theme.border}`}>
+                                        <span key={idx} className={`text-[11px] font-black uppercase px-4 py-1 rounded-xl shadow-md border backdrop-blur-md ${theme.accent} ${isMultiColor ? 'text-white border-white/20' : theme.text + ' ' + theme.border}`}>
                                             {role.designation}
                                             {role.level === 'zonal' ? ` (${role.zones?.name || 'Zonal'})` :
                                                 role.level === 'branch' ? ` (${role.branches?.name || 'Branch'})` :
-                                                    ' (CYCA)'}
+                                                    ' (CEC)'}
                                         </span>
                                     ))}
                                     {sortedRoles.length === 0 && (
@@ -266,24 +268,25 @@ export default function IDCardPreview({ member, onClose }) {
 
                             <div className={`w-full h-px ${isWhiteTop && !isMultiColor ? 'bg-slate-100' : 'bg-white/10'}`}></div>
 
-                            <div className="grid grid-cols-2 gap-2 w-full text-center">
+                            <div className="grid grid-cols-2 gap-4 w-full text-center">
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[9px] font-black ${isMultiColor ? 'text-white/80' : theme.subText} uppercase tracking-tight block`}>ID Number</span>
-                                    <span className={`text-[11px] font-mono font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tighter`}>{idNumber}</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : 'text-slate-500'} uppercase tracking-[0.1em] block mb-1`}>ID Number</span>
+                                    <span className={`text-xs font-mono font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tight`}>{idNumber}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[9px] font-black ${isMultiColor ? 'text-white/80' : theme.subText} uppercase tracking-tight block`}>Validity</span>
-                                    <span className={`text-[11px] font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tighter`}>2024 - 2026</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : 'text-slate-500'} uppercase tracking-[0.1em] block mb-1`}>Validity</span>
+                                    <span className={`text-xs font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tight`}>2024 - 2026</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Footer Band */}
-                        <div className={`mt-auto h-16 ${isMultiColor ? 'bg-black/20' : theme.labelBg} flex items-center justify-center px-8 relative overflow-hidden`}>
-                            {level !== 'central' && <div className="absolute inset-0 bg-black/10"></div>}
-                            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] relative z-10 text-center px-2">
+                        <div className={`mt-auto h-24 ${isMultiColor ? 'bg-black/40' : theme.labelBg} flex flex-col items-center justify-center px-8 relative overflow-hidden pb-6`}>
+                            {level !== 'central' && <div className="absolute inset-x-0 top-0 h-px bg-white/10"></div>}
+                            <span className="text-[11px] font-black text-white uppercase tracking-[0.3em] relative z-10 text-center px-4 leading-relaxed">
                                 {theme.label}
                             </span>
+                            <div className="mt-1 w-12 h-1 bg-white/20 rounded-full relative z-10"></div>
                         </div>
 
                         {/* Watermark Logo */}

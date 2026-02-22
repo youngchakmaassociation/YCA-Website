@@ -17,6 +17,7 @@ export const metadata = {
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ElectionBanner from "./components/ElectionBanner";
+import AiAssistant from "./components/AiAssistant";
 
 export default function RootLayout({ children }) {
   return (
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <main className="flex-grow max-w-full overflow-x-hidden">
           {children}
         </main>
+        <AiAssistant />
         <Footer />
       </body>
     </html>

@@ -11,6 +11,8 @@ const handleSupabaseResponse = (data, error) => {
     if (error) {
         if (error.code === 'PGRST205') {
             console.warn('Supabase Table Missing: The requested table does not exist in your database. Using local fallback data instead.');
+        } else if (error.message?.includes('Failed to fetch') || error.name === 'TypeError') {
+            console.warn('Supabase Connection Issue: Failed to connect to database. Using local fallback data instead.');
         } else {
             console.error('Supabase error:', JSON.stringify(error, null, 2));
         }
