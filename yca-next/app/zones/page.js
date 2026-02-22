@@ -67,99 +67,100 @@ export default function ZonesPage() {
                         </div>
                     ) : (
                         displayedZones.map((zone, i) => (
-                            key = { zone._id }
-                                onClick = {() => window.location.href = `/zones/${zone.slug || zone._id}`}
-                    onMouseEnter={() => setHoveredZone(zone)}
-                    className="group p-10 rounded-[3rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-xl hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 animate-fade-in-up flex flex-col cursor-pointer"
-                    style={{ animationDelay: `${i * 100}ms` }}
+                            <div
+                                key={zone._id}
+                                onClick={() => window.location.href = `/zones/${zone.slug || zone._id}`}
+                                onMouseEnter={() => setHoveredZone(zone)}
+                                className="group p-10 rounded-[3rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-xl hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 animate-fade-in-up flex flex-col cursor-pointer"
+                                style={{ animationDelay: `${i * 100}ms` }}
                             >
-                    <div className="size-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all">
-                        <span className="material-symbols-outlined text-4xl">location_on</span>
-                    </div>
-                    <h3 className="text-2xl font-black text-primary mb-4 group-hover:text-accent transition-colors">{zone.name}</h3>
-                    <p className="text-lg font-medium opacity-60 leading-relaxed mb-8 flex-grow line-clamp-3">{zone.description}</p>
-
-                    <div className="pt-8 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
-                        <div className="flex items-center gap-6">
-                            <div className="flex flex-col">
-                                <span className="text-3xl font-black text-gray-900 dark:text-white">{zone.branches?.length || 0}</span>
-                                <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Active Branches</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <a
-                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="size-12 rounded-xl bg-primary text-white flex items-center justify-center transition-all hover:bg-accent hover:rotate-6 shadow-lg shadow-primary/20"
-                                    onClick={(e) => e.stopPropagation()}
-                                    title="Get Directions"
-                                >
-                                    <span className="material-symbols-outlined text-2xl">directions</span>
-                                </a>
-                                <a
-                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="size-12 rounded-xl bg-primary/5 hover:bg-primary hover:text-white flex items-center justify-center transition-all group/map"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                    }}
-                                    title="Search on Maps"
-                                >
-                                    <span className="material-symbols-outlined text-2xl">map</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="size-12 rounded-full border border-primary/20 flex items-center justify-center text-primary group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all">
-                            <span className="material-symbols-outlined">arrow_forward</span>
-                        </div>
-                    </div>
-                </div>
-                ))
-                    )}
-            </div>
-
-            {/* Interactive Map Side */}
-            <aside className="lg:w-1/3 sticky top-24 h-fit space-y-8">
-                <div className="relative rounded-[3.5rem] overflow-hidden bg-primary p-2 shadow-3xl">
-                    <div className="relative h-[600px] rounded-[3rem] overflow-hidden border-4 border-white/20">
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            loading="lazy"
-                            allowFullScreen
-                            src={`https://maps.google.com/maps?q=${encodeURIComponent(((hoveredZone || displayedZones[0])?.name || '') + ' Mizoram India')}&output=embed`}
-                            className="grayscale hover:grayscale-0 transition-all duration-1000 contrast-125"
-                        ></iframe>
-                        <div className="absolute inset-x-6 bottom-6 p-6 bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20">
-                            <div className="flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-primary/40">Headquarters Focus</p>
-                                    <h4 className="text-lg font-black text-primary">{(hoveredZone || displayedZones[0])?.name || 'District Command'}</h4>
+                                <div className="size-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all">
+                                    <span className="material-symbols-outlined text-4xl">location_on</span>
                                 </div>
-                                <span className="material-symbols-outlined text-primary text-3xl animate-bounce">location_on</span>
+                                <h3 className="text-2xl font-black text-primary mb-4 group-hover:text-accent transition-colors">{zone.name}</h3>
+                                <p className="text-lg font-medium opacity-60 leading-relaxed mb-8 flex-grow line-clamp-3">{zone.description}</p>
+
+                                <div className="pt-8 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
+                                    <div className="flex items-center gap-6">
+                                        <div className="flex flex-col">
+                                            <span className="text-3xl font-black text-gray-900 dark:text-white">{zone.branches?.length || 0}</span>
+                                            <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Active Branches</span>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <a
+                                                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="size-12 rounded-xl bg-primary text-white flex items-center justify-center transition-all hover:bg-accent hover:rotate-6 shadow-lg shadow-primary/20"
+                                                onClick={(e) => e.stopPropagation()}
+                                                title="Get Directions"
+                                            >
+                                                <span className="material-symbols-outlined text-2xl">directions</span>
+                                            </a>
+                                            <a
+                                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(zone.name + ' ' + (zone.landmark || '') + ' Mizoram India')}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="size-12 rounded-xl bg-primary/5 hover:bg-primary hover:text-white flex items-center justify-center transition-all group/map"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                }}
+                                                title="Search on Maps"
+                                            >
+                                                <span className="material-symbols-outlined text-2xl">map</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div className="size-12 rounded-full border border-primary/20 flex items-center justify-center text-primary group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all">
+                                        <span className="material-symbols-outlined">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+
+                {/* Interactive Map Side */}
+                <aside className="lg:w-1/3 sticky top-24 h-fit space-y-8">
+                    <div className="relative rounded-[3.5rem] overflow-hidden bg-primary p-2 shadow-3xl">
+                        <div className="relative h-[600px] rounded-[3rem] overflow-hidden border-4 border-white/20">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                loading="lazy"
+                                allowFullScreen
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent(((hoveredZone || displayedZones[0])?.name || '') + ' Mizoram India')}&output=embed`}
+                                className="grayscale hover:grayscale-0 transition-all duration-1000 contrast-125"
+                            ></iframe>
+                            <div className="absolute inset-x-6 bottom-6 p-6 bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20">
+                                <div className="flex items-center justify-between">
+                                    <div className="space-y-1">
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-primary/40">Headquarters Focus</p>
+                                        <h4 className="text-lg font-black text-primary">{(hoveredZone || displayedZones[0])?.name || 'District Command'}</h4>
+                                    </div>
+                                    <span className="material-symbols-outlined text-primary text-3xl animate-bounce">location_on</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </aside>
-        </div>
-
-            {/* Stats Section */ }
-    <div className="mt-32 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {[
-            { val: '25+', label: 'Countries Reach' },
-            { val: '120+', label: 'Global Branches' },
-            { val: '8', label: 'Zonal Commands' },
-            { val: '50k+', label: 'Active Members' }
-        ].map((stat, i) => (
-            <div key={i} className="text-center space-y-2 p-12 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border border-slate-200/50 dark:border-transparent hover:bg-primary hover:text-white transition-all group">
-                <div className="text-5xl font-black text-primary group-hover:text-white transition-colors">{stat.val}</div>
-                <div className="text-xs font-black uppercase tracking-widest opacity-40">{stat.label}</div>
+                </aside>
             </div>
-        ))}
-    </div>
+
+            {/* Stats Section */}
+            <div className="mt-32 grid grid-cols-1 md:grid-cols-4 gap-8">
+                {[
+                    { val: '25+', label: 'Countries Reach' },
+                    { val: '120+', label: 'Global Branches' },
+                    { val: '8', label: 'Zonal Commands' },
+                    { val: '50k+', label: 'Active Members' }
+                ].map((stat, i) => (
+                    <div key={i} className="text-center space-y-2 p-12 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border border-slate-200/50 dark:border-transparent hover:bg-primary hover:text-white transition-all group">
+                        <div className="text-5xl font-black text-primary group-hover:text-white transition-colors">{stat.val}</div>
+                        <div className="text-xs font-black uppercase tracking-widest opacity-40">{stat.label}</div>
+                    </div>
+                ))}
+            </div>
         </div >
     );
 }

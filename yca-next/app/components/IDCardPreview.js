@@ -87,9 +87,12 @@ export default function IDCardPreview({ member, onClose }) {
             #id-card-wrap {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 10mm !important;
+                gap: 5mm !important;
                 align-items: center !important;
-                padding-top: 10mm !important;
+                justify-content: center !important;
+                width: 210mm !important; /* A4 Width */
+                min-height: 297mm !important; /* A4 Height */
+                margin: 0 auto !important;
             }
             .id-card-face {
                 box-shadow: none !important;
@@ -101,6 +104,19 @@ export default function IDCardPreview({ member, onClose }) {
                 background-color: ${level === 'central' ? 'white' : level === 'zonal' ? '#007A33' : '#C8102E'} !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                display: flex !important;
+                flex-direction: column !important;
+                transform: rotate(0deg) !important;
+                position: relative !important;
+            }
+            /* Add cut marks at corners */
+            .id-card-face::before {
+                content: '';
+                position: absolute;
+                top: -2mm; left: -2mm; right: -2mm; bottom: -2mm;
+                border: 0.1mm dashed #ddd;
+                pointer-events: none;
+                z-index: 0;
             }
         }
     `;
@@ -185,12 +201,12 @@ export default function IDCardPreview({ member, onClose }) {
 
                             <div className={`w-full h-px ${level === 'central' ? 'bg-slate-100' : 'bg-white/10'}`}></div>
 
-                            <div className="grid grid-cols-2 gap-8 w-full text-left">
-                                <div>
+                            <div className="grid grid-cols-2 gap-8 w-full text-center">
+                                <div className="flex flex-col items-center">
                                     <span className={`text-[8px] font-black ${theme.subText} uppercase tracking-widest block mb-1`}>ID Number</span>
                                     <span className={`text-xs font-mono font-bold ${theme.memberText} tracking-widest`}>{idNumber}</span>
                                 </div>
-                                <div>
+                                <div className="flex flex-col items-center">
                                     <span className={`text-[8px] font-black ${theme.subText} uppercase tracking-widest block mb-1`}>Validity</span>
                                     <span className={`text-xs font-bold ${theme.memberText} tracking-widest`}>2024 - 2026</span>
                                 </div>
