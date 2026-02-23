@@ -134,8 +134,8 @@ export default function DashboardPage() {
                                 {/* Footer bar */}
                                 <div className="absolute bottom-0 left-0 right-0 h-16 bg-slate-50 border-t border-gray-100 flex items-center justify-between px-8">
                                     <div className="flex flex-col">
-                                        <p className="text-[7px] font-black text-gray-400 uppercase tracking-[0.2em]">Zonal Council</p>
-                                        <p className="text-[10px] font-black text-slate-900 uppercase">Kamalanagar Headquarters</p>
+                                        <p className="text-[7px] font-black text-gray-400 uppercase tracking-[0.2em]">Official Member</p>
+                                        <p className="text-[10px] font-black text-slate-900 uppercase">Young Chakma Association</p>
                                     </div>
                                     <div className="size-10 bg-white border border-gray-200 rounded-lg p-1.5 shadow-sm">
                                         {/* Mock QR Code */}

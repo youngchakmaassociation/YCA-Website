@@ -33,8 +33,6 @@ export default function IDCardPreview({ member, onClose }) {
         fetchAllRoles();
     }, [member.name]);
 
-    const idNumber = generateIDNumber(member);
-
     // Sort roles by priority (central > zonal > branch)
     const sortedRoles = [...allRoles].sort((a, b) => {
         const levels = { central: 1, zonal: 2, branch: 3 };
@@ -42,6 +40,7 @@ export default function IDCardPreview({ member, onClose }) {
     });
 
     const primaryRole = sortedRoles[0] || member;
+    const idNumber = generateIDNumber(primaryRole);
     const level = primaryRole.level || 'branch';
 
     // Design Tokens based on Level
