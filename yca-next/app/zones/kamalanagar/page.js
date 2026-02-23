@@ -61,11 +61,10 @@ export default function KamalanagarZonePage() {
             <div className="flex flex-col items-center text-center gap-6 mb-24 animate-fade-in-up">
                 <span className="text-xs font-black uppercase tracking-[0.3em] text-accent">General Headquarters</span>
                 <h1 className="text-5xl md:text-8xl font-black text-primary leading-tight">
-                    Kamalanagar <br /> <span className="text-accent underline decoration-primary decoration-8 underline-offset-12">Zone</span>
+                    Kamalanagar <br /> <span className="text-accent underline decoration-primary decoration-8 underline-offset-12">Headquarters</span>
                 </h1>
                 <p className="max-w-3xl text-xl font-medium opacity-60 leading-relaxed mt-4">
-                    The heart of the Young Chakma Association. As our central coordination hub, Kamalanagar Zone
-                    oversees the most critical administrative and strategic operations of the organization.
+                    The heart of the Young Chakma Association. As our central coordination hub, Kamalanagar serves as the General Headquarters, overseeing the most critical administrative and strategic operations of the organization.
                 </p>
             </div>
 

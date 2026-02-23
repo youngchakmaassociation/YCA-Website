@@ -7,7 +7,7 @@ export default function ElectionBanner() {
 
     const zonesData = [
         {
-            name: 'Kamalanagar Zone',
+            name: 'Kamalanagar (CYCA HQ)',
             totalCast: 7,
             totalEligible: 12,
             branches: [
