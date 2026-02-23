@@ -378,7 +378,7 @@ export default function ElectionDetailPage() {
                     </div>
                 )
             }
-        </div >
+        </div>
         </>
     );
 }
