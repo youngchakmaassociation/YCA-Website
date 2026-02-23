@@ -1299,7 +1299,7 @@ export default function BylawPage() {
                                     <div className="relative aspect-square rounded-[3rem] bg-white/5 border border-white/10 p-10 rotate-3 group-hover:rotate-0 transition-transform duration-700">
                                         <img src="/assets/ycalogo.png" alt="YCA symbol" className="w-full h-full object-contain opacity-20 grayscale brightness-200" />
                                         <div className="absolute inset-x-0 bottom-10 text-center">
-                                            <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Unity • Culture • Progress</p>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">DO HELP</p>
                                         </div>
                                     </div>
                                 </div>
