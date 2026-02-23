@@ -270,11 +270,11 @@ export default function IDCardPreview({ member, onClose }) {
 
                             <div className="grid grid-cols-2 gap-4 w-full text-center">
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : 'text-slate-500'} uppercase tracking-[0.1em] block mb-1`}>ID Number</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : theme.subText} uppercase tracking-[0.1em] block mb-1`}>ID Number</span>
                                     <span className={`text-xs font-mono font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tight`}>{idNumber}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
-                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : 'text-slate-500'} uppercase tracking-[0.1em] block mb-1`}>Validity</span>
+                                    <span className={`text-[10px] font-black ${isMultiColor ? 'text-white/90' : theme.subText} uppercase tracking-[0.1em] block mb-1`}>Validity</span>
                                     <span className={`text-xs font-black ${isMultiColor ? 'text-white' : theme.memberText} tracking-tight`}>2024 - 2026</span>
                                 </div>
                             </div>
