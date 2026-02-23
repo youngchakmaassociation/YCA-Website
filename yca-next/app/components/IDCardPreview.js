@@ -328,7 +328,7 @@ export default function IDCardPreview({ member, onClose }) {
                                 <div className={`relative ${cardSize === 'CR80' ? 'size-24' : 'size-32'} drop-shadow-xl`}>
                                     <Image src="/assets/ycalogo.png" alt="" fill className="object-contain" />
                                 </div>
-                                <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${theme.subText}`}>DO HELP</span>
+                                <span className={`text-[9px] font-black uppercase tracking-[0.3em] mr-[-0.3em] text-center ${theme.subText}`}>DO HELP</span>
                             </div>
                         </div>
 
