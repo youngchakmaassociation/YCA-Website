@@ -203,6 +203,49 @@ export default function ElectionPage() {
                     </div>
                 </div>
 
+                {/* Active / Upcoming Elections Section */}
+                {activeElections.length > 0 && (
+                    <div className="mb-20 animate-fade-in-up">
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="relative flex h-5 w-5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-5 w-5 bg-red-500 border-2 border-white shadow-sm"></span>
+                            </span>
+                            <h3 className="text-3xl font-black text-primary uppercase tracking-tighter">Live & Upcoming Elections</h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {activeElections.map((election) => (
+                                <Link href={`/election/${election.id || election._id}`} key={election.id || election._id} className="block group">
+                                    <div className="p-8 rounded-[2.5rem] bg-white border border-red-100 shadow-xl hover:-translate-y-2 transition-all relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-red-100 transition-colors"></div>
+                                        <div className="relative z-10 space-y-4">
+                                            <div className="flex justify-between items-start">
+                                                <span className="px-4 py-1.5 bg-red-100 text-red-700 font-extrabold text-xs uppercase tracking-widest rounded-full">
+                                                    {election.status === 'active' ? 'Live Voting' : election.status}
+                                                </span>
+                                            </div>
+                                            <h4 className="text-2xl font-black text-primary">{election.title}</h4>
+                                            <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
+                                                <div className="flex items-center gap-2 text-sm font-bold text-gray-500">
+                                                    <span className="material-symbols-outlined text-lg">category</span>
+                                                    {election.type} {election.zone?.name ? `(${election.zone.name})` : ''}
+                                                </div>
+                                                <div className="flex items-center gap-2 text-sm font-bold text-gray-500">
+                                                    <span className="material-symbols-outlined text-lg">calendar_month</span>
+                                                    {formatDate(election.startDate)} - {formatDate(election.endDate)}
+                                                </div>
+                                            </div>
+                                            <div className="pt-4 flex items-center justify-between text-primary font-black group-hover:text-red-600 transition-colors">
+                                                <span>Enter Election Hub</span>
+                                                <span className="material-symbols-outlined transform group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 <div className="space-y-12 mb-20 animate-fade-in-up">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8">
