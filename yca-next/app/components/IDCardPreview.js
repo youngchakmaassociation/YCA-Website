@@ -213,10 +213,10 @@ export default function IDCardPreview({ member, onClose }) {
                         style={cardStyle}
                     >
                         {/* Header Design */}
-                        <div className="pt-10 px-8 text-center space-y-4">
+                        <div className="pt-6 px-6 text-center space-y-3">
                             <div className="flex flex-col items-center">
-                                <span className={`text-[10px] font-black tracking-[0.4em] ${isWhiteTop ? 'text-slate-400' : 'text-white/40'} uppercase mb-4`}>Official Identity Card</span>
-                                <div className="relative size-20 mb-2">
+                                <span className={`text-[9px] font-black tracking-[0.3em] ${isWhiteTop ? 'text-slate-400' : 'text-white/40'} uppercase mb-3`}>Official Identity Card</span>
+                                <div className="relative size-16 mb-2">
                                     <Image
                                         src="/assets/ycalogo.png"
                                         alt="YCA Logo"
@@ -224,14 +224,14 @@ export default function IDCardPreview({ member, onClose }) {
                                         className="object-contain logo-3d-pop shadow-2xl"
                                     />
                                 </div>
-                                <h4 className={`${isWhiteTop ? 'text-slate-900' : 'text-white'} font-black text-lg tracking-tighter uppercase leading-tight`}>Young Chakma Association</h4>
+                                <h4 className={`${isWhiteTop ? 'text-slate-900' : 'text-white'} font-black text-[15px] sm:text-base tracking-tighter uppercase leading-tight`}>Young Chakma Association</h4>
                             </div>
                         </div>
 
                         {/* Member Info Section */}
-                        <div className="flex-grow flex flex-col items-center pt-6 px-8 text-center gap-6">
+                        <div className="flex-grow flex flex-col items-center pt-4 px-6 text-center gap-4">
                             {/* Member Photo */}
-                            <div className="relative size-36 shrink-0">
+                            <div className="relative size-32 shrink-0">
                                 <div className={`absolute inset-0 rounded-3xl ${theme.accent} scale-105 blur-lg opacity-30`}></div>
                                 <Image
                                     src={member.photo_url || 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=200&h=200&auto=format&fit=crop'}
@@ -281,12 +281,11 @@ export default function IDCardPreview({ member, onClose }) {
                         </div>
 
                         {/* Footer Band */}
-                        <div className={`mt-auto h-24 ${isMultiColor ? 'bg-black/40' : theme.labelBg} flex flex-col items-center justify-center px-8 relative overflow-hidden pb-6`}>
+                        <div className={`mt-auto ${isMultiColor ? 'bg-black/40' : theme.labelBg} py-5 flex flex-col items-center justify-center px-6 relative w-full`}>
                             {level !== 'central' && <div className="absolute inset-x-0 top-0 h-px bg-white/10"></div>}
-                            <span className="text-[11px] font-black text-white uppercase tracking-[0.3em] relative z-10 text-center px-4 leading-relaxed">
+                            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] relative z-10 text-center leading-snug w-full">
                                 {theme.label}
                             </span>
-                            <div className="mt-1 w-12 h-1 bg-white/20 rounded-full relative z-10"></div>
                         </div>
 
                         {/* Watermark Logo */}
