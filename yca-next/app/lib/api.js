@@ -83,53 +83,92 @@ export const zonesAPI = {
     getAll: async () => {
         const { data, error } = await supabase
             .from('zones')
-            .select('*')
-            .eq('is_active', true);
+            .select('*, branches(id)')
+            .eq('is_active', true)
+            .order('name', { ascending: true });
         return handleSupabaseResponse(data, error);
     },
     getOne: async (slugOrId) => {
+        if (!slugOrId) return { success: false, error: 'Missing identifier' };
+
         const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
 
-        const column = isUUID ? 'id' : 'slug';
-        const { data, error } = await supabase
-            .from('zones')
-            .select('*, branches(*)')
-            .eq(column, slugOrId)
-            .single();
-        return handleSupabaseResponse(data, error);
+        if (isUUID) {
+            const { data, error } = await supabase
+                .from('zones')
+                .select('*, branches(*)')
+                .eq('id', slugOrId)
+                .single();
+            return handleSupabaseResponse(data, error);
+        } else {
+            // Case-insensitive slug match for zones
+            const { data, error } = await supabase
+                .from('zones')
+                .select('*, branches(*)')
+                .ilike('slug', slugOrId.toLowerCase())
+                .maybeSingle();
+
+            if (!data && !error) {
+                // Try fuzzy name match for zones
+                const { data: nameData, error: nameError } = await supabase
+                    .from('zones')
+                    .select('*, branches(*)')
+                    .ilike('name', `%${slugOrId}%`)
+                    .limit(1)
+                    .maybeSingle();
+                return handleSupabaseResponse(nameData, nameError);
+            }
+            return handleSupabaseResponse(data, error);
+        }
     },
 };
 
 export const branchesAPI = {
     getAll: async (zoneId = null) => {
-        let query = supabase.from('branches').select('*, zones(name, slug)');
+        let query = supabase
+            .from('branches')
+            .select('*, zones(id, name, slug)')
+            .order('name', { ascending: true });
         if (zoneId) query = query.eq('zone_id', zoneId);
         const { data, error } = await query;
         return handleSupabaseResponse(data, error);
     },
     getOne: async (slugOrId) => {
+        if (!slugOrId) return { success: false, error: 'Missing identifier' };
+
         const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
 
         if (isUUID) {
             const { data, error } = await supabase
                 .from('branches')
-                .select('*, zones(name, slug)')
+                .select('*, zones(id, name, slug)')
                 .eq('id', slugOrId)
                 .single();
             return handleSupabaseResponse(data, error);
         } else {
-            // 1. Try exact slug match
+            // 1. Try case-insensitive slug match first (most common)
             let { data, error } = await supabase
                 .from('branches')
-                .select('*, zones(name, slug)')
-                .eq('slug', slugOrId)
+                .select('*, zones(id, name, slug)')
+                .ilike('slug', slugOrId.toLowerCase())
                 .maybeSingle();
 
-            // 2. If no slug, try name match (case-insensitive) as a smart fallback
+            // 2. Fallback to exact slug match (just in case ilike is weird on some platforms)
+            if (!data && !error) {
+                const { data: exactData, error: exactError } = await supabase
+                    .from('branches')
+                    .select('*, zones(id, name, slug)')
+                    .eq('slug', slugOrId)
+                    .maybeSingle();
+                data = exactData;
+                error = exactError;
+            }
+
+            // 3. Last resort: Fuzzy name match
             if (!data && !error) {
                 const { data: nameData, error: nameError } = await supabase
                     .from('branches')
-                    .select('*, zones(name, slug)')
+                    .select('*, zones(id, name, slug)')
                     .ilike('name', `%${slugOrId}%`)
                     .limit(1)
                     .maybeSingle();

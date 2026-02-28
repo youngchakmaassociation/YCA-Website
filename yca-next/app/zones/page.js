@@ -67,9 +67,9 @@ export default function ZonesPage() {
                         </div>
                     ) : (
                         displayedZones.map((zone, i) => (
-                            <div
-                                key={zone._id}
-                                onClick={() => window.location.href = `/zones/${zone.slug || zone._id}`}
+                            <Link
+                                key={zone.id || zone._id || i}
+                                href={`/zones/${zone.slug || zone.id || zone._id}`}
                                 onMouseEnter={() => setHoveredZone(zone)}
                                 className="group p-10 rounded-[3rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-xl hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 animate-fade-in-up flex flex-col cursor-pointer"
                                 style={{ animationDelay: `${i * 100}ms` }}
@@ -115,7 +115,7 @@ export default function ZonesPage() {
                                         <span className="material-symbols-outlined">arrow_forward</span>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))
                     )}
                 </div>
@@ -151,9 +151,9 @@ export default function ZonesPage() {
             <div className="mt-32 grid grid-cols-1 md:grid-cols-4 gap-8">
                 {[
                     { val: '25+', label: 'Countries Reach' },
-                    { val: '120+', label: 'Global Branches' },
-                    { val: '8', label: 'Zonal Commands' },
-                    { val: '50k+', label: 'Active Members' }
+                    { val: '160+', label: 'Active Branches' },
+                    { val: '9', label: 'Zonal Commands' },
+                    { val: '4500+', label: 'Official Voters' }
                 ].map((stat, i) => (
                     <div key={i} className="text-center space-y-2 p-12 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border border-slate-200/50 dark:border-transparent hover:bg-primary hover:text-white transition-all group">
                         <div className="text-5xl font-black text-primary group-hover:text-white transition-colors">{stat.val}</div>

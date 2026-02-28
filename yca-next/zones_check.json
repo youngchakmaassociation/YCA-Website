@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Nunsury Zone",
+    "slug": "nunsury",
+    "id": "57fa8f1f-b0e5-45eb-8b17-987afeb7aa39"
+  },
+  {
+    "name": "New Jagnasury Zone (Damdep Zone)",
+    "slug": "damdep",
+    "id": "d7d533e3-6d93-4f65-8cf2-3ba4d989e536"
+  },
+  {
+    "name": "Bageisury Zone",
+    "slug": "bageisury",
+    "id": "04663017-aa04-497f-848e-cffce3237324"
+  },
+  {
+    "name": "Borapansury Zone",
+    "slug": "borapansury",
+    "id": "45b73c7a-3ef3-44de-9881-0d1b7c791de4"
+  },
+  {
+    "name": "Longpuighat Zone",
+    "slug": "longpuighat",
+    "id": "0fd33c9e-2ad3-4a22-b224-0f10479c5a55"
+  },
+  {
+    "name": "Marpara Zone",
+    "slug": "marpara",
+    "id": "1e71e63e-3b4b-4739-9ad9-20b61b21e14d"
+  },
+  {
+    "name": "Rajiv Nagar Zone",
+    "slug": "rajiv-nagar",
+    "id": "28da5dc9-2899-462c-9e59-d60d6014a793"
+  },
+  {
+    "name": "Tipperaghat Zone",
+    "slug": "tipperaghat",
+    "id": "501122f6-0d1e-4332-bff7-c5500b52051f"
+  },
+  {
+    "name": "Tuichawng Zone",
+    "slug": "tuichawng",
+    "id": "a40a4cc8-a15f-4773-aaf0-d568322a9072"
+  }
+]

@@ -27,8 +27,8 @@ export default function Home() {
 
   const stats = [
     { label: 'Active Members', value: '4,500+', icon: 'group' },
-    { label: 'Local Branches', value: '7', icon: 'account_tree' },
-    { label: 'Zonal HQs', value: '3', icon: 'hub' },
+    { label: 'Local Branches', value: '160+', icon: 'account_tree' },
+    { label: 'Zonal HQs', value: '9', icon: 'hub' },
     { label: 'Years of Service', value: '45+', icon: 'history_edu' }
   ];
 
@@ -71,42 +71,64 @@ export default function Home() {
                 <Link href="/membership" className="px-10 py-5 bg-white text-primary font-black rounded-2xl hover:bg-accent hover:text-white transition-all transform hover:scale-105 shadow-2xl shadow-black/20">
                   Become a Member
                 </Link>
-                <Link href="/about" className="px-10 py-5 bg-white/10 backdrop-blur-xl text-white font-black rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
-                  Our Mission
+                <Link href="/election" className="px-10 py-5 bg-amber-500 text-white font-black rounded-2xl hover:bg-amber-600 transition-all transform hover:scale-105 shadow-2xl shadow-amber-500/20 flex items-center gap-3">
+                  <span className="material-symbols-outlined">how_to_reg</span>
+                  Electoral Roll 2026
                 </Link>
               </div>
             </div>
 
             {/* Hero Card/Visual */}
             <div className="lg:w-2/5 flex justify-center animate-float">
-              <div className="relative p-2 bg-white/5 backdrop-blur-2xl rounded-[3rem] border border-white/10 shadow-3xl">
-                <div className="absolute -top-10 -right-10 size-32 bg-accent rounded-full blur-3xl opacity-40"></div>
-                <div className="relative overflow-hidden rounded-[2.5rem] bg-background-dark/50 p-8 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="size-16 rounded-[1.2rem] bg-primary flex items-center justify-center shadow-lg">
-                      <span className="material-symbols-outlined text-3xl text-white">campaign</span>
+              <div className="space-y-6 w-full max-w-md">
+                {/* Electoral Roll Release Card */}
+                <div className="relative p-1 bg-gradient-to-br from-amber-400 to-amber-600 rounded-[2.5rem] shadow-2xl transform hover:-rotate-1 transition-transform">
+                  <div className="relative overflow-hidden rounded-[2.4rem] bg-white p-8 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded-lg">New Release</span>
+                      <span className="material-symbols-outlined text-amber-500 animate-pulse">new_releases</span>
                     </div>
-                    <div>
-                      <h4 className="text-white font-black">Live Update</h4>
-                      <p className="text-white/60 text-xs font-bold font-mono">SC-040-2024</p>
-                    </div>
+                    <h3 className="text-2xl font-black text-primary leading-tight">Draft Electoral Roll for CYCA Election 2026</h3>
+                    <p className="text-xs font-bold text-gray-500 leading-relaxed">
+                      Official draft published for transparency. Check your candidacy and voting status. Final roll will follow after claim/objection period.
+                    </p>
+                    <Link href="/electoral-roll" className="flex items-center justify-between w-full p-4 rounded-xl bg-amber-500 hover:bg-amber-600 transition-colors text-white font-black group">
+                      View Digital E-Roll
+                      <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </Link>
                   </div>
-                  <h3 className="text-2xl font-black text-white leading-tight">
-                    Official General Conference Results Now Available
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm text-white/70 font-medium">
-                      <span className="material-symbols-outlined text-sm">schedule</span>
-                      Published 2 hours ago
+                </div>
+
+                {/* Original Hero Card */}
+                <div className="relative p-2 bg-white/5 backdrop-blur-2xl rounded-[3rem] border border-white/10 shadow-3xl">
+                  <div className="absolute -top-10 -right-10 size-32 bg-accent rounded-full blur-3xl opacity-40"></div>
+                  <div className="relative overflow-hidden rounded-[2.5rem] bg-background-dark/50 p-8 space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="size-16 rounded-[1.2rem] bg-primary flex items-center justify-center shadow-lg">
+                        <span className="material-symbols-outlined text-3xl text-white">campaign</span>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-black">Live Update</h4>
+                        <p className="text-white/60 text-xs font-bold font-mono">SC-040-2024</p>
+                      </div>
                     </div>
-                    <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full w-2/3 bg-accent rounded-full"></div>
+                    <h3 className="text-2xl font-black text-white leading-tight">
+                      Official General Conference Results Now Available
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-sm text-white/70 font-medium">
+                        <span className="material-symbols-outlined text-sm">schedule</span>
+                        Published 2 hours ago
+                      </div>
+                      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full w-2/3 bg-accent rounded-full"></div>
+                      </div>
                     </div>
+                    <Link href="/news-events" className="flex items-center justify-between w-full p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-white font-bold group">
+                      View Circular
+                      <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </Link>
                   </div>
-                  <Link href="/news-events" className="flex items-center justify-between w-full p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-white font-bold group">
-                    View Circular
-                    <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                  </Link>
                 </div>
               </div>
             </div>

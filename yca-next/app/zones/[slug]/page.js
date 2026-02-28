@@ -17,6 +17,7 @@ export default function DynamicZonePage() {
     const [showIDCard, setShowIDCard] = useState(false);
 
     useEffect(() => {
+        if (!slug) return;
         const fetchZone = async () => {
             setLoading(true);
             try {
@@ -188,19 +189,28 @@ export default function DynamicZonePage() {
                             </div>
 
                             <div className="space-y-4">
-                                {zone.branches?.map((branch, i) => (
-                                    <div
-                                        key={i}
-                                        onClick={() => window.location.href = `/branches/${branch.slug || branch._id}`}
-                                        className="group p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-transparent hover:border-accent hover:bg-white dark:hover:bg-white/10 transition-all cursor-pointer flex items-center justify-between"
-                                    >
-                                        <div className="space-y-1">
-                                            <h3 className="text-lg font-black text-primary group-hover:text-accent transition-colors">{branch.name}</h3>
-                                            <p className="text-xs font-medium opacity-60 line-clamp-1">{branch.description || 'Administrative unit under Zonal HQ.'}</p>
+                                {zone.branches && zone.branches.length > 0 ? (
+                                    zone.branches.map((branch, i) => (
+                                        <div
+                                            key={i}
+                                            onClick={() => window.location.href = `/branches/${branch.slug || branch.id}`}
+                                            className="group p-6 rounded-2xl bg-gray-50 dark:bg-black/20 border border-transparent hover:border-accent hover:bg-white dark:hover:bg-white/10 transition-all cursor-pointer flex items-center justify-between"
+                                        >
+                                            <div className="space-y-1">
+                                                <h3 className="text-lg font-black text-primary group-hover:text-accent transition-colors">{branch.name}</h3>
+                                                <p className="text-xs font-medium opacity-60 line-clamp-1">{branch.description || 'Administrative unit under Zonal HQ.'}</p>
+                                            </div>
+                                            <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                         </div>
-                                        <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    ))
+                                ) : (
+                                    <div className="py-20 text-center space-y-4">
+                                        <div className="size-20 mx-auto bg-primary/5 rounded-full flex items-center justify-center">
+                                            <span className="material-symbols-outlined text-4xl text-primary/20">hub</span>
+                                        </div>
+                                        <p className="font-black text-primary/40 uppercase tracking-widest text-xs">No active branches found for this zone yet.</p>
                                     </div>
-                                ))}
+                                )}
                             </div>
                         </div>
                     </section>

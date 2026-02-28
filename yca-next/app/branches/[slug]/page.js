@@ -20,6 +20,7 @@ export default function DynamicBranchPage() {
 
 
     useEffect(() => {
+        if (!slug) return;
         const fetchData = async () => {
             setLoading(true);
             try {
@@ -175,7 +176,7 @@ export default function DynamicBranchPage() {
             )}
 
             <div className="flex flex-col gap-6 mb-20 animate-fade-in-up">
-                <Link href={branch.zones ? `/zones/${branch.zones.slug || branch.zones._id}` : '/zones/kamalanagar'} className="flex items-center gap-2 text-sm font-black text-accent uppercase tracking-widest hover:translate-x-1 transition-transform">
+                <Link href={branch.zones ? `/zones/${branch.zones.slug || branch.zones._id}` : '/zones/central-administration'} className="flex items-center gap-2 text-sm font-black text-accent uppercase tracking-widest hover:translate-x-1 transition-transform">
                     <span className="material-symbols-outlined text-sm">arrow_back</span>
                     {branch.zones ? branch.zones.name : 'Central Administration'}
                 </Link>

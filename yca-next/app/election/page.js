@@ -139,7 +139,7 @@ export default function ElectionPage() {
                                 <div className="lg:col-span-1 space-y-4">
                                     <h3 className="text-2xl font-black text-indigo-900">Voter Eligibility</h3>
                                     <p className="text-sm text-indigo-900/60 leading-relaxed font-medium">
-                                        Only members enrolled in the <strong>Official Electoral Roll</strong> and meeting specific constitutional criteria can vote in the Central General Election (U/S 35).
+                                        Only members enrolled in the <strong>Official Electoral Roll</strong> and meeting specific constitutional criteria can vote in the Central General Election (U/S 34).
                                     </p>
                                     <div className="flex items-center gap-2 p-3 bg-white/60 rounded-xl border border-indigo-100">
                                         <span className="material-symbols-outlined text-indigo-600">stars</span>
@@ -180,24 +180,40 @@ export default function ElectionPage() {
                                                 <div className="space-y-1">
                                                     <p className="font-black">Electoral Roll (ANNEXURE-V)</p>
                                                     <p className="opacity-70 font-medium leading-relaxed">
-                                                        Official list prepared by the Election Committee (U/S 34).
+                                                        Official list prepared by the Election Committee.
                                                         Contains: Serial No., Name, Father's Name, Age, & Sex of every eligible voter.
                                                     </p>
-                                                    <div className="pt-2 mt-2 border-t border-indigo-200/50 space-y-2">
-                                                        <p className="text-[10px] text-red-600 font-black flex items-center gap-1">
-                                                            <span className="material-symbols-outlined text-xs">warning</span>
-                                                            VOTERS: Name must be on this roll to cast a vote.
-                                                        </p>
-                                                        <p className="text-[10px] text-indigo-700 font-black flex items-center gap-1">
-                                                            <span className="material-symbols-outlined text-xs">account_balance</span>
-                                                            CANDIDATES: Per Article 32(2), candidates must already be enrolled on the roll as voters.
-                                                        </p>
-                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Electoral Roll Access Card */}
+                        <div className="md:col-span-2 p-8 md:p-12 rounded-[3rem] bg-amber-50 border border-amber-100 shadow-sm relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 size-64 bg-amber-400/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-amber-400/10 transition-colors"></div>
+                            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10">
+                                <div className="space-y-4 flex-grow">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-200 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded-lg">
+                                        Draft Release
+                                    </div>
+                                    <h3 className="text-3xl font-black text-amber-900">Digital Electoral Roll 2026</h3>
+                                    <p className="text-sm text-amber-900/60 leading-relaxed font-medium max-w-xl">
+                                        The draft electoral roll is now available for public viewing. This list contains all eligible voters for the upcoming General Election.
+                                    </p>
+                                    <div className="flex items-center gap-3 p-4 bg-white/60 rounded-2xl border border-amber-200/50">
+                                        <span className="material-symbols-outlined text-amber-600 animate-pulse">info</span>
+                                        <p className="text-xs font-black text-amber-900 uppercase tracking-widest leading-none">
+                                            Note: After claim and objection, the full final electoral roll will be updated again.
+                                        </p>
+                                    </div>
+                                </div>
+                                <Link href="/electoral-roll" className="shrink-0 px-10 py-5 bg-amber-600 text-white font-black rounded-2xl hover:bg-amber-700 transition-all shadow-xl shadow-amber-600/20 flex items-center gap-4 group/btn">
+                                    Access Digital Roll
+                                    <span className="material-symbols-outlined transform group-hover/btn:translate-x-2 transition-transform">arrow_forward</span>
+                                </Link>
                             </div>
                         </div>
                     </div>

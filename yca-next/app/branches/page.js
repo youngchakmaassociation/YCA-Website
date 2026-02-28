@@ -93,9 +93,9 @@ export default function BranchesPage() {
                             </div>
                         ) : (
                             filteredBranches.map((branch, i) => (
-                                <div
-                                    key={branch._id}
-                                    onClick={() => window.location.href = `/branches/${branch.slug || branch._id}`}
+                                <Link
+                                    key={branch.id || branch._id || i}
+                                    href={`/branches/${branch.slug || branch.id || branch._id}`}
                                     onMouseEnter={() => setHoveredBranch(branch)}
                                     className="group p-8 rounded-[2.5rem] bg-slate-50/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/10 shadow-xl hover:shadow-2xl hover:border-primary/30 hover:-translate-y-2 transition-all animate-fade-in-up cursor-pointer"
                                 >
@@ -115,38 +115,34 @@ export default function BranchesPage() {
                                             <span className="font-black text-slate-800 dark:text-slate-300">Next: 2026</span>
                                         </div>
                                         <div className="flex gap-3">
-                                            <a
-                                                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.name + ' ' + (branch.landmark || '') + ' Mizoram India')}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <div
                                                 className="size-12 rounded-xl bg-primary text-white flex items-center justify-center transition-all hover:bg-accent hover:rotate-6 shadow-lg shadow-primary/20"
-                                                onClick={(e) => e.stopPropagation()}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.name + ' ' + (branch.landmark || '') + ' Mizoram India')}`, '_blank');
+                                                }}
                                                 title="Get Directions"
                                             >
                                                 <span className="material-symbols-outlined text-2xl font-black">directions</span>
-                                            </a>
-                                            <a
-                                                href={`https://maps.google.com/maps?q=${encodeURIComponent(branch.name + ' ' + (branch.landmark || '') + ' Mizoram India')}&output=embed`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            </div>
+                                            <div
                                                 className="size-12 rounded-xl bg-white dark:bg-white/5 text-slate-600 hover:text-primary flex items-center justify-center transition-colors border border-slate-300 dark:border-transparent"
-                                                onClick={(e) => e.stopPropagation()}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    window.open(`https://maps.google.com/maps?q=${encodeURIComponent(branch.name + ' ' + (branch.landmark || '') + ' Mizoram India')}&output=embed`, '_blank');
+                                                }}
                                                 title="View on Maps"
                                             >
                                                 <span className="material-symbols-outlined text-2xl font-black">map</span>
-                                            </a>
-                                            <button
-                                                className="size-12 rounded-xl bg-white dark:bg-white/5 text-slate-600 hover:text-accent flex items-center justify-center transition-colors border border-slate-300 dark:border-transparent"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <span className="material-symbols-outlined text-2xl font-black">mail</span>
-                                            </button>
+                                            </div>
                                             <div className="flex items-center justify-center px-10 h-12 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-accent hover:rotate-2 transition-all shadow-xl shadow-primary/30 active:scale-95">
                                                 Connect
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))
                         )}
                     </div>
